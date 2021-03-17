@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article - Detail View</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <section class="navigation">
+            <section class="logo-wrapper">
+                <img src="./public/logo.png" alt="Logo">
+            </section>
+            <section>
+                <nav>
+                    <ul>
+                        <li><a href="#">Add article</a></li>
+                        <li><a href="#">My articles</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </nav>
+            </section>
+        </section>
+    </div>
+</header>
+<main>
+    <div class="main-container">
+        <section class="top-article">
+            <article class="top-article-image">
+                <img src="./public/react.png" alt="react">
+            </article>
+            <hr>
+            <article class="top-article-details">
+                <span class="main-article-details-date">15.03.2021</span>
+                <span class="main-article-details-author">Martin</span>
+                <span class="main-article-details-comments">Comments: 0</span>
+                <span class="main-article-details-likes">Likes: 0</span>
+                <span class="main-article-details-readers">Readers: 0</span>
+                <span class="main-article-details-thumb-up"><i class="far fa-thumbs-up"></i>Like</span>
+                <span class="main-article-details-thumb-down"><i class="far fa-thumbs-down"></i>Unlike</span>
+            </article>
+            <hr>
+            <article class="top-article-description">
+                <h2 class="main-article-description-title">Title</h2>
+                <p class="main-article-description-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A
+                    beatae, consequatur consequuntur deserunt dignissimos distinctio explicabo facilis ipsa laborum,
+                    neque
+                    porro quia quisquam ratione repudiandae similique voluptas voluptate voluptates, voluptatibus!Lorem
+                    ipsum dolor sit amet, consectetur adipisicing elit. A
+                    beatae, consequatur consequuntur deserunt dignissimos distinctio explicabo facilis ipsa laborum,
+                    neque
+                    porro quia quisquam ratione repudiandae similique voluptas voluptate voluptates, voluptatibus!</p>
+            </article>
+            <hr>
+            <article class="top-article-comment">
+                <form action="#">
+                    <label for="comment">Comment: </label>
+                    <textarea name="comment" id="comment" cols="30" rows="10"
+                              placeholder="Leave your comment..."></textarea>
+                    <input type="submit" value="Post comment">
+                </form>
+            </article>
+            <hr>
+            <article class="top-article-comment-content">
+                <article class="main-article-comment-content-details">
+                    <p><i class="far fa-trash-alt"></i><span>#1</span><span>By Author</span></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad assumenda, cum deleniti dolorum
+                        ducimus
+                        mollitia nobis possimus quam sunt voluptas?</p>
+                </article>
+                <article class="main-article-comment-content-details">
+                    <p><i class="far fa-trash-alt"></i><span>#2</span><span>By Different Author</span></p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, quas.</p>
+                </article>
+            </article>
+        </section>
+    </div>
+</main>
+<footer>
+    <p>Software University &copy; 2021</p>
+</footer>
+</body>
+</html>
