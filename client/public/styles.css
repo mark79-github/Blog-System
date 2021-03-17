@@ -119,6 +119,7 @@ header nav ul {
     object-fit: contain;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    vertical-align: middle;
 }
 
 .top-article-details {
