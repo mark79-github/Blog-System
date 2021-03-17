@@ -1,14 +1,14 @@
-const Article = (props) => {
-    console.log('props', props);
+const Article = ({id, title, urlToImage}) => {
+    const href = `/blog/${id}`;
     return (
         <article className="article">
             <article className="article-image">
-                <img src={props.urlToImage} alt="react"/>
+                <img src={urlToImage} alt="react"/>
             </article>
             <article className="article-description">
-                <h2 className="article-description-title">Title</h2>
+                <h2 className="article-description-title">{title}</h2>
                 <button className="article-description-btn">
-                    <a href="./article-detail-view.html">Read more</a>
+                    <a href={href}>Read more</a>
                 </button>
             </article>
         </article>

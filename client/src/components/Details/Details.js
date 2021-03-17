@@ -1,40 +1,43 @@
-const Details = () => {
-    return (
-        // <main>
+import {Component} from 'react';
+import * as postService from "../../services/postService";
+
+class Details extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            post: {},
+        }
+    }
+
+    componentDidMount() {
+        postService.getById(this.props.match.params.id)
+            .then(post => this.setState({post}))
+            .catch(err => console.error('Error:', err));
+    }
+
+
+    render() {
+        return (
             <div className="main-container">
                 <section className="top-article">
                     <article className="top-article-image">
-                        <img src="/react.png" alt="react"/>
+                        <img src={this.state.post.urlToImage} alt="react"/>
                     </article>
                     <hr/>
                     <article className="top-article-details">
-                        <span className="main-article-details-date">15.03.2021</span>
-                        <span className="main-article-details-author">Martin</span>
-                        <span className="main-article-details-comments">Comments: 0</span>
-                        <span className="main-article-details-likes">Likes: 0</span>
-                        <span className="main-article-details-readers">Readers: 0</span>
-                        <span className="main-article-details-thumb-up">
-                                <i className="far fa-thumbs-up"></i>
-                                Like</span>
-                        <span className="main-article-details-thumb-down"><i
-                            className="far fa-thumbs-down"></i>Unlike</span>
+                        <span className="main-article-details-date">{this.state.post.createdAt}</span>
+                        <span className="main-article-details-author">{this.state.post.author}</span>
+                        <span className="main-article-details-comments">Comments: {this.state.post.comments || 0}</span>
+                        <span className="main-article-details-likes">Likes: {this.state.post.likes || 0}</span>
+                        <span className="main-article-details-readers">Readers: {this.state.post.readers || 0}</span>
+                        <span className="main-article-details-thumb-up"><i className="far fa-thumbs-up"></i>Like</span>
+                        <span className="main-article-details-thumb-down"><i className="far fa-thumbs-down"></i>Unlike</span>
                     </article>
                     <hr/>
                     <article className="top-article-description">
-                        <h2 className="main-article-description-title">Title</h2>
-                        <p className="main-article-description-content">Lorem ipsum dolor sit amet, consectetur
-                            adipisicing elit. A
-                            beatae, consequatur consequuntur deserunt dignissimos distinctio explicabo facilis
-                            ipsa laborum,
-                            neque
-                            porro quia quisquam ratione repudiandae similique voluptas voluptate voluptates,
-                            voluptatibus!Lorem
-                            ipsum dolor sit amet, consectetur adipisicing elit. A
-                            beatae, consequatur consequuntur deserunt dignissimos distinctio explicabo facilis
-                            ipsa laborum,
-                            neque
-                            porro quia quisquam ratione repudiandae similique voluptas voluptate voluptates,
-                            voluptatibus!</p>
+                        <h2 className="main-article-description-title">{this.state.post.title}</h2>
+                        <p className="main-article-description-content">{this.state.post.content}</p>
                     </article>
                     <hr/>
                     <article className="top-article-comment">
@@ -63,8 +66,8 @@ const Details = () => {
                     </article>
                 </section>
             </div>
-        // </main>
-    );
+        );
+    }
 }
 
 export default Details;

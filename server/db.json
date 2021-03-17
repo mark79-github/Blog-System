@@ -1,7 +1,7 @@
 {
     "posts": [
         {
-            "_id": 1,
+            "id": 1,
             "title": "Title",
             "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias laudantium molestias at facere reprehenderit cum ut ipsam iste numquam. Vitae sapiente beatae atque. At aut maxime earum quibusdam aliquid ex.",
             "author": "Author",
@@ -12,7 +12,7 @@
             "readers": []
         },
         {
-            "_id": 2,
+            "id": 2,
             "title": "Title",
             "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias laudantium molestias at facere reprehenderit cum ut ipsam iste numquam. Vitae sapiente beatae atque. At aut maxime earum quibusdam aliquid ex.",
             "author": "Author",
@@ -23,8 +23,19 @@
             "readers": []
         },
         {
-            "_id": 3,
+            "id": 3,
             "title": "Title",
+            "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias laudantium molestias at facere reprehenderit cum ut ipsam iste numquam. Vitae sapiente beatae atque. At aut maxime earum quibusdam aliquid ex.",
+            "author": "Author",
+            "urlToImage": "/react.png",
+            "createdAt": "2021-03-17",
+            "likes": [],
+            "comments": [],
+            "readers": []
+        },
+        {
+            "id": 4,
+            "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias laudantium molestias at facere reprehenderit",
             "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias laudantium molestias at facere reprehenderit cum ut ipsam iste numquam. Vitae sapiente beatae atque. At aut maxime earum quibusdam aliquid ex.",
             "author": "Author",
             "urlToImage": "/react.png",

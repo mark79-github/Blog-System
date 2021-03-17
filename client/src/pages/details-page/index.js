@@ -2,11 +2,11 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Details from "../../components/Details";
 
-const DetailsPage = () =>{
+const DetailsPage = ({match}) => {
     return (
         <>
             <Header/>
-            <Details/>
+            <Details match={match}/>
             <Footer/>
         </>
 

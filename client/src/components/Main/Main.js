@@ -25,8 +25,7 @@ class Main extends Component {
                 <TopArticle/>
                 <section className="sub-article">
                     {this.state.posts.map(x => {
-                        return (<Article
-                            key={x._id} urlToImage={x.urlToImage}/>)
+                        return (<Article key={x.id} urlToImage={x.urlToImage} title={x.title} id={x.id}/>)
                     })}
                 </section>
             </div>

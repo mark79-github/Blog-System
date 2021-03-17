@@ -5,3 +5,9 @@ export const getAll = () => {
         .then(res => res.json())
         .catch(err => console.error('Error:' + err));
 };
+
+export const getById = (id) => {
+    return fetch(localhostApi + '/' + id, {mode: 'cors'})
+        .then(res => res.json())
+        .catch(err => console.error('Error:' + err));
+};
