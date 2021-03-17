@@ -1,0 +1,83 @@
+header {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.logo-wrapper img {
+    vertical-align: center;
+}
+
+.navigation {
+    background: darkblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header {
+    background: darkblue;
+}
+
+.header-search {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.header-search-form {
+    margin: 0 auto;
+    display: flex;
+}
+
+.header-search-form-submit {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    background: transparent;
+    border: 0;
+    padding: 0 20px;
+    color: white;
+}
+
+.header-search-form-submit:hover {
+    cursor: pointer;
+}
+
+#search {
+    flex-grow: 1;
+    height: 30px;
+    background: transparent;
+    outline: none;
+    border: 0;
+    border-bottom: 1px solid white;
+    position: relative;
+}
+
+#search:focus {
+    color: white;
+}
+
+#search::placeholder {
+    color: white;
+}
+
+header nav ul {
+    display: flex;
+}
+
+header nav ul li {
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+
+header nav ul li:last-child {
+    margin-right: 0;
+}
+
+header nav ul li a {
+    color: white;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+}

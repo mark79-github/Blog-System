@@ -6,13 +6,13 @@ body {
     background: darkblue;
 }
 
-.logo-wrapper img {
-    vertical-align: center;
-}
-
 header {
     max-width: 1000px;
     margin: 0 auto;
+}
+
+.logo-wrapper img {
+    vertical-align: center;
 }
 
 .navigation {
