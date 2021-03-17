@@ -1,4 +1,5 @@
 import React from "react";
+import NavigationItem from "../NavigationItem";
 
 const Navigation = () => {
     return (
@@ -9,7 +10,9 @@ const Navigation = () => {
             <section>
                 <nav>
                     <ul>
-                        <li><a href="./sign-page.html">Sign</a></li>
+                        <NavigationItem>Add Article</NavigationItem>
+                        <NavigationItem>My Articles</NavigationItem>
+                        <NavigationItem>Sign</NavigationItem>
                     </ul>
                 </nav>
             </section>

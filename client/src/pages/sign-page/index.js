@@ -1,16 +1,16 @@
 import React from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import Main from "../../components/Main";
+import Sign from "../../components/Sign";
 
-const HomePage = () => {
+const SignPage = () => {
     return (
         <>
             <Header/>
-            <Main/>
+            <Sign/>
             <Footer/>
         </>
     );
 }
 
-export default HomePage;
+export default SignPage;
