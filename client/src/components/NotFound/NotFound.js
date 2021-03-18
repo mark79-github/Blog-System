@@ -1,16 +1,17 @@
-import logo from '../../logo.svg';
-import '../../components/NotFound/NotFound.css';
+import logo from "../../logo.svg";
+import './NotFound.css';
 
-function ErrorPage() {
+const NotFound = () => {
     return (
         <div className="app">
             <header className="app-header">
+                <h1>Error 404</h1>
+                <p>Page Not Found</p>
                 <img src={logo} className="app-logo" alt="logo"/>
-                <p>Error 404 - Page Not Found</p>
                 <a className="app-link" href="/" target="_self" rel="noopener noreferrer">Return to Home</a>
             </header>
         </div>
     );
 }
 
-export default ErrorPage;
+export default NotFound;

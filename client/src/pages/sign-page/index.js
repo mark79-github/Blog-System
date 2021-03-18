@@ -5,11 +5,7 @@ import Sign from "../../components/Sign";
 
 const SignPage = () => {
     return (
-        <>
-            <Header/>
             <Sign/>
-            <Footer/>
-        </>
     );
 }
 

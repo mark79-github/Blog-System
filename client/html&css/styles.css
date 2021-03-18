@@ -244,33 +244,35 @@ footer p {
     justify-content: space-around;
 }
 
-.sign-title {
+.form-container-title {
     font-weight: 600;
 }
 
-.sign-sub-title {
+.form-container-sub-title {
     margin: 10px 0 20px 0;
     font-style: italic;
 }
 
-.sign {
+.form-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     color: white;
-    /*border: 1px solid white;*/
-    /*border-radius: 8px;*/
     padding: 100px;
 }
 
-.sign-form {
+.form-container-title.post {
+    align-self: center;
+}
+
+.form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
 }
 
-.sign-form input {
+.form input {
     width: 100%;
     margin: 5px 0;
     min-height: 30px;
@@ -280,24 +282,30 @@ footer p {
     color: white;
 }
 
-.sign-form input::placeholder {
+.form input::placeholder {
     color: white;
 }
 
-.sign-form input:focus {
+.form input:focus {
     color: white;
     outline: none;
 }
 
-.sign-form input[type=submit] {
+.form input[type=submit] {
     border-radius: 4px;
     border: 1px solid white;
     margin-top: 30px;
     padding: 20px 0;
 }
 
-.sign-form input[type=submit]:hover {
+.form input[type=submit]:hover {
     cursor: pointer;
     background: white;
     color: darkblue;
+}
+
+.form textarea {
+    min-width: 500px;
+    min-height: 100px;
+    outline: none;
 }
