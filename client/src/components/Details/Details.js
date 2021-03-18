@@ -18,6 +18,11 @@ class Details extends Component {
 
 
     render() {
+        // if (!this.state.post) {
+        //     return (
+        //         <h2>Loading</h2>
+        //     )
+        // }
         return (
             <div className="main-container">
                 <section className="top-article">
@@ -32,7 +37,8 @@ class Details extends Component {
                         <span className="main-article-details-likes">Likes: {this.state.post.likes || 0}</span>
                         <span className="main-article-details-readers">Readers: {this.state.post.readers || 0}</span>
                         <span className="main-article-details-thumb-up"><i className="far fa-thumbs-up"></i>Like</span>
-                        <span className="main-article-details-thumb-down"><i className="far fa-thumbs-down"></i>Unlike</span>
+                        <span className="main-article-details-thumb-down"><i
+                            className="far fa-thumbs-down"></i>Unlike</span>
                     </article>
                     <hr/>
                     <article className="top-article-description">

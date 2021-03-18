@@ -1,5 +1,5 @@
 const Article = ({id, title, urlToImage}) => {
-    const href = `/blog/${id}`;
+    const href = `/post/${id}`;
     return (
         <article className="article">
             <article className="article-image">

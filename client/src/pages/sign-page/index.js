@@ -1,11 +1,15 @@
 import React from 'react';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
-import Sign from "../../components/Sign";
+import SignUp from "../../components/SignUp";
+import SignIn from "../../components/SignIn";
 
 const SignPage = () => {
     return (
-            <Sign/>
+        <main>
+            <div className="sign-form-wrapper">
+                <SignUp/>
+                <SignIn/>
+            </div>
+        </main>
     );
 }
 

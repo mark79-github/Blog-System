@@ -8,6 +8,7 @@ class Main extends Component {
         super(props);
 
         this.state = {
+            topPost: {},
             posts: []
         }
     }
@@ -15,7 +16,11 @@ class Main extends Component {
     componentDidMount() {
         postService.getAll()
             .then(posts => {
-                this.setState({posts})
+                posts.sort((f, s) => {
+                    return f.likes.length - s.likes.length;
+                })
+                this.setState({topPost: posts.slice(0, 1)})
+                this.setState({posts: posts.slice(1)});
             });
     }
 
