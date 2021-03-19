@@ -26,7 +26,7 @@ class Details extends Component {
                     </article>
                     <hr/>
                     <article className="top-article-details">
-                        <span className="main-article-details-date">{this.state.post.createdAt}</span>
+                        <span className="main-article-details-date">{this.state.post.publishedAt}</span>
                         <span className="main-article-details-author">{this.state.post.author}</span>
                         <span className="main-article-details-comments">Comments: {this.state.post.comments || 0}</span>
                         <span className="main-article-details-likes">Likes: {this.state.post.likes || 0}</span>
