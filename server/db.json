@@ -24,12 +24,12 @@
         },
         {
             "id": 3,
-            "title": "Title",
+            "title": "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
             "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias laudantium molestias at facere reprehenderit cum ut ipsam iste numquam. Vitae sapiente beatae atque. At aut maxime earum quibusdam aliquid ex.",
             "author": "Author",
             "urlToImage": "/react.png",
             "createdAt": "2021-03-17",
-            "likes": [],
+            "likes": ["admin"],
             "comments": [],
             "readers": []
         },

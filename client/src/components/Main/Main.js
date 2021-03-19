@@ -16,18 +16,18 @@ class Main extends Component {
     componentDidMount() {
         postService.getAll()
             .then(posts => {
-                posts.sort((f, s) => {
-                    return f.likes.length - s.likes.length;
+                const sortedPosts = posts.sort((f, s) => {
+                    return s.likes.length - f.likes.length;
                 })
-                this.setState({topPost: posts.slice(0, 1)})
-                this.setState({posts: posts.slice(1)});
+                this.setState({topPost: sortedPosts.slice(0, 1)[0]})
+                this.setState({posts: sortedPosts.slice(1)});
             });
     }
 
     render() {
         return (
             <div className="main-container">
-                <TopArticle/>
+                <TopArticle data={this.state.topPost}/>
                 <section className="sub-article">
                     {this.state.posts.map(x => {
                         return (<Article key={x.id} urlToImage={x.urlToImage} title={x.title} id={x.id}/>)

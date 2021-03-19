@@ -18,16 +18,11 @@ class Details extends Component {
 
 
     render() {
-        // if (!this.state.post) {
-        //     return (
-        //         <h2>Loading</h2>
-        //     )
-        // }
         return (
             <div className="main-container">
                 <section className="top-article">
                     <article className="top-article-image">
-                        <img src={this.state.post.urlToImage} alt="react"/>
+                        <img src={this.state.post.urlToImage} alt="Image"/>
                     </article>
                     <hr/>
                     <article className="top-article-details">
