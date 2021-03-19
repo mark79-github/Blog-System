@@ -10,9 +10,9 @@ const Navigation = () => {
             <section>
                 <nav>
                     <ul>
-                        <NavigationItem>Add Post</NavigationItem>
-                        <NavigationItem>My Posts</NavigationItem>
-                        <NavigationItem>Sign</NavigationItem>
+                        <NavigationItem linkTo={'/post/create'}>Add Post</NavigationItem>
+                        <NavigationItem linkTo={'/'}>My Posts</NavigationItem>
+                        <NavigationItem linkTo={'/user/sign'}>Sign</NavigationItem>
                     </ul>
                 </nav>
             </section>
