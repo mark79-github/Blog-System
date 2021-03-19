@@ -1,4 +1,5 @@
-const Article = ({id, title, urlToImage}) => {
+const Article = ({data}) => {
+    const {id, title, urlToImage} = data;
     const href = `/post/${id}`;
     return (
         <article className="article">

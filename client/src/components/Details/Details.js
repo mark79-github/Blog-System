@@ -22,7 +22,7 @@ class Details extends Component {
             <div className="main-container">
                 <section className="top-article">
                     <article className="top-article-image">
-                        <img src={this.state.post.urlToImage} alt="Image"/>
+                        <img src={this.state.post.urlToImage} alt=""/>
                     </article>
                     <hr/>
                     <article className="top-article-details">

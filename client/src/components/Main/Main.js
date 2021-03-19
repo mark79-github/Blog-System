@@ -8,7 +8,7 @@ class Main extends Component {
         super(props);
 
         this.state = {
-            topPost: {},
+            topPost: [],
             posts: []
         }
     }
@@ -23,7 +23,7 @@ class Main extends Component {
                 // this.setState({topPost: sortedPosts.slice(0, 1)[0]})
                 // this.setState({posts: sortedPosts.slice(1)});
 
-                this.setState({topPost: posts.articles.slice(0, 1)[0]})
+                this.setState({topPost: posts.articles.slice(0, 1)})
                 this.setState({posts: posts.articles.slice(1)});
 
             });
@@ -32,10 +32,12 @@ class Main extends Component {
     render() {
         return (
             <div className="main-container">
-                <TopArticle data={this.state.topPost}/>
+                {this.state.topPost.map(x => {
+                    return (<TopArticle key={x.id} data={x}/>)
+                })}
                 <section className="sub-article">
                     {this.state.posts.map(x => {
-                        return (<Article key={x.id} urlToImage={x.urlToImage} title={x.title} id={x.id}/>)
+                        return (<Article key={x.id} data={x}/>)
                     })}
                 </section>
             </div>
