@@ -23,8 +23,10 @@ class Main extends Component {
                 // this.setState({topPost: sortedPosts.slice(0, 1)[0]})
                 // this.setState({posts: sortedPosts.slice(1)});
 
-                this.setState({topPost: posts.articles.slice(0, 1)})
-                this.setState({posts: posts.articles.slice(1)});
+                console.log(posts);
+
+                this.setState({topPost: posts.slice(0, 1)})
+                this.setState({posts: posts.slice(1)});
 
             });
     }

@@ -1,34 +1,31 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-    merchant: {
-        type: String,
-        required: true,
-        minlength: 4,
-    },
-    total: {
-        type: Number,
-        required: true,
-    },
-    category: {
+    title: {
         type: String,
         required: true,
     },
-    description: {
+    content: {
         type: String,
-        minlength: 3,
-        maxlength: 30,
+        required: true
     },
-    report: {
-        type: Boolean,
-        required: true,
-        default: false,
-    },
-    user: {
+    author: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true,
-    }
+    },
+    urlToImage: {
+        type: String,
+        required: true
+    },
+    publishedAt: {
+        type: Date,
+        default: Date.now(),
+    },
+    comments: [],
+    likes: [],
+    readers: []
 });
 
 module.exports = mongoose.model('Post', postSchema);
+
