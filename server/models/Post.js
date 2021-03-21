@@ -22,7 +22,17 @@ const postSchema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
     },
-    comments: [],
+    comments: [{
+        user: {
+            type: mongoose.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
+        comment: {
+            type: String,
+            required: true,
+        }
+    }],
     likes: [],
     readers: []
 });

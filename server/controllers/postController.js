@@ -66,6 +66,8 @@ exports.likePost = async (req, res) => {
     try {
         const post = req.post
 
+        console.log('req._id', req._id);
+
         // convert the likes array to set to prevent duplication of records
         const set = new Set(post.likes)
         set.add(req._id)
@@ -97,7 +99,9 @@ exports.unlikePost = async (req, res) => {
 exports.commentOnPost = async (req, res) => {
     try {
         const post = req.post
-        post.comments.unshift({user: req._id, comment: req.body.comment})
+        const comment = {user: req._id, comment: req.body.comment};
+        console.log(comment);
+        post.comments.unshift(comment)
         const update = await post.save()
         res.status(200).json(update)
     } catch (error) {

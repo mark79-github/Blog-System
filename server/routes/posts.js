@@ -7,13 +7,15 @@ router.post('/', middleware.verifyToken, postController.addPost);
 
 router.get('/', postController.getAllPosts);
 
-router.get('/:id', [middleware.verifyToken, middleware.getPost], postController.getPostById);
+// router.get('/:id', [middleware.verifyToken, middleware.getPost], postController.getPostById);
+router.get('/:id', [middleware.getPost], postController.getPostById);
 
 router.put('/:id', [middleware.verifyToken, middleware.getPost], postController.updatePost);
 
 router.delete('/:id', [middleware.verifyToken, middleware.getPost], postController.deletePost);
 
 router.put('/like/:id', [middleware.verifyToken, middleware.getPost], postController.likePost);
+// router.put('/like/:id', [middleware.getPost], postController.likePost);
 
 router.put('/unlike/:id', [middleware.verifyToken, middleware.getPost], postController.unlikePost);
 

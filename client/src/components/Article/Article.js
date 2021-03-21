@@ -1,6 +1,7 @@
+import {Link} from "react-router-dom";
+
 const Article = ({data}) => {
-    const {id, title, urlToImage} = data;
-    const href = `/post/${id}`;
+    const {_id, title, urlToImage} = data;
     return (
         <article className="article">
             <article className="article-image">
@@ -9,7 +10,7 @@ const Article = ({data}) => {
             <article className="article-description">
                 <h2 className="article-description-title">{title}</h2>
                 <button className="article-description-btn">
-                    <a href={href}>Read more</a>
+                    <Link to={`/post/${_id}`}>Read more</Link>
                 </button>
             </article>
         </article>

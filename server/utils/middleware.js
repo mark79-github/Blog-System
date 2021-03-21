@@ -7,6 +7,7 @@ const {privateKey} = require('../config/config');
 exports.verifyToken = async (req, res, next) => {
     try {
         const bearer = req.headers.authorization
+
         if (!bearer) {
             response.forbidden(res, 'Missing bearer token')
             return

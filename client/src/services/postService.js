@@ -1,16 +1,57 @@
-const localhostApi = 'http://localhost:5000/api/posts';
-// const localhostApi = 'https://newsapi.org/v2/top-headlines?country=bg&apiKey=59cbe769d88f4f57b18104609a176fca'
-// const localhostApi = 'https://newsapi.org/v2/everything?q=football&apiKey=59cbe769d88f4f57b18104609a176fca'
-// const localhostApi = 'http://newsapi.org/v2/everything?q=football&apiKey=59cbe769d88f4f57b18104609a176fca'
+const api = 'http://localhost:5000/api/posts';
+
 export const getAll = () => {
-    // return fetch(localhostApi, {mode: 'cors'})
-    return fetch(localhostApi)
+    return fetch(api)
         .then(res => res.json())
         .catch(err => console.error('Error:' + err));
 };
 
 export const getById = (id) => {
-    return fetch(localhostApi + '/' + id, {mode: 'cors'})
+    return fetch(api + '/' + id)
+        .then(res => res.json())
+        .catch(err => console.error('Error:' + err));
+};
+
+
+export const likeById = (id) => {
+    const tempToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNTZmZWEwZTViNjZkMWZmNGFkMTY3MSIsImlhdCI6MTYxNjMzMzIwMn0.9p001z73eWCsEr7sXQKrUcFqVi6HZbtIWKkN-ZI5Pqs'
+
+    return fetch(api + '/like/' + id, {
+        method: "PUT",
+        headers: {
+            authorization: 'Bearer ' + tempToken
+        }
+    })
+        .then(res => res.json())
+        .catch(err => console.error('Error:' + err));
+};
+
+export const unlikeById = (id) => {
+    const tempToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNTZmZWEwZTViNjZkMWZmNGFkMTY3MSIsImlhdCI6MTYxNjMzMzIwMn0.9p001z73eWCsEr7sXQKrUcFqVi6HZbtIWKkN-ZI5Pqs'
+
+    return fetch(api + '/unlike/' + id, {
+        method: "PUT",
+        headers: {
+            authorization: 'Bearer ' + tempToken
+        }
+    })
+        .then(res => res.json())
+        .catch(err => console.error('Error:' + err));
+};
+
+export const commentById = (id, comment) => {
+    const tempToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNTZmZWEwZTViNjZkMWZmNGFkMTY3MSIsImlhdCI6MTYxNjMzMzIwMn0.9p001z73eWCsEr7sXQKrUcFqVi6HZbtIWKkN-ZI5Pqs'
+
+    return fetch(api + '/comment/' + id, {
+        method: "PUT",
+        headers: {
+            'Authorization': 'Bearer ' + tempToken,
+            'Content-Type': 'application/json'
+        },
+        body: {
+            comment: JSON.stringify(comment)
+        },
+    })
         .then(res => res.json())
         .catch(err => console.error('Error:' + err));
 };

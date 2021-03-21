@@ -16,30 +16,25 @@ class Main extends Component {
     componentDidMount() {
         postService.getAll()
             .then(posts => {
-                // const sortedPosts = posts.sort((f, s) => {
-                //     // return s.likes.length - f.likes.length;
-                //     return s.publishedAt - f.publishedAt;
-                // })
-                // this.setState({topPost: sortedPosts.slice(0, 1)[0]})
-                // this.setState({posts: sortedPosts.slice(1)});
-
-                console.log(posts);
-
                 this.setState({topPost: posts.slice(0, 1)})
                 this.setState({posts: posts.slice(1)});
-
             });
     }
 
     render() {
+        if (!this.state.topPost.length) {
+            return (
+                <h2 style={{color:'white'}}>Loading...</h2>
+            )
+        }
         return (
             <div className="main-container">
                 {this.state.topPost.map(x => {
-                    return (<TopArticle key={x.id} data={x}/>)
+                    return (<TopArticle key={x._id} data={x}/>)
                 })}
                 <section className="sub-article">
                     {this.state.posts.map(x => {
-                        return (<Article key={x.id} data={x}/>)
+                        return (<Article key={x._id} data={x}/>)
                     })}
                 </section>
             </div>
