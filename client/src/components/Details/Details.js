@@ -5,6 +5,7 @@ import * as userService from "../../services/userService";
 import Like from "../Like";
 import Unlike from "../Unlike";
 import FormComment from "../FormComment";
+import Comment from "../Comment";
 
 class Details extends Component {
     constructor(props) {
@@ -79,19 +80,10 @@ class Details extends Component {
                         </article>
                         <hr/>
                         <article className="top-article-comment-content">
-                            <article className="main-article-comment-content-details">
-                                <p><i className="far fa-trash-alt"></i><span>#1</span><span>By Author</span>
-                                </p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad assumenda,
-                                    cum deleniti dolorum
-                                    ducimus
-                                    mollitia nobis possimus quam sunt voluptas?</p>
-                            </article>
-                            <article className="main-article-comment-content-details">
-                                <p><i className="far fa-trash-alt"></i><span>#2</span><span>By Different Author</span>
-                                </p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id, quas.</p>
-                            </article>
+                            {this.state.post.comments.map((x, index) => {
+                                x.index = index + 1;
+                                return <Comment key={index + 1} data={x}/>
+                            })}
                         </article>
                     </section>
                 </div>
