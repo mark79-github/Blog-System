@@ -9,7 +9,8 @@ class Main extends Component {
 
         this.state = {
             topPost: [],
-            posts: []
+            posts: [],
+            loading: true,
         }
     }
 
@@ -18,13 +19,16 @@ class Main extends Component {
             .then(posts => {
                 this.setState({topPost: posts.slice(0, 1)})
                 this.setState({posts: posts.slice(1)});
+                this.setState({loading: false})
             });
     }
 
     render() {
-        if (!this.state.topPost.length) {
+        if (this.state.loading) {
             return (
-                <h2 style={{color:'white'}}>Loading...</h2>
+                <div className="main-container">
+                    <h2 style={{color: 'white'}}>Loading...</h2>
+                </div>
             )
         }
         return (

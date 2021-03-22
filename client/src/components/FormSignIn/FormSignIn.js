@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import * as userService from "../../services/userService";
+import * as authService from "../../services/authService";
 
 class FormSignIn extends Component {
     constructor(props) {
@@ -25,7 +25,14 @@ class FormSignIn extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
-        console.log(JSON.stringify(this.state));
+        authService.login(this.state.email, this.state.password)
+            .then((res) => {
+                this.setState({
+                    email: '',
+                    password: ''
+                });
+                console.log(res.token);
+            }).catch(err => console.error("Error:", err));
     }
 
     render() {

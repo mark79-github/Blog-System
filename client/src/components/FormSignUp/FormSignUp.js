@@ -28,7 +28,17 @@ class FormSignUp extends Component {
         event.preventDefault();
 
         authService.register(this.state.displayName, this.state.email, this.state.password)
-            .then(user => user.json())
+            .then((res) => {
+                this.setState({
+                    displayName: '',
+                    email: '',
+                    password: '',
+                    repeatPassword: ''
+                })
+                console.log(res.token);
+                // redirect to login
+                // or login and redirect to home
+            })
             .catch(err => console.error('Error: ', err))
     }
 
