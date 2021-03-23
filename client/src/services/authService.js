@@ -3,7 +3,7 @@ const api = 'http://localhost:5000/api/auth';
 export const register = (displayName, email, password) => {
     return fetch(api + '/register', {
         method: 'POST',
-        headers:{
+        headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -19,7 +19,7 @@ export const register = (displayName, email, password) => {
 export const login = (email, password) => {
     return fetch(api + '/login', {
         method: 'POST',
-        headers:{
+        headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({

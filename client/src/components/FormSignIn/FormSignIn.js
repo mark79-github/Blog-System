@@ -26,12 +26,12 @@ class FormSignIn extends Component {
         event.preventDefault();
 
         authService.login(this.state.email, this.state.password)
-            .then((res) => {
+            .then((response) => {
                 this.setState({
                     email: '',
                     password: ''
                 });
-                console.log(res.token);
+                console.log(response.statusCode);
             }).catch(err => console.error("Error:", err));
     }
 
