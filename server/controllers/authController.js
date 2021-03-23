@@ -37,7 +37,8 @@ exports.login = async (req, res) => {
         }
 
         const token = await utils.generateAccessToken(user._id)
-        res.status(200).json({token, user});
+        // res.status(200).json({token, user});
+        res.status(200).cookie('token', token, { httpOnly: true }).json({token, user});
 
     } catch (error) {
         response.serverError(res, error.message)

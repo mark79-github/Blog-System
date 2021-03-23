@@ -8,9 +8,13 @@ exports.verifyToken = async (req, res, next) => {
     try {
         const bearer = req.headers.authorization
 
+        {
+            const t = req.cookies.token;
+            console.log('t', t);
+        }
+
         if (!bearer) {
-            response.forbidden(res, 'Missing bearer token')
-            return
+            return response.forbidden(res, 'Missing bearer token')
         }
 
         const token = bearer.split(" ")[1]
@@ -25,9 +29,8 @@ exports.verifyToken = async (req, res, next) => {
 exports.getUser = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id)
-        if (!user){
-            response.missing(res, `No user found with id: ${req.params.id}`)
-            return
+        if (!user) {
+            return response.missing(res, `No user found with id: ${req.params.id}`)
         }
         req.user = user
         next()
@@ -39,9 +42,8 @@ exports.getUser = async (req, res, next) => {
 exports.getPost = async (req, res, next) => {
     try {
         const post = await Post.findById(req.params.id)
-        if (!post){
-            response.missing(res, `No post found with id: ${req.params.id}`)
-            return
+        if (!post) {
+            return response.missing(res, `No post found with id: ${req.params.id}`)
         }
         req.post = post
         next()
