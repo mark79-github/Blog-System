@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import {useHistory} from 'react-router-dom';
 import * as postService from '../../services/postService';
 import {login} from "../../services/authService";
 
@@ -32,7 +33,8 @@ class FormPost extends Component {
                     title: '',
                     content: '',
                     urlToImage: ''
-                })
+                });
+                //TODO useHistory to redirect
             })
             .catch(err => console.error("Error: ", err))
     }

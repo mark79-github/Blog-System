@@ -1,7 +1,14 @@
 const api = 'http://localhost:5000/api/posts';
 
-export const getAll = () => {
-    return fetch(api)
+export const getAll = (query) => {
+    let url = api;
+    if (query){
+        url += `?title=${query}`
+    }
+
+    console.log('url', url);
+
+    return fetch(url)
         .then(res => res.json())
         .catch(err => console.error('Error:' + err));
 };

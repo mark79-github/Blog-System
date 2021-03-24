@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import * as postService from '../../services/postService'
 
 class FormSearch extends Component {
     constructor(props) {
@@ -16,15 +17,18 @@ class FormSearch extends Component {
         this.setState({
             [name]: value
         });
-
-        console.log('name: ', name, ' value: ', value);
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
 
-        console.log('search', this.state.search);
-        //TODO postService
+        postService.getAll(this.state.search)
+            .then((res) => {
+                this.setState({
+                    search: ''
+                })
+            })
+            .catch(err => console.error("Error: ", err))
     }
 
     render() {

@@ -14,7 +14,9 @@ exports.addPost = async (req, res) => {
 
 exports.getAllPosts = async (req, res) => {
     try {
-        const posts = await Post.find()
+        let title = req.query.title || '';
+        const options = {title: {$regex: title, $options: "i"}}
+        const posts = await Post.find(options)
         res.status(200).json(posts)
     } catch (error) {
         response.serverError(res, error.message)
