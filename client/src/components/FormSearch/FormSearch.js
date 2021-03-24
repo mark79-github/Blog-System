@@ -23,13 +23,14 @@ class FormSearch extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
+        console.log('search', this.state.search);
         //TODO postService
     }
 
     render() {
         return (
             <form className="header-search-form" onSubmit={this.handleSubmit}>
-                <input type="search" name="search" id="search" placeholder="Search by title ..."
+                <input type="text" name="search" id="search" placeholder="Search by title ..."
                        onChange={this.handleInputChange}/>
                 <input type="submit" className="header-search-form-submit" value="&#xf002;"/>
             </form>

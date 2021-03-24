@@ -100,7 +100,6 @@ exports.commentOnPost = async (req, res) => {
     try {
         const post = req.post
         const comment = {user: req._id, comment: req.body.comment};
-        console.log(comment);
         post.comments.unshift(comment)
         const update = await post.save()
         res.status(200).json(update)
@@ -108,3 +107,4 @@ exports.commentOnPost = async (req, res) => {
         response.serverError(res, error.message)
     }
 }
+

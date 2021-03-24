@@ -27,11 +27,11 @@ class FormSignIn extends Component {
 
         authService.login(this.state.email, this.state.password)
             .then((response) => {
+                console.log(response);
                 this.setState({
                     email: '',
                     password: ''
                 });
-                console.log(response.statusCode);
             }).catch(err => console.error("Error:", err));
     }
 

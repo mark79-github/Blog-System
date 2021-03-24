@@ -13,6 +13,13 @@ export const register = (displayName, email, password) => {
         })
     })
         .then(res => res.json())
+        .then(text => {
+            if (text.hasOwnProperty('message')) {
+                return text.message
+            } else {
+                return text.token;
+            }
+        })
         .catch(err => console.error('Error:' + err));
 };
 
@@ -28,5 +35,12 @@ export const login = (email, password) => {
         })
     })
         .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+        .then(text => {
+            if (text.hasOwnProperty('message')) {
+                return text.message
+            } else {
+                return text.token;
+            }
+        })
+        .catch(err => console.error(err));
 };

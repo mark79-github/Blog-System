@@ -18,7 +18,6 @@ class FormComment extends Component {
     handleSubmit = (event) => {
         postService.commentById(this.props.commentId, this.state.value)
             .then((comment) => {
-                console.log('comment', comment);
                 return this.setState({value: ''})
             })
             .catch(err => console.error('Error:', err));
@@ -29,8 +28,7 @@ class FormComment extends Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 <label htmlFor="comment">Comment: </label>
-                <textarea name="comment" id="comment" cols="30" rows="10"
-                          placeholder="Leave your comment..."
+                <textarea name="comment" id="comment" placeholder="Leave your comment..."
                           value={this.state.value} onChange={this.handleChange}/>
                 <input type="submit" value="Post comment"/>
             </form>

@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import * as postService from '../../services/postService';
+import {login} from "../../services/authService";
 
 class FormPost extends Component {
     constructor(props) {
@@ -25,11 +26,14 @@ class FormPost extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         postService.addPost(this.state.title, this.state.content, this.state.urlToImage)
-            .then(() => this.setState({
-                title: '',
-                content: '',
-                urlToImage: ''
-            }))
+            .then((res) => {
+                console.log('res add post', res);
+                this.setState({
+                    title: '',
+                    content: '',
+                    urlToImage: ''
+                })
+            })
             .catch(err => console.error("Error: ", err))
     }
 

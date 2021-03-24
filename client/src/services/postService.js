@@ -41,6 +41,8 @@ export const unlikeById = (id) => {
 export const commentById = (id, comment) => {
     const tempToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNTZmZWEwZTViNjZkMWZmNGFkMTY3MSIsImlhdCI6MTYxNjMzMzIwMn0.9p001z73eWCsEr7sXQKrUcFqVi6HZbtIWKkN-ZI5Pqs'
 
+    console.log('comment', comment);
+
     return fetch(api + '/comment/' + id, {
         method: "PUT",
         headers: {
