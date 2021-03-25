@@ -22,7 +22,7 @@ class FormSearch extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
-        postService.getAll(this.state.search)
+        postService.getAll({title: this.state.search})
             .then((res) => {
                 this.setState({
                     search: ''

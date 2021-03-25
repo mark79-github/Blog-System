@@ -19,7 +19,7 @@ class FormSignIn extends Component {
             [name]: value
         });
 
-        console.log('name: ', name, ' value: ', value);
+        // console.log('name: ', name, ' value: ', value);
     }
 
     handleSubmit = (event) => {
@@ -27,11 +27,25 @@ class FormSignIn extends Component {
 
         authService.login(this.state.email, this.state.password)
             .then((response) => {
-                console.log(response);
+
                 this.setState({
                     email: '',
                     password: ''
                 });
+
+
+                if (response.hasOwnProperty('token')) {
+                    window.localStorage.setItem('authToken', response.token);
+                }
+                if (response.hasOwnProperty('user')) {
+                    window.localStorage.setItem('authUser', JSON.stringify({
+                        _id: response.user._id,
+                        displayName: response.user.displayName
+                    }));
+                }
+                if (response.hasOwnProperty('message')) {
+                    return response.message
+                }
             }).catch(err => console.error("Error:", err));
     }
 

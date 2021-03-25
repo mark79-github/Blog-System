@@ -1,9 +1,9 @@
 import React from 'react';
 import Main from "../../components/Main";
 
-const HomePage = () => {
+const HomePage = ({searchQry}) => {
     return (
-            <Main/>
+            <Main searchQry={searchQry}/>
     );
 }
 

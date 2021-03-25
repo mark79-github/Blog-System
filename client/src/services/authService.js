@@ -35,12 +35,5 @@ export const login = (email, password) => {
         })
     })
         .then(res => res.json())
-        .then(text => {
-            if (text.hasOwnProperty('message')) {
-                return text.message
-            } else {
-                return text.token;
-            }
-        })
         .catch(err => console.error(err));
 };

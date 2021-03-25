@@ -11,11 +11,12 @@ class Main extends Component {
             topPost: [],
             posts: [],
             loading: true,
+            searchQry: props.searchQry,
         }
     }
 
     componentDidMount() {
-        postService.getAll()
+        postService.getAll(this.state.searchQry)
             .then(posts => {
                 this.setState({topPost: posts.slice(0, 1)})
                 this.setState({posts: posts.slice(1)});
@@ -24,6 +25,7 @@ class Main extends Component {
     }
 
     render() {
+
         if (this.state.loading) {
             return (
                 <div className="main-container">

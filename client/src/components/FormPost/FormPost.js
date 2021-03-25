@@ -1,7 +1,5 @@
 import {Component} from 'react';
-import {useHistory} from 'react-router-dom';
 import * as postService from '../../services/postService';
-import {login} from "../../services/authService";
 
 class FormPost extends Component {
     constructor(props) {
@@ -28,7 +26,7 @@ class FormPost extends Component {
         event.preventDefault();
         postService.addPost(this.state.title, this.state.content, this.state.urlToImage)
             .then((res) => {
-                console.log('res add post', res);
+                // console.log('res add post', res);
                 this.setState({
                     title: '',
                     content: '',

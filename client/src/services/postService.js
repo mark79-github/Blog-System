@@ -2,8 +2,11 @@ const api = 'http://localhost:5000/api/posts';
 
 export const getAll = (query) => {
     let url = api;
+
     if (query){
-        url += `?title=${query}`
+        for (let key of Object.keys(query)) {
+            url += `?${key}=${query[key]}`
+        }
     }
 
     console.log('url', url);
@@ -48,7 +51,7 @@ export const unlikeById = (id) => {
 export const commentById = (id, comment) => {
     const tempToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNTZmZWEwZTViNjZkMWZmNGFkMTY3MSIsImlhdCI6MTYxNjMzMzIwMn0.9p001z73eWCsEr7sXQKrUcFqVi6HZbtIWKkN-ZI5Pqs'
 
-    console.log('comment', comment);
+    // console.log('comment', comment);
 
     return fetch(api + '/comment/' + id, {
         method: "PUT",
