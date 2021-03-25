@@ -14,7 +14,17 @@
 
 import {createContext} from "react";
 
-const defaultUser = {
+// const defaultUser = {
+//     isLoggedIn: false,
+//     token: null,
+//     displayName: '',
+//     login: () => {
+//     },
+//     logout: () => {
+//     }
+// };
+
+const AuthContext = createContext({
     isLoggedIn: false,
     token: null,
     displayName: '',
@@ -22,8 +32,6 @@ const defaultUser = {
     },
     logout: () => {
     }
-};
+});
 
-const AuthContext = createContext({defaultUser});
-
-export {AuthContext, defaultUser};
+export default AuthContext;

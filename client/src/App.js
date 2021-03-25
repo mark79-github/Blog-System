@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
-import {AuthContext, defaultUser} from "./components/AuthContext/AuthContext";
+import AuthContext from "./components/AuthContext/AuthContext";
 import HomePage from "./pages/home-page";
 import SignPage from "./pages/sign-page";
 import DetailsPage from "./pages/details-page";
@@ -23,12 +23,18 @@ class App extends Component {
         const authToken = window.localStorage.getItem("authToken");
         const authUser = JSON.parse(window.localStorage.getItem("authUser"));
 
-        if (!authToken || !authUser) {
-            return defaultUser;
-        }
+        console.log('authUser', authUser);
 
-        if (!authToken) {
-            return defaultUser;
+        if (!authToken || !authUser) {
+            return {
+                isLoggedIn: false,
+                token: null,
+                displayName: '',
+                login: () => {
+                },
+                logout: () => {
+                }
+            };
         }
 
         return {...authUser, isLoggedIn: true};
@@ -36,9 +42,10 @@ class App extends Component {
 
     render() {
         const {user} = this.state;
+        console.log('app render - user', user);
         return (
             <>
-                <AuthContext.Provider value={{user}}>
+                <AuthContext.Provider value={user}>
                     <Header/>
                     <Switch>
                         <Route path={'/'} component={HomePage} exact/>
