@@ -35,10 +35,10 @@ class FormSignIn extends Component {
 
 
                 if (response.hasOwnProperty('token')) {
-                    window.localStorage.setItem('authToken', response.token);
+                    localStorage.setItem('authToken', response.token);
                 }
                 if (response.hasOwnProperty('user')) {
-                    window.localStorage.setItem('authUser', JSON.stringify({
+                    localStorage.setItem('authUser', JSON.stringify({
                         _id: response.user._id,
                         displayName: response.user.displayName
                     }));
@@ -46,6 +46,8 @@ class FormSignIn extends Component {
                 if (response.hasOwnProperty('message')) {
                     return response.message
                 }
+
+
             }).catch(err => console.error("Error:", err));
     }
 

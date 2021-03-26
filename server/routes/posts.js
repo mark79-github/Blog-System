@@ -21,4 +21,6 @@ router.put('/unlike/:id', [middleware.verifyToken, middleware.getPost], postCont
 
 router.put('/comment/:id', [middleware.verifyToken, middleware.getPost], postController.commentOnPost);
 
+router.post('/view/:id', [middleware.getPost], postController.viewPost);
+
 module.exports = router;

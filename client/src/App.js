@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
-import AuthContext from "./components/AuthContext/AuthContext";
+import AuthContext from "./components/AuthContext";
 import HomePage from "./pages/home-page";
 import SignPage from "./pages/sign-page";
 import DetailsPage from "./pages/details-page";
@@ -20,8 +20,8 @@ class App extends Component {
     }
 
     loadUserFromStorage = () => {
-        const authToken = window.localStorage.getItem("authToken");
-        const authUser = JSON.parse(window.localStorage.getItem("authUser"));
+        const authToken = localStorage.getItem("authToken");
+        const authUser = JSON.parse(localStorage.getItem("authUser"));
 
         console.log('authUser', authUser);
 

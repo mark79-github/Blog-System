@@ -7,6 +7,7 @@ const Logout = () => {
     const authContext = useContext(AuthContext);
 
     console.log(authContext);
+    localStorage.removeItem('authToken');
 
     return (
         <Redirect to={'/'}/>

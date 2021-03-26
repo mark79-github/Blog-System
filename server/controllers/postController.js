@@ -110,3 +110,14 @@ exports.commentOnPost = async (req, res) => {
     }
 }
 
+exports.viewPost = async (req, res) => {
+    try {
+        let post = req.post
+        post.views = post.views + 1;
+        const update = await post.save()
+        res.status(200).json(update)
+    } catch (error) {
+        response.serverError(res, error.message)
+    }
+}
+

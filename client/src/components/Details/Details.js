@@ -63,7 +63,7 @@ class Details extends Component {
                             <span
                                 className="main-article-details-likes">Likes: {this.state.post.likes.length || 0}</span>
                             <span
-                                className="main-article-details-readers">Readers: {this.state.post.readers.length || 0}</span>
+                                className="main-article-details-readers">Views: {this.state.post.views}</span>
                             {
                                 !this.state.post.likes.some(x => x === this.state.post.author)
                                     ? <Like onLike={this.like}/> : <Unlike onUnlike={this.unlike}/>
