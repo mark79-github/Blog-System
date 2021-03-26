@@ -1,67 +1,60 @@
-import {Component} from 'react';
+import {useContext, useState} from 'react';
+import {useHistory} from 'react-router-dom';
+
 import * as authService from "../../services/authService";
+import AuthContext from "../AuthContext";
 
-class FormSignIn extends Component {
-    constructor(props) {
-        super(props);
+const FormSignIn = () => {
+    const authContext = useContext(AuthContext);
+    let history = useHistory();
 
-        this.state = {
-            email: '',
-            password: ''
-        }
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleEmailInputChange = (event) => {
+        setEmail(event.target.value);
     }
 
-    handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-        this.setState({
-            [name]: value
-        });
-
-        // console.log('name: ', name, ' value: ', value);
+    const handlePasswordInputChange = (event) => {
+        setPassword(event.target.value);
     }
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
-        authService.login(this.state.email, this.state.password)
+        console.log('authContext', authContext);
+
+        authService.login(email, password)
             .then((response) => {
-
-                this.setState({
-                    email: '',
-                    password: ''
-                });
-
+                // setEmail('');
+                // setPassword('');
 
                 if (response.hasOwnProperty('token')) {
-                    localStorage.setItem('authToken', response.token);
+                    authContext.login(response.token);
+                    history.push('/');
                 }
-                if (response.hasOwnProperty('user')) {
-                    localStorage.setItem('authUser', JSON.stringify({
-                        _id: response.user._id,
-                        displayName: response.user.displayName
-                    }));
-                }
+                // if (response.hasOwnProperty('user')) {
+                //     localStorage.setItem('authUser', JSON.stringify({
+                //         _id: response.user._id,
+                //         displayName: response.user.displayName
+                //     }));
+                // }
                 if (response.hasOwnProperty('message')) {
                     return response.message
                 }
-
-
             }).catch(err => console.error("Error:", err));
     }
 
-    render() {
-        return (
-            <form className="form" onSubmit={this.handleSubmit}>
-                <input type="email" name="email" placeholder="Email" value={this.state.email}
-                       onChange={this.handleInputChange}/>
-                <input type="password" name="password" placeholder="Password" value={this.state.password}
-                       onChange={this.handleInputChange}/>
-                <input type="submit" value="Sign In"/>
-            </form>
-        );
-    }
+    return (
+        <form className="form" onSubmit={handleSubmit}>
+            <input type="email" name="email" placeholder="Email" value={email}
+                   onChange={handleEmailInputChange}/>
+            <input type="password" name="password" placeholder="Password" value={password}
+                   onChange={handlePasswordInputChange}/>
+            <input type="submit" value="Sign In"/>
+        </form>
+    );
+
 }
 
 export default FormSignIn;

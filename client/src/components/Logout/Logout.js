@@ -6,8 +6,7 @@ import AuthContext from '../AuthContext';
 const Logout = () => {
     const authContext = useContext(AuthContext);
 
-    console.log(authContext);
-    localStorage.removeItem('authToken');
+    authContext.logout();
 
     return (
         <Redirect to={'/'}/>

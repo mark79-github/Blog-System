@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import AuthContext from "./components/AuthContext";
 import HomePage from "./pages/home-page";
@@ -10,56 +10,68 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Logout from "./components/Logout";
 
-class App extends Component {
+let logoutTimer;
 
-    constructor(props) {
-        super(props);
+const App = () => {
 
-        const user = this.loadUserFromStorage();
-        this.state = {user};
-    }
+    const [token, setToken] = useState(false);
+    // TODO after refresh not keeping token state
+    const [tokenExpirationDate, setTokenExpirationDate] = useState();
 
-    loadUserFromStorage = () => {
-        const authToken = localStorage.getItem("authToken");
-        const authUser = JSON.parse(localStorage.getItem("authUser"));
+    const login = useCallback((token, expirationTime) => {
+        setToken(token);
+        const expiration = expirationTime || new Date(new Date().getTime() + 1000 * 60 * 60);
+        setTokenExpirationDate(expiration);
+        localStorage.setItem("authToken", JSON.stringify({
+            token,
+            expirationTime: expiration.toISOString()
+        }));
+    }, []);
 
-        console.log('authUser', authUser);
+    const logout = useCallback(() => {
+        setToken(null);
+        localStorage.removeItem("authToken");
+    }, []);
 
-        if (!authToken || !authUser) {
-            return {
-                isLoggedIn: false,
-                token: null,
-                displayName: '',
-                login: () => {
-                },
-                logout: () => {
-                }
-            };
+    useEffect(() => {
+        const storedData = JSON.parse(localStorage.getItem("authToken"));
+        if (storedData &&
+            storedData.token &&
+            new Date(storedData.expirationTime) > new Date()) {
+            login(storedData.token, new Date(storedData.expirationTime));
         }
+    }, [login]);
 
-        return {...authUser, isLoggedIn: true};
-    };
+    useEffect(() => {
+        if (token && tokenExpirationDate) {
+            const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
+            logoutTimer = setTimeout(logout, remainingTime);
+        } else {
+            clearTimeout(logoutTimer);
+        }
+    }, [token, logout, tokenExpirationDate]);
 
-    render() {
-        const {user} = this.state;
-        console.log('app render - user', user);
-        return (
-            <>
-                <AuthContext.Provider value={user}>
-                    <Header/>
-                    <Switch>
-                        <Route path={'/'} component={HomePage} exact/>
-                        <Route path={'/user/sign'} component={SignPage} exact/>
-                        <Route path={'/user/logout'} component={Logout} exact/>
-                        <Route path={'/post/create'} component={CreatePostPage} exact/>
-                        <Route path={'/post/:id'} component={DetailsPage}/>
-                        <Route component={ErrorPage}/>
-                    </Switch>
-                    <Footer/>
-                </AuthContext.Provider>
-            </>
-        );
-    }
+    return (
+        <>
+            <AuthContext.Provider value={{
+                isLoggedIn: !!token,
+                token: token,
+                login: login,
+                logout: logout
+            }}>
+                <Header/>
+                <Switch>
+                    <Route path={'/'} component={HomePage} exact/>
+                    <Route path={'/user/sign'} component={SignPage} exact/>
+                    <Route path={'/user/logout'} component={Logout} exact/>
+                    <Route path={'/post/create'} component={CreatePostPage} exact/>
+                    <Route path={'/post/:id'} component={DetailsPage}/>
+                    <Route component={ErrorPage}/>
+                </Switch>
+                <Footer/>
+            </AuthContext.Provider>
+        </>
+    );
 }
 
 export default App;
