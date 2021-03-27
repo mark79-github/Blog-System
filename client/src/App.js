@@ -9,13 +9,17 @@ import CreatePostPage from "./pages/create-post-page";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Logout from "./components/Logout";
+import Notification from "./components/Notification";
+import notificationService from "./services/notificationService";
 
 let logoutTimer;
 
 const App = () => {
 
     const [token, setToken] = useState(false);
-    // TODO after refresh not keeping token state
+    // TODO After refresh not keeping token state
+    // TODO Found Navigation is rendered before app - why - async/await?!
+
     const [tokenExpirationDate, setTokenExpirationDate] = useState();
 
     const login = useCallback((token, expirationTime) => {
@@ -26,15 +30,18 @@ const App = () => {
             token,
             expirationTime: expiration.toISOString()
         }));
+        notificationService.infoMsg('Successfully login');
     }, []);
 
     const logout = useCallback(() => {
         setToken(null);
         localStorage.removeItem("authToken");
+        notificationService.infoMsg('Successfully logout');
     }, []);
 
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem("authToken"));
+        console.log('use effect [login]', storedData);
         if (storedData &&
             storedData.token &&
             new Date(storedData.expirationTime) > new Date()) {
@@ -53,6 +60,7 @@ const App = () => {
 
     return (
         <>
+            <Notification />
             <AuthContext.Provider value={{
                 isLoggedIn: !!token,
                 token: token,

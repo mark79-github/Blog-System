@@ -6,6 +6,7 @@ import Like from "../Like";
 import Unlike from "../Unlike";
 import FormComment from "../FormComment";
 import Comment from "../Comment";
+import notificationService from "../../services/notificationService";
 
 class Details extends Component {
     constructor(props) {
@@ -18,13 +19,19 @@ class Details extends Component {
 
     like = () => {
         postService.likeById(this.state.post._id)
-            .then(post => this.setState({post}))
+            .then(post => {
+                this.setState({post})
+                notificationService.infoMsg('Liked');
+            })
             .catch(err => console.error('Error:', err));
     }
 
     unlike = () => {
         postService.unlikeById(this.state.post._id)
-            .then(post => this.setState({post}))
+            .then(post => {
+                this.setState({post})
+                notificationService.infoMsg('Unliked');
+            })
             .catch(err => console.error('Error:', err));
     }
 
