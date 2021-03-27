@@ -23,7 +23,7 @@ const TopArticle = ({data}) => {
                 <span className="top-article-details-author">{author}</span>
                 <span className="top-article-details-comments">Comments: {comments.length || 0}</span>
                 <span className="top-article-details-likes">Likes: {likes.length || 0}</span>
-                <span className="top-article-details-readers">Views: {views}</span>
+                <span className="top-article-details-readers">Views: {Number(views)}</span>
             </article>
             <article className="top-article-description">
                 <h2 className="top-article-description-title">{title}</h2>

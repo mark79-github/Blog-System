@@ -16,9 +16,7 @@ exports.register = async (req, res) => {
             password: hash
         }).save();
         const token = await utils.generateAccessToken(newUser._id);
-        console.log(token);
         res.status(200).json({token, newUser});
-
     } catch (error) {
         response.serverError(res, error.message)
     }
@@ -28,19 +26,17 @@ exports.login = async (req, res) => {
     try {
         const user = await User.findOne({email: req.body.email})
         if (!user) {
-            return response.missing(res, `No user found with email: ${req.body.email}`)
+            return response.missing(res, `No user found with email: ${req.body.email}`);
         }
 
         const matches = await utils.verifyPassword(req.body.password, user.password)
         if (!matches) {
-            return response.forbidden(res, "Passwords do not match")
+            return response.forbidden(res, "Passwords do not match");
         }
 
         const token = await utils.generateAccessToken(user._id)
-        // res.status(200).json({token, user});
-        res.status(200).cookie('token', token, { httpOnly: true }).json({token, user});
-
+        res.status(200).json({token, user});
     } catch (error) {
-        response.serverError(res, error.message)
+        response.serverError(res, error.message);
     }
 }

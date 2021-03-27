@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom';
 
 import * as authService from "../../services/authService";
 import AuthContext from "../AuthContext";
+import notificationService from "../../services/notificationService";
 
 const FormSignIn = () => {
     const authContext = useContext(AuthContext);
@@ -22,12 +23,10 @@ const FormSignIn = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        console.log('authContext', authContext);
-
         authService.login(email, password)
             .then((response) => {
-                // setEmail('');
-                // setPassword('');
+                setEmail('');
+                setPassword('');
 
                 if (response.hasOwnProperty('token')) {
                     authContext.login(response.token);
@@ -40,9 +39,12 @@ const FormSignIn = () => {
                 //     }));
                 // }
                 if (response.hasOwnProperty('message')) {
-                    return response.message
+                    throw Error(response.message);
                 }
-            }).catch(err => console.error("Error:", err));
+            })
+            .catch(err => {
+                notificationService.errorMsg(err.message);
+            });
     }
 
     return (

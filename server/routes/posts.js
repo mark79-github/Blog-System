@@ -15,7 +15,6 @@ router.put('/:id', [middleware.verifyToken, middleware.getPost], postController.
 router.delete('/:id', [middleware.verifyToken, middleware.getPost], postController.deletePost);
 
 router.put('/like/:id', [middleware.verifyToken, middleware.getPost], postController.likePost);
-// router.put('/like/:id', [middleware.getPost], postController.likePost);
 
 router.put('/unlike/:id', [middleware.verifyToken, middleware.getPost], postController.unlikePost);
 

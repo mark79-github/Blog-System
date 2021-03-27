@@ -1,5 +1,4 @@
 import {Component} from 'react'
-import * as postService from '../../services/postService'
 
 class FormSearch extends Component {
     constructor(props) {
@@ -11,35 +10,37 @@ class FormSearch extends Component {
     }
 
     handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
         this.setState({
-            [name]: value
+            search: event.target.value
         });
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
 
-        postService.getAll({title: this.state.search})
-            .then((res) => {
-                this.setState({
-                    search: ''
-                })
-            })
-            .catch(err => console.error("Error: ", err))
+        this.setState({
+            search: ''
+        })
+        // postService.getAll({title: this.state.search})
+        //     .then((res) => {
+        //         this.setState({
+        //             search: ''
+        //         })
+        //     })
+        //     .catch(err => console.error("Error: ", err))
     }
 
     render() {
         return (
             <form className="header-search-form" onSubmit={this.handleSubmit}>
                 <input type="text" name="search" id="search" placeholder="Search by title ..."
+                       value={this.state.search}
                        onChange={this.handleInputChange}/>
                 <input type="submit" className="header-search-form-submit" value="&#xf002;"/>
             </form>
         );
     }
+
 }
 
 export default FormSearch;
