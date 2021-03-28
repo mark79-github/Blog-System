@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const response = require('../utils/response');
 const Post = require('../models/Post');
 
@@ -14,8 +15,17 @@ exports.addPost = async (req, res) => {
 
 exports.getAllPosts = async (req, res) => {
     try {
-        let title = req.query.title || '';
-        const options = {title: {$regex: title, $options: "i"}}
+
+        const {author, title} = req.query;
+        let options = {};
+
+        if (author) {
+            options.author = new mongoose.Types.ObjectId(author);
+        }
+        if (title) {
+            options.title = {$regex: title, $options: "i"};
+        }
+
         const posts = await Post.find(options)
         res.status(200).json(posts)
     } catch (error) {

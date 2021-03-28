@@ -9,6 +9,8 @@ export const getAll = (query) => {
         }
     }
 
+    console.log('url', url);
+
     return fetch(url)
         .then(res => res.json())
         .catch(err => console.error('Error:' + err));

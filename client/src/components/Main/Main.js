@@ -5,20 +5,20 @@ import TopArticle from "../TopArticle";
 import Loader from "react-loader-spinner";
 import notificationService from "../../services/notificationService";
 
-const Main = () => {
+const Main = ({searchQry}) => {
 
     const [topPost, setTopPost] = useState([]);
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        postService.getAll()
+        postService.getAll(searchQry)
             .then(posts => {
                 setTopPost(posts.slice(0, 1));
                 setPosts(posts.slice(1));
                 setLoading(false);
             }).catch(err => notificationService.errorMsg(err.message));
-    }, [])
+    }, [searchQry])
 
     if (loading) {
         return (
