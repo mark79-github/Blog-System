@@ -4,8 +4,12 @@ export const getAll = (query) => {
     let url = api;
 
     if (query) {
+        let queryArr = [];
         for (let key of Object.keys(query)) {
-            url += `?${key}=${query[key]}`
+            queryArr.push(`${key}=${query[key]}`);
+        }
+        if (queryArr.length){
+            url += `?${queryArr.join('&')}`;
         }
     }
 

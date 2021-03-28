@@ -1,46 +1,28 @@
-import {Component} from 'react'
+import {useState} from 'react'
 
-class FormSearch extends Component {
-    constructor(props) {
-        super(props);
+const FormSearch = (props) => {
+    const [search, setSearch] = useState('')
 
-        this.state = {
-            search: ''
-        }
+    const handleInputChange = (event) => {
+        setSearch(event.target.value)
     }
 
-    handleInputChange = (event) => {
-        this.setState({
-            search: event.target.value
-        });
-    }
-
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
-        this.setState({
-            search: ''
-        })
-        // postService.getAll({title: this.state.search})
-        //     .then((res) => {
-        //         this.setState({
-        //             search: ''
-        //         })
-        //     })
-        //     .catch(err => console.error("Error: ", err))
+        props.onSearch({title: search});
+
+        setSearch('');
     }
 
-    render() {
-        return (
-            <form className="header-search-form" onSubmit={this.handleSubmit}>
-                <input type="text" name="search" id="search" placeholder="Search by title ..."
-                       value={this.state.search}
-                       onChange={this.handleInputChange}/>
-                <input type="submit" className="header-search-form-submit" value="&#xf002;"/>
-            </form>
-        );
-    }
-
+    return (
+        <form className="header-search-form" onSubmit={handleSubmit}>
+            <input type="text" name="search" id="search" placeholder="Search by title ..."
+                   value={search}
+                   onChange={handleInputChange}/>
+            <input type="submit" className="header-search-form-submit" value="&#xf002;"/>
+        </form>
+    );
 }
 
 export default FormSearch;

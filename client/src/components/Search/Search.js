@@ -1,10 +1,11 @@
 import React from "react";
 import FormSearch from "../FormSearch";
 
-const Search = () => {
+const Search = (props) => {
+
     return (
         <section className="header-search">
-            <FormSearch/>
+            <FormSearch onSearch={props.onSearch}/>
         </section>
     );
 }

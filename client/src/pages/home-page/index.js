@@ -3,10 +3,9 @@ import Main from "../../components/Main";
 
 const HomePage = (props) => {
 
-    // console.log('location.search',props.location.search);
-    //location.search
+    console.log('props.searchObj', props.searchObj);
 
-   const getQueryStringParams = (query) => {
+    const getQueryStringParams = (query) => {
         return query
             ? (/^[?#]/.test(query) ? query.slice(1) : query)
                 .split('&')
@@ -19,10 +18,11 @@ const HomePage = (props) => {
             : {}
     };
 
-    // console.log(getQueryStringParams(props.location.search));
+    let searchObj = Object.assign({}, getQueryStringParams(props.location.search));
+    searchObj = Object.assign(searchObj, props.searchObj);
 
     return (
-        <Main searchQry={getQueryStringParams(props.location.search)}/>
+        <Main searchQry={searchObj}/>
     );
 }
 

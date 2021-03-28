@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import AuthContext from "../AuthContext";
 import NavigationItem from "../NavigationItem";
 
-const Navigation = () => {
+const Navigation = (props) => {
     const {isLoggedIn, displayName, userId} = useContext(AuthContext);
 
     return (
@@ -20,7 +20,8 @@ const Navigation = () => {
                             ?
                             <>
                                 <NavigationItem linkTo={'/post/create'}>Add Post</NavigationItem>
-                                <NavigationItem linkTo={`/?author=${userId}`}>My Posts</NavigationItem>
+                                <NavigationItem linkTo={`/?author=${userId}`} onSearch={props.onSearch}>My
+                                    Posts </NavigationItem>
                                 <NavigationItem linkTo={'/user/logout'}>Logout, {displayName}</NavigationItem>
                             </>
                             : <NavigationItem linkTo={'/user/sign'}>Sign</NavigationItem>

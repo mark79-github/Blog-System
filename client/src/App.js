@@ -23,6 +23,7 @@ const App = () => {
     const [userId, setUserId] = useState('');
     const [displayName, setDisplayName] = useState('');
     const [tokenExpirationDate, setTokenExpirationDate] = useState();
+    const [searchByTitle, setSearchByTitle] = useState({});
 
     const login = useCallback((token, userId, displayName, expirationTime) => {
         setToken(token);
@@ -46,6 +47,12 @@ const App = () => {
         localStorage.removeItem("authToken");
         notificationService.infoMsg('Successfully logout');
     }, []);
+
+    const onSearch = (search) => {
+        setSearchByTitle(search);
+        // Object.keys(search)
+        //     .map(key => alert(`${key}=${search[key]}`));
+    }
 
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem("authToken"));
@@ -78,10 +85,10 @@ const App = () => {
                 login: login,
                 logout: logout
             }}>
-                <Header/>
+                <Header onSearch={onSearch}/>
                 <Switch>
 
-                    <Route path={'/'} component={HomePage} exact/>
+                    <Route path={'/'} component={(props) => <HomePage {...props} searchObj={searchByTitle}/>} exact/>
                     <Route path={'/post/create'} component={CreatePostPage} exact/>
                     <Route path={'/post/:id'} component={DetailsPage}/>
 

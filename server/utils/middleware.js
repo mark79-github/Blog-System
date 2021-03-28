@@ -8,11 +8,6 @@ exports.verifyToken = async (req, res, next) => {
     try {
         const bearer = req.headers.authorization
 
-        {
-            const t = req.cookies.token;
-            console.log('t', t);
-        }
-
         if (!bearer) {
             return response.forbidden(res, 'Missing bearer token')
         }
