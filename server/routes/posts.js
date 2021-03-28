@@ -20,6 +20,8 @@ router.put('/unlike/:id', [middleware.verifyToken, middleware.getPost], postCont
 
 router.put('/comment/:id', [middleware.verifyToken, middleware.getPost], postController.commentOnPost);
 
+router.delete('/comment/:id/delete/:commentId', [middleware.verifyToken, middleware.getPost], postController.deleteCommentOnPost);
+
 router.post('/view/:id', [middleware.getPost], postController.viewPost);
 
 module.exports = router;

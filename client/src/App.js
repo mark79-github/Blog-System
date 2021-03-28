@@ -17,17 +17,23 @@ let logoutTimer;
 const App = () => {
 
     const [token, setToken] = useState(false);
+
     // TODO After refresh not keeping token state
     // TODO Found Navigation is rendered before app - why - async/await?!
-
+    const [userId, setUserId] = useState('');
+    const [displayName, setDisplayName] = useState('');
     const [tokenExpirationDate, setTokenExpirationDate] = useState();
 
-    const login = useCallback((token, expirationTime) => {
+    const login = useCallback((token, userId, displayName, expirationTime) => {
         setToken(token);
+        setUserId(userId);
+        setDisplayName(displayName);
         const expiration = expirationTime || new Date(new Date().getTime() + 1000 * 60 * 60);
         setTokenExpirationDate(expiration);
         localStorage.setItem("authToken", JSON.stringify({
             token,
+            userId,
+            displayName,
             expirationTime: expiration.toISOString()
         }));
         notificationService.infoMsg('Successfully login');
@@ -35,17 +41,20 @@ const App = () => {
 
     const logout = useCallback(() => {
         setToken(null);
+        setUserId(null);
+        setDisplayName(null);
         localStorage.removeItem("authToken");
         notificationService.infoMsg('Successfully logout');
     }, []);
 
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem("authToken"));
-        console.log('use effect [login]', storedData);
         if (storedData &&
             storedData.token &&
+            storedData.userId &&
+            storedData.displayName &&
             new Date(storedData.expirationTime) > new Date()) {
-            login(storedData.token, new Date(storedData.expirationTime));
+            login(storedData.token, storedData.userId, storedData.displayName, new Date(storedData.expirationTime));
         }
     }, [login]);
 
@@ -60,21 +69,27 @@ const App = () => {
 
     return (
         <>
-            <Notification />
+            <Notification/>
             <AuthContext.Provider value={{
                 isLoggedIn: !!token,
                 token: token,
+                userId: userId,
+                displayName: displayName,
                 login: login,
                 logout: logout
             }}>
                 <Header/>
                 <Switch>
+
                     <Route path={'/'} component={HomePage} exact/>
-                    <Route path={'/user/sign'} component={SignPage} exact/>
-                    <Route path={'/user/logout'} component={Logout} exact/>
                     <Route path={'/post/create'} component={CreatePostPage} exact/>
                     <Route path={'/post/:id'} component={DetailsPage}/>
+
+                    <Route path={'/user/sign'} component={SignPage} exact/>
+                    <Route path={'/user/logout'} component={Logout} exact/>
+
                     <Route component={ErrorPage}/>
+
                 </Switch>
                 <Footer/>
             </AuthContext.Provider>

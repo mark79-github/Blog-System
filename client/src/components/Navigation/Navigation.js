@@ -4,8 +4,7 @@ import AuthContext from "../AuthContext";
 import NavigationItem from "../NavigationItem";
 
 const Navigation = () => {
-    const authContext = useContext(AuthContext);
-    console.log('Navigation', authContext);
+    const {isLoggedIn, displayName, userId} = useContext(AuthContext);
 
     return (
         <section className="navigation">
@@ -17,12 +16,12 @@ const Navigation = () => {
             <section>
                 <nav>
                     <ul>
-                        {authContext.isLoggedIn
+                        {isLoggedIn
                             ?
                             <>
                                 <NavigationItem linkTo={'/post/create'}>Add Post</NavigationItem>
-                                <NavigationItem linkTo={'/'}>My Posts</NavigationItem>
-                                <NavigationItem linkTo={'/user/logout'}>Logout</NavigationItem>
+                                <NavigationItem linkTo={`/?author=${userId}`}>My Posts</NavigationItem>
+                                <NavigationItem linkTo={'/user/logout'}>Logout, {displayName}</NavigationItem>
                             </>
                             : <NavigationItem linkTo={'/user/sign'}>Sign</NavigationItem>
                         }

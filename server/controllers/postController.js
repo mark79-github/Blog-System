@@ -108,10 +108,26 @@ exports.commentOnPost = async (req, res) => {
     }
 }
 
+exports.deleteCommentOnPost = async (req, res) => {
+    try {
+        const post = req.post
+        const {commentId} = req.params;
+
+        // remove the commentId from the comments array
+        post.comments = post.comments.filter(x => x._id.toString() !== commentId)
+
+        const update = await post.save()
+        res.status(200).json(update)
+    } catch (error) {
+        response.serverError(res, error.message)
+    }
+}
+
+
 exports.viewPost = async (req, res) => {
     try {
         let post = req.post
-        post.views = Number(post.views) + 1;
+        post.visits = Number(post.visits) + 1;
         const update = await post.save()
         res.status(200).json(update)
     } catch (error) {

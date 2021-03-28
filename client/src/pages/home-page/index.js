@@ -1,11 +1,9 @@
 import React from 'react';
 import Main from "../../components/Main";
 
-const HomePage = (props) => {
-    console.log('homepage searchQry', props)
+const HomePage = () => {
     return (
-            // <Main searchQry={searchQry}/>
-            <Main/>
+        <Main/>
     );
 }
 

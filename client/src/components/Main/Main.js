@@ -1,51 +1,44 @@
-import {Component} from "react";
+import {useEffect, useState} from "react";
 import * as postService from '../../services/postService';
 import Article from "../Article";
 import TopArticle from "../TopArticle";
+import Loader from "react-loader-spinner";
+import notificationService from "../../services/notificationService";
 
-class Main extends Component {
-    constructor(props) {
-        super(props);
+const Main = () => {
 
-        this.state = {
-            topPost: [],
-            posts: [],
-            loading: true,
-            searchQry: props.searchQry,
-        }
-    }
+    const [topPost, setTopPost] = useState([]);
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    componentDidMount() {
-        postService.getAll(this.state.searchQry)
+    useEffect(() => {
+        postService.getAll()
             .then(posts => {
-                this.setState({topPost: posts.slice(0, 1)})
-                this.setState({posts: posts.slice(1)});
-                this.setState({loading: false})
-            });
-    }
+                setTopPost(posts.slice(0, 1));
+                setPosts(posts.slice(1));
+                setLoading(false);
+            }).catch(err => notificationService.errorMsg(err.message));
+    }, [])
 
-    render() {
-
-        if (this.state.loading) {
-            return (
-                <div className="main-container">
-                    <h2 style={{color: 'white'}}>Loading...</h2>
-                </div>
-            )
-        }
+    if (loading) {
         return (
             <div className="main-container">
-                {this.state.topPost.map(x => {
-                    return (<TopArticle key={x._id} data={x}/>)
-                })}
-                <section className="sub-article">
-                    {this.state.posts.map(x => {
-                        return (<Article key={x._id} data={x}/>)
-                    })}
-                </section>
+                <Loader type="Rings" color="white" height={80} width={80}/>
             </div>
         )
     }
+    return (
+        <div className="main-container">
+            {topPost.map(x => {
+                return (<TopArticle key={x._id} data={x}/>)
+            })}
+            <section className="sub-article">
+                {posts.map(x => {
+                    return (<Article key={x._id} data={x}/>)
+                })}
+            </section>
+        </div>
+    );
 }
 
 export default Main;

@@ -29,7 +29,7 @@ const FormSignIn = () => {
                 setPassword('');
 
                 if (response.hasOwnProperty('token')) {
-                    authContext.login(response.token);
+                    authContext.login(response.token, response.user._id, response.user.displayName);
                     history.push('/');
                 }
                 // if (response.hasOwnProperty('user')) {

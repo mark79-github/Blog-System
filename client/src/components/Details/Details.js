@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from 'react';
-import moment from 'moment';
+// import moment from 'moment';
 import Loader from 'react-loader-spinner';
 import * as postService from "../../services/postService";
 import * as userService from "../../services/userService";
@@ -10,104 +10,15 @@ import Comment from "../Comment";
 import notificationService from "../../services/notificationService";
 import AuthContext from "../AuthContext";
 
-// class Details extends Component {
-//     constructor(props) {
-//         super(props);
-//
-//         this.state = {
-//             post: {},
-//         }
-//     }
-//
-//     like = () => {
-//         postService.likeById(this.state.post._id)
-//             .then(post => {
-//                 this.setState({post})
-//                 notificationService.infoMsg('Liked');
-//             })
-//             .catch(err => console.error('Error:', err));
-//     }
-//
-//     unlike = () => {
-//         postService.unlikeById(this.state.post._id)
-//             .then(post => {
-//                 this.setState({post})
-//                 notificationService.infoMsg('Unliked');
-//             })
-//             .catch(err => console.error('Error:', err));
-//     }
-//
-//     componentDidMount() {
-//         postService.getById(this.props.match.params.id)
-//             .then(post => {
-//                 return Promise.all([post, userService.getById(post.author)])
-//             }).then(([post, author]) => {
-//             post.authorName = author.displayName;
-//             post.publishedAt = moment(post.publishedAt).format('DD.MM.YYYY hh:mm');
-//             return this.setState({post});
-//         })
-//             .catch(err => console.error('Error:', err));
-//     }
-//
-//     render() {
-//         if (!this.state.post.title) {
-//             return (
-//                 <div className="main-container">
-//                     <h2>Loading...</h2>
-//                 </div>
-//             )
-//         } else
-//             return (
-//                 <div className="main-container">
-//                     <section className="top-article">
-//                         <article className="top-article-image">
-//                             <img src={this.state.post.urlToImage} alt=""/>
-//                         </article>
-//                         <hr/>
-//                         <article className="top-article-details">
-//                             <span className="main-article-details-date">Date: {this.state.post.publishedAt}</span>
-//                             <span className="main-article-details-author">Author: {this.state.post.authorName}</span>
-//                             <span
-//                                 className="main-article-details-comments">Comments: {this.state.post.comments.length || 0}</span>
-//                             <span
-//                                 className="main-article-details-likes">Likes: {this.state.post.likes.length || 0}</span>
-//                             <span
-//                                 className="main-article-details-readers">Views: {this.state.post.views}</span>
-//                             {
-//                                 !this.state.post.likes.some(x => x === this.state.post.author)
-//                                     ? <Like onLike={this.like}/> : <Unlike onUnlike={this.unlike}/>
-//                             }
-//                         </article>
-//                         <hr/>
-//                         <article className="top-article-description">
-//                             <h2 className="main-article-description-title">{this.state.post.title}</h2>
-//                             <p className="main-article-description-content">{this.state.post.content}</p>
-//                         </article>
-//                         <hr/>
-//                         <article className="top-article-comment">
-//                             <FormComment commentId={this.state.post._id}/>
-//                         </article>
-//                         <hr/>
-//                         <article className="top-article-comment-content">
-//                             {this.state.post.comments.map((x, index) => {
-//                                 x.index = index + 1;
-//                                 return <Comment key={index + 1} data={x}/>
-//                             })}
-//                         </article>
-//                     </section>
-//                 </div>
-//             );
-//     }
-// }
-
 const Details = ({match}) => {
-    const authContext = useContext(AuthContext);
-
-    const [post, setPost] = useState({});
+    const {token, isLoggedIn, userId} = useContext(AuthContext);
     const postId = match.params.id;
 
+    const [post, setPost] = useState({});
+    const [authorName, setAuthorName] = useState('');
+
     const like = () => {
-        postService.likeById(post._id, authContext.token)
+        postService.likeById(post._id, token)
             .then(post => {
                 setPost(post)
                 notificationService.infoMsg('Liked');
@@ -118,7 +29,7 @@ const Details = ({match}) => {
     }
 
     const unlike = () => {
-        postService.unlikeById(post._id, authContext.token)
+        postService.unlikeById(post._id, token)
             .then(post => {
                 setPost(post);
                 notificationService.infoMsg('Unliked');
@@ -128,29 +39,35 @@ const Details = ({match}) => {
             });
     }
 
-    const deleteComment = () => {
-        //TODO delete comment from post -> only the author can remove his own comment
+    const deleteComment = (commentId) => {
+        postService.deleteCommentByIds(post._id, commentId, token)
+            .then(post => {
+                setPost(post)
+            })
+            .catch(err => {
+                notificationService.errorMsg(err.message)
+            });
     }
 
-    useEffect(() => {
+    const getPostById = () => {
         postService.getById(postId)
             .then(post => {
                 return Promise.all([post, userService.getById(post.author)])
             }).then(([post, author]) => {
-            post.views = Number(post.views);
-            post.authorName = author.displayName;
-            post.publishedAt = moment(post.publishedAt).format('DD.MM.YYYY hh:mm');
+            setAuthorName(author.displayName);
             setPost(post);
         })
             .catch(err => {
                 notificationService.errorMsg(err.message)
             });
-    }, [post]);
+    }
+
+    useEffect(getPostById, [postId]);
 
     if (!post.hasOwnProperty('title')) {
         return (
             <div className="main-container">
-                <Loader type="Rings" color="white" height={80} width={80} />
+                <Loader type="Rings" color="white" height={80} width={80}/>
             </div>
         )
     } else
@@ -163,17 +80,17 @@ const Details = ({match}) => {
                     <hr/>
                     <article className="top-article-details">
                         <span className="main-article-details-date">Date: {post.publishedAt}</span>
-                        <span className="main-article-details-author">Author: {post.authorName}</span>
+                        <span className="main-article-details-author">Author: {authorName}</span>
                         <span
                             className="main-article-details-comments">Comments: {post.comments.length || 0}</span>
                         <span
                             className="main-article-details-likes">Likes: {post.likes.length || 0}</span>
                         <span
-                            className="main-article-details-readers">Views: {post.views}</span>
+                            className="main-article-details-readers">Visits: {post.visits}</span>
                         {
-                            authContext.isLoggedIn
+                            isLoggedIn
                                 ?
-                                !post.likes.some(x => x === post.author)
+                                !post.likes.some(x => x === userId)
                                     ? <Like onLike={like}/>
                                     : <Unlike onUnlike={unlike}/>
                                 : null
@@ -185,11 +102,11 @@ const Details = ({match}) => {
                         <p className="main-article-description-content">{post.content}</p>
                     </article>
                     {
-                        authContext.isLoggedIn ?
+                        isLoggedIn ?
                             <>
                                 <hr/>
                                 <article className="top-article-comment">
-                                    <FormComment postId={post._id} token={authContext.token}/>
+                                    <FormComment postId={post._id} token={token}/>
                                 </article>
                             </>
                             : null
@@ -197,11 +114,11 @@ const Details = ({match}) => {
                     <hr/>
                     <article className="top-article-comment-content">
                         {
-                            post.comments.map((x, index) => {
-                                x.index = index + 1;
+                            post.comments.map((commentObj, index) => {
+                                commentObj.index = index + 1;
                                 return <Comment
                                     key={index + 1}
-                                    data={x}
+                                    data={commentObj}
                                     onDeleteComment={deleteComment}
                                 />
                             })
@@ -213,3 +130,7 @@ const Details = ({match}) => {
 }
 
 export default Details;
+
+/*
+
+ */

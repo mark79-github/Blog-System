@@ -9,8 +9,6 @@ export const getAll = (query) => {
         }
     }
 
-    console.log('url', url);
-
     return fetch(url)
         .then(res => res.json())
         .catch(err => console.error('Error:' + err));
@@ -34,7 +32,7 @@ export const likeById = (id, token) => {
 };
 
 export const unlikeById = (id, token) => {
-   return fetch(api + '/unlike/' + id, {
+    return fetch(api + '/unlike/' + id, {
         method: "PUT",
         headers: {
             authorization: 'Bearer ' + token
@@ -45,7 +43,7 @@ export const unlikeById = (id, token) => {
 };
 
 export const commentById = (id, comment, token) => {
-   return fetch(api + '/comment/' + id, {
+    return fetch(api + '/comment/' + id, {
         method: "PUT",
         headers: {
             'Authorization': 'Bearer ' + token,
@@ -67,6 +65,18 @@ export const addPost = (title, content, urlToImage, token) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({title, content, urlToImage})
+    })
+        .then(res => res.json())
+        .catch(err => console.error('Error:' + err));
+};
+
+export const deleteCommentByIds = (id, commentId, token) => {
+    return fetch(api + '/comment/' + id + '/delete/' + commentId, {
+        method: "DELETE",
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        }
     })
         .then(res => res.json())
         .catch(err => console.error('Error:' + err));

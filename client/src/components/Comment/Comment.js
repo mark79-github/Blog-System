@@ -1,53 +1,35 @@
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import * as userService from '../../services/userService';
-
-// class Comment extends Component {
-//     constructor(props) {
-//         super(props);
-//
-//         this.state = {
-//             author: ''
-//         }
-//     }
-//
-//     handleClick = () => {
-//         this.props.onDeleteComment();
-//     }
-//
-//     componentDidMount() {
-//         userService.getById(this.props.data.user)
-//             .then(user => this.setState({author: user.displayName}))
-//             .catch(err => console.error("Error: ", err))
-//     }
-//
-//     render() {
-//         return (
-//             <article className="main-article-comment-content-details">
-//                 <p><i className="far fa-trash-alt"
-//                       onClick={this.handleClick}/><span>#{this.props.data.index}</span><span>By {this.state.author}</span>
-//                 </p>
-//                 <p>{this.props.data.comment}</p>
-//             </article>
-//         );
-//     }
-// }
+import notificationService from "../../services/notificationService";
+import AuthContext from "../AuthContext";
 
 const Comment = ({data, onDeleteComment}) => {
-    const {index, comment, user} = data;
-    const [author, setAuthor] = useState('');
+    const {_id, index, comment, user} = data;
+    const authContext = useContext(AuthContext);
+    const [authorDisplayName, setAuthorDisplayName] = useState('');
 
-    const handleClick = () => onDeleteComment();
+    // const userId = user._id;
+
+    const handleClick = () => onDeleteComment(_id);
 
     useEffect(() => {
-        userService.getById(user)
-            .then(user => setAuthor(user.displayName))
-            .catch(err => console.error("Error: ", err))
-    }, [])
+        const getUserDisplayName = () => {
+            userService.getById(user)
+                .then(user => setAuthorDisplayName(user.displayName))
+                .catch(err => notificationService.errorMsg(err.message));
+        }
+        getUserDisplayName();
+    }, [user]);
 
     return (
         <article className="main-article-comment-content-details">
-            <p><i className="far fa-trash-alt"
-                  onClick={handleClick}/><span>#{index}</span><span>By {author}</span>
+            <p>
+                <span>#{index} by {authorDisplayName} </span>
+                {
+                    authContext.userId === user
+                        ? <i className="far fa-trash-alt" onClick={handleClick}/>
+                        : null
+                }
             </p>
             <p>{comment}</p>
         </article>

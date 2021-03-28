@@ -78,7 +78,6 @@ const FormPost = () => {
         event.preventDefault();
         postService.addPost(title, content, urlToImage, authContext.token)
             .then((res) => {
-                console.log('res add post', res);
                 setTitle('');
                 setContent('');
                 setUrlToImage('');
