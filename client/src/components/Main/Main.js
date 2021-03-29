@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import * as postService from '../../services/postService';
 import Article from "../Article";
 import TopArticle from "../TopArticle";

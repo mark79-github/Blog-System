@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import AuthContext from "./components/AuthContext";
 import HomePage from "./pages/home-page";
@@ -23,7 +23,6 @@ const App = () => {
     const [userId, setUserId] = useState('');
     const [displayName, setDisplayName] = useState('');
     const [tokenExpirationDate, setTokenExpirationDate] = useState();
-    const [searchByTitle, setSearchByTitle] = useState({});
 
     const login = useCallback((token, userId, displayName, expirationTime) => {
         setToken(token);
@@ -47,12 +46,6 @@ const App = () => {
         localStorage.removeItem("authToken");
         notificationService.infoMsg('Successfully logout');
     }, []);
-
-    const onSearch = (search) => {
-        setSearchByTitle(search);
-        // Object.keys(search)
-        //     .map(key => alert(`${key}=${search[key]}`));
-    }
 
     useEffect(() => {
         const storedData = JSON.parse(localStorage.getItem("authToken"));
@@ -85,10 +78,14 @@ const App = () => {
                 login: login,
                 logout: logout
             }}>
-                <Header onSearch={onSearch}/>
+                <Header/>
                 <Switch>
 
-                    <Route path={'/'} component={(props) => <HomePage {...props} searchObj={searchByTitle}/>} exact/>
+                    {/*How to pass params to component in Route if needed*/}
+                    {/*<Route path={'/'} component={(props) => <HomePage {...props} searchObj={searchByTitle}/>} exact/>*/}
+                    {/*How to pass params to component in Route if needed*/}
+
+                    <Route path={'/'} component={HomePage} exact/>
                     <Route path={'/post/create'} component={CreatePostPage} exact/>
                     <Route path={'/post/:id'} component={DetailsPage}/>
 

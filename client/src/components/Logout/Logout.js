@@ -4,9 +4,9 @@ import {Redirect} from 'react-router-dom'
 import AuthContext from '../AuthContext';
 
 const Logout = () => {
-    const authContext = useContext(AuthContext);
+    const {logout} = useContext(AuthContext);
 
-    authContext.logout();
+    logout();
 
     return (
         <Redirect to={'/'}/>

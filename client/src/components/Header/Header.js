@@ -1,17 +1,10 @@
 import React from 'react';
 import Navigation from '../Navigation';
-import Search from "../Search";
 
-const Header = (props) => {
-
+const Header = () => {
     return (
-        <header>
-            <div className="header-container">
-                <Navigation onSearch={props.onSearch}/>
-                <Search onSearch={props.onSearch}/>
-            </div>
-        </header>
-    );
+        <Navigation/>
+    )
 }
 
 export default Header;

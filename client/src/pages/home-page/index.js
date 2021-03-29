@@ -1,5 +1,6 @@
 import React from 'react';
 import Main from "../../components/Main";
+import Search from "../../components/Search";
 
 const HomePage = (props) => {
 
@@ -22,7 +23,10 @@ const HomePage = (props) => {
     searchObj = Object.assign(searchObj, props.searchObj);
 
     return (
-        <Main searchQry={searchObj}/>
+        <>
+            <Search/>
+            <Main searchQry={searchObj}/>
+        </>
     );
 }
 
