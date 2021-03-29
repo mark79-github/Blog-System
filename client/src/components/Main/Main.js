@@ -14,6 +14,10 @@ const Main = ({searchQry}) => {
     useEffect(() => {
         postService.getAll(searchQry)
             .then(posts => {
+                if (!posts.length) {
+                    setLoading(false);
+                    return;
+                }
                 setTopPost(posts.slice(0, 1));
                 setPosts(posts.slice(1));
                 setLoading(false);
@@ -27,6 +31,15 @@ const Main = ({searchQry}) => {
             </div>
         )
     }
+
+    if (!topPost.length) {
+        return (
+            <div className="main-container">
+                <h1 style={{color: "white", textAlign: "center"}}>No posts found on given criteria</h1>
+            </div>
+        )
+    }
+
     return (
         <div className="main-container">
             {topPost.map(x => {
