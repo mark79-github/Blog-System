@@ -4,25 +4,37 @@ import Article from "../Article";
 import TopArticle from "../TopArticle";
 import Loader from "react-loader-spinner";
 import notificationService from "../../services/notificationService";
+import Search from "../Search";
 
 const Main = ({searchQry}) => {
 
     const [topPost, setTopPost] = useState([]);
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [filter, setFilter] = useState({});
+
+    const onSearch = (filter) => {
+        setFilter(filter);
+    }
 
     useEffect(() => {
-        postService.getAll(searchQry)
-            .then(posts => {
-                if (!posts.length) {
+
+        console.log('filter in useEffect', filter)
+
+        postService.getAll(filter)
+            .then(res => {
+
+                console.log('posts', res);
+
+                if (!res.length) {
                     setLoading(false);
                     return;
                 }
-                setTopPost(posts.slice(0, 1));
-                setPosts(posts.slice(1));
+                setTopPost(res.slice(0, 1));
+                setPosts(res.slice(1));
                 setLoading(false);
             }).catch(err => notificationService.errorMsg(err.message));
-    }, [searchQry])
+    }, [filter, topPost]);
 
     if (loading) {
         return (
@@ -42,6 +54,7 @@ const Main = ({searchQry}) => {
 
     return (
         <div className="main-container">
+            <Search onSearch={onSearch}/>
             {topPost.map(x => {
                 return (<TopArticle key={x._id} data={x}/>)
             })}

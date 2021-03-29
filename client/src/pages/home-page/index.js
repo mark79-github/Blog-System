@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Main from "../../components/Main";
 import Search from "../../components/Search";
 
 const HomePage = (props) => {
+    const [filter, setFilter] = useState({})
+    // console.log('props.searchObj', props.searchObj);
 
-    console.log('props.searchObj', props.searchObj);
+    const onSearch = (searchQry) => {
+        console.log('searchQry', searchQry)
+        setFilter(searchQry);
+    }
 
     const getQueryStringParams = (query) => {
         return query
@@ -20,11 +25,12 @@ const HomePage = (props) => {
     };
 
     let searchObj = Object.assign({}, getQueryStringParams(props.location.search));
-    searchObj = Object.assign(searchObj, props.searchObj);
+    searchObj = Object.assign(searchObj, filter);
+
+    console.log('searchObj', searchObj);
 
     return (
         <>
-            <Search/>
             <Main searchQry={searchObj}/>
         </>
     );

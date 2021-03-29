@@ -77,20 +77,25 @@ const FormSignUp = () => {
         authService.register(displayName, email, password)
             .then((response) => {
 
-                if (response.hasOwnProperty('token')) {
-                    authContext.login(response.token);
-                    history.push('/');
-                }
+                setDisplayName('');
+                setEmail('');
+                setPassword('');
+                setRepeatPassword('');
 
                 if (response.hasOwnProperty('message')) {
                     throw Error(response.message);
                 }
 
-                setDisplayName('');
-                setEmail('');
-                setPassword('');
-                setRepeatPassword('');
+                return {
+                    token: response.token,
+                    userId: response.newUser._id,
+                    displayName: response.newUser.displayName
+                };
             })
+            .then(res => {
+            authContext.login(res.token, res.userId, res.displayName);
+            history.push('/');
+        })
             .catch(err => {
                 notificationService.errorMsg(err.message);
             })
