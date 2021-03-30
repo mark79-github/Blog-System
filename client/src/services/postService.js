@@ -4,16 +4,8 @@ export const getAll = (query) => {
     let url = api;
 
     if (query) {
-        let queryArr = [];
-        for (let key of Object.keys(query)) {
-            queryArr.push(`${key}=${query[key]}`);
-        }
-        if (queryArr.length){
-            url += `?${queryArr.join('&')}`;
-        }
+        url += query;
     }
-
-    console.log('url', url);
 
     return fetch(url)
         .then(res => res.json())

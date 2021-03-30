@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import queryString from 'query-string';
 import * as postService from '../../services/postService';
 import Article from "../Article";
 import TopArticle from "../TopArticle";
@@ -91,26 +92,15 @@ class Main extends Component {
         }
     }
 
-    onSearch = (searchObj) => {
-        this.props.history.push(`/search?title=${searchObj.title}`)
+    onSearch = (title) => {
+        const result = queryString.parse(this.props.location.search);
+        Object.assign(result, {title});
+        this.props.history.push(`/?${queryString.stringify(result)}`)
     }
-
-    getQueryStringParams = (query) => {
-        return query
-            ? (/^[?#]/.test(query) ? query.slice(1) : query)
-                .split('&')
-                .reduce((params, param) => {
-                        let [key, value] = param.split('=');
-                        params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
-                        return params;
-                    }, {}
-                )
-            : {}
-    };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.location.search !== prevProps.location.search) {
-            postService.getAll(this.getQueryStringParams(this.props.location.search))
+            postService.getAll(this.props.location.search)
                 .then(res => {
                     this.setState({
                         topPost: res.slice(0, 1),
@@ -123,7 +113,7 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        postService.getAll(this.getQueryStringParams(this.props.location.search))
+        postService.getAll(this.props.location.search)
             .then(res => {
 
                 this.setState({

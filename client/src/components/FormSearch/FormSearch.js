@@ -10,7 +10,8 @@ const FormSearch = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        props.onSearch({title: search});
+        // props.onSearch({title: search});
+        props.onSearch(search);
 
         setSearch('');
     }
