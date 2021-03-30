@@ -160,7 +160,8 @@ header nav ul li a {
     color: white;
 }
 
-.far:hover {
+.far:hover,
+.fas:hover {
     cursor: pointer;
 }
 

@@ -9,6 +9,8 @@ import FormComment from "../FormComment";
 import Comment from "../Comment";
 import notificationService from "../../services/notificationService";
 import AuthContext from "../AuthContext";
+import Edit from "../Edit/Edit";
+import Delete from "../Delete";
 
 const Details = ({match}) => {
     const {token, isLoggedIn, userId} = useContext(AuthContext);
@@ -57,6 +59,14 @@ const Details = ({match}) => {
             .catch(err => notificationService.errorMsg(err.message));
     }
 
+    const onEditPost = () => {
+        alert('edit');
+    }
+
+    const onDeletePost = () => {
+        alert('delete');
+    }
+
     const getPostById = () => {
         postService.getById(postId)
             .then(post => {
@@ -70,7 +80,7 @@ const Details = ({match}) => {
             });
     }
 
-    useEffect(getPostById, [postId]);
+    useEffect(getPostById, [postId, post]);
 
     if (!post.hasOwnProperty('title')) {
         return (
@@ -101,6 +111,15 @@ const Details = ({match}) => {
                                 !post.likes.some(x => x === userId)
                                     ? <Like onLike={like}/>
                                     : <Unlike onUnlike={unlike}/>
+                                : null
+                        }
+                        {
+                            post.author === userId
+                                ?
+                                <>
+                                    <Edit onEdit={onEditPost}/>
+                                    <Delete onDelete={onDeletePost}/>
+                                </>
                                 : null
                         }
                     </article>
