@@ -82,10 +82,10 @@ const App = () => {
                 <Switch>
 
                     {/*How to pass params to component in Route if needed*/}
-                    {/*<Route path={'/'} component={(props) => <HomePage {...props} searchObj={searchByTitle}/>} exact/>*/}
+                    <Route path={'/'} component={(props) => <HomePage {...props}/>} exact/>
                     {/*How to pass params to component in Route if needed*/}
 
-                    <Route path={'/'} component={HomePage} exact/>
+                    {/*<Route path={'/'} component={HomePage} exact/>*/}
                     <Route path={'/post/create'} component={CreatePostPage} exact/>
                     <Route path={'/post/:id'} component={DetailsPage}/>
 

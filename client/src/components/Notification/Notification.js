@@ -2,7 +2,7 @@ import React from "react";
 import { ToastContainer, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Notification = (props) => (
+const Notification = () => (
     <ToastContainer
         position="bottom-right"
         autoClose={1000}

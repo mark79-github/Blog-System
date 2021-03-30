@@ -16,12 +16,14 @@ const FormSearch = (props) => {
     }
 
     return (
-        <form className="header-search-form" onSubmit={handleSubmit}>
-            <input type="text" name="search" id="search" placeholder="Search by title ..."
-                   value={search}
-                   onChange={handleInputChange}/>
-            <input type="submit" className="header-search-form-submit" value="&#xf002;"/>
-        </form>
+        <section className="header-search">
+            <form className="header-search-form" onSubmit={handleSubmit}>
+                <input type="text" name="search" id="search" placeholder="Search by title ..."
+                       value={search}
+                       onChange={handleInputChange}/>
+                <input type="submit" className="header-search-form-submit" value="&#xf002;"/>
+            </form>
+        </section>
     );
 }
 

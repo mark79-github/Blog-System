@@ -88,15 +88,20 @@ const FormPost = () => {
 
 
     return (
-        <form className="form" onSubmit={handleSubmit}>
-            <input type="text" name="title" placeholder="Title" value={title}
-                   onChange={handleTitleInputHandler}/>
-            <textarea name="content" placeholder="Content" value={content}
-                      onChange={handleContentInputHandler}/>
-            <input type="text" name="urlToImage" placeholder="Image url" value={urlToImage}
-                   onChange={handleUrlToImageInputHandler}/>
-            <input type="submit" value="Create"/>
-        </form>
+        <div className="main-container">
+            <section className="form-container">
+                <h2 className="form-container-title post">Create Post</h2>
+                <form className="form" onSubmit={handleSubmit}>
+                    <input type="text" name="title" placeholder="Title" value={title}
+                           onChange={handleTitleInputHandler}/>
+                    <textarea name="content" placeholder="Content" value={content}
+                              onChange={handleContentInputHandler}/>
+                    <input type="text" name="urlToImage" placeholder="Image url" value={urlToImage}
+                           onChange={handleUrlToImageInputHandler}/>
+                    <input type="submit" value="Create"/>
+                </form>
+            </section>
+        </div>
     );
 }
 
