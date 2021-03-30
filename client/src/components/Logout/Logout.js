@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext, useEffect} from 'react';
 import {Redirect} from 'react-router-dom'
 
 import AuthContext from '../AuthContext';
@@ -6,7 +6,11 @@ import AuthContext from '../AuthContext';
 const Logout = () => {
     const {logout} = useContext(AuthContext);
 
-    logout();
+    useEffect(()=>{
+        return(()=>{
+            logout();
+        })
+    },[]);
 
     return (
         <Redirect to={'/'}/>

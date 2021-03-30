@@ -1,7 +1,4 @@
 import {useState} from 'react';
-import * as postService from '../../services/postService';
-import {useHistory} from "react-router-dom";
-import notificationService from "../../services/notificationService";
 
 // class FormComment extends Component {
 //     constructor(props) {
@@ -38,9 +35,8 @@ import notificationService from "../../services/notificationService";
 //     }
 // }
 
-const FormComment = ({postId, token}) => {
+const FormComment = ({onNewComment}) => {
     const [comment, setComment] = useState('');
-    let history = useHistory();
 
     const handleInputChange = (event) => {
         setComment(event.target.value);
@@ -49,12 +45,8 @@ const FormComment = ({postId, token}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        postService.commentById(postId, comment, token)
-            .then(() => {
-                setComment('');
-                history.push(`/post/${postId}`);
-            })
-            .catch(err => notificationService.errorMsg(err.message));
+        onNewComment(comment);
+        setComment('');
     }
 
     return (

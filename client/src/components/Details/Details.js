@@ -49,6 +49,14 @@ const Details = ({match}) => {
             });
     }
 
+    const onNewComment = (comment) => {
+        postService.commentById(postId, comment, token)
+            .then(res => {
+                setPost(res);
+            })
+            .catch(err => notificationService.errorMsg(err.message));
+    }
+
     const getPostById = () => {
         postService.getById(postId)
             .then(post => {
@@ -106,7 +114,7 @@ const Details = ({match}) => {
                             <>
                                 <hr/>
                                 <article className="top-article-comment">
-                                    <FormComment postId={post._id} token={token}/>
+                                    <FormComment onNewComment={onNewComment}/>
                                 </article>
                             </>
                             : null
