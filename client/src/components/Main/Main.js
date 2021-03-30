@@ -1,11 +1,10 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {Component} from "react";
 import * as postService from '../../services/postService';
 import Article from "../Article";
 import TopArticle from "../TopArticle";
 import Loader from "react-loader-spinner";
 import notificationService from "../../services/notificationService";
 import FormSearch from "../FormSearch";
-import {login} from "../../services/authService";
 
 // const Main = ({searchQry}) => {
 //     console.log('main beginning', searchQry);
@@ -89,89 +88,49 @@ class Main extends Component {
             topPost: [],
             posts: [],
             loading: true,
-            filter: {}
         }
-    }
-
-    shallowEqual(object1, object2) {
-        const keys1 = Object.keys(object1);
-        const keys2 = Object.keys(object2);
-
-        if (keys1.length !== keys2.length) {
-            return false;
-        }
-
-        for (let key of keys1) {
-            if (object1[key] !== object2[key]) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     onSearch = (searchObj) => {
-        console.log(searchObj.title);
-        this.setState({filter: searchObj})
+        this.props.history.push(`/search?title=${searchObj.title}`)
     }
 
+    getQueryStringParams = (query) => {
+        return query
+            ? (/^[?#]/.test(query) ? query.slice(1) : query)
+                .split('&')
+                .reduce((params, param) => {
+                        let [key, value] = param.split('=');
+                        params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
+                        return params;
+                    }, {}
+                )
+            : {}
+    };
+
     componentDidUpdate(prevProps, prevState, snapshot) {
-
-        // !this.shallowEqual(prevProps.searchQry, this.props.searchQry) ||
-        if (
-            !this.shallowEqual(prevState.filter, this.state.filter)) {
-            console.log('differs - this.props.searchQry', this.props.searchQry)
-            console.log('differs - this.state.filter', this.props.searchQry)
-            postService.getAll(this.state.filter)
+        if (this.props.location.search !== prevProps.location.search) {
+            postService.getAll(this.getQueryStringParams(this.props.location.search))
                 .then(res => {
-
-                    console.log('posts', res);
-
-                    // if (!res.length) {
-                    //     this.setState({loading: false})
-                    //     return;
-                    // }
-
                     this.setState({
-                        topPost: res.slice(0, 1)
-                    })
-                    this.setState({
-                        posts: res.slice(1)
-                    })
-
-                    this.setState({
+                        topPost: res.slice(0, 1),
+                        posts: res.slice(1),
                         loading: false
                     })
-
                 })
                 .catch(err => notificationService.errorMsg(err.message));
         }
     }
 
     componentDidMount() {
-        console.log('this.props.searchQry', this.props.searchQry);
-        console.log('this.state.filter', this.state.filter);
-        postService.getAll(this.state.filter)
+        postService.getAll(this.getQueryStringParams(this.props.location.search))
             .then(res => {
 
-                // console.log('posts', res);
-
-                // if (!res.length) {
-                //     this.setState({loading: false})
-                //     return;
-                // }
-
                 this.setState({
-                    topPost: res.slice(0, 1)
-                })
-                this.setState({
-                    posts: res.slice(1)
-                })
-
-                this.setState({
+                    topPost: res.slice(0, 1),
+                    posts: res.slice(1),
                     loading: false
                 })
-
             })
             .catch(err => notificationService.errorMsg(err.message));
     }
@@ -204,11 +163,19 @@ class Main extends Component {
                     return (<TopArticle key={x._id} data={x}/>)
                 })}
 
-                <section className="sub-article">
-                    {this.state.posts.map(x => {
-                        return (<Article key={x._id} data={x}/>)
-                    })}
-                </section>
+                {
+                    !!this.state.posts.length
+                        ?
+                        <section className="sub-article">
+                            {this.state.posts.map(x => {
+                                return (
+                                    <Article key={x._id} data={x}/>
+                                )
+                            })}
+                        </section>
+                        :
+                        null
+                }
 
             </div>
         );
