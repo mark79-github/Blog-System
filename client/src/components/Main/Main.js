@@ -98,6 +98,10 @@ class Main extends Component {
         this.props.history.push(`/?${queryString.stringify(result)}`)
     }
 
+    componentWillUnmount() {
+        console.log('Main.js - componentWillUnmount')
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.location.search !== prevProps.location.search) {
             postService.getAll(this.props.location.search)

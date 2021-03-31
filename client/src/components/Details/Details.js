@@ -11,13 +11,17 @@ import notificationService from "../../services/notificationService";
 import AuthContext from "../AuthContext";
 import Edit from "../Edit/Edit";
 import Delete from "../Delete";
+import {useHistory} from "react-router-dom";
 
 const Details = ({match}) => {
-    const {token, isLoggedIn, userId} = useContext(AuthContext);
     const postId = match.params.id;
+
+    const {token, isLoggedIn, userId} = useContext(AuthContext);
 
     const [post, setPost] = useState({});
     const [authorName, setAuthorName] = useState('');
+
+    const history = useHistory();
 
     const like = () => {
         postService.likeById(post._id, token)
@@ -63,8 +67,12 @@ const Details = ({match}) => {
         alert('edit');
     }
 
-    const onDeletePost = () => {
-        alert('delete');
+    const onDeletePost = async () => {
+        await postService.deleteById(postId, token)
+            .then(() => {
+                history.push('/');
+            })
+            .catch(err => notificationService.errorMsg(err.message))
     }
 
     const getPostById = () => {

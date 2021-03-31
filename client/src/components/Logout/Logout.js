@@ -6,7 +6,9 @@ import AuthContext from '../AuthContext';
 const Logout = () => {
     const {logout} = useContext(AuthContext);
 
-    useEffect(logout, []);
+    useEffect(() => {
+        logout();
+    }, [logout]);
 
     return (
         <Redirect to={'/'}/>

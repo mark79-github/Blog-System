@@ -79,3 +79,15 @@ export const deleteCommentByIds = (id, commentId, token) => {
         .then(res => res.json())
         .catch(err => console.error('Error:' + err));
 };
+
+export const deleteById = (id, token) => {
+    return fetch(api + '/' + id, {
+        method: "DELETE",
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .catch(err => console.error('Error:' + err));
+};

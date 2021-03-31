@@ -4,7 +4,7 @@ const Delete = ({onDelete}) => {
     }
 
     return (
-        <span><i className="fas fa-eraser" onClick={handleClick}/>Delete</span>
+        <span><i className="fas fa-eraser" onClick={() => { if (window.confirm('Are you sure you wish to delete the post ?')) handleClick() } }/>Delete</span>
     );
 }
 
