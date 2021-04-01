@@ -2,6 +2,7 @@ import {useContext, useState} from 'react';
 import * as postService from '../../services/postService';
 import AuthContext from "../AuthContext";
 import {useHistory} from "react-router-dom";
+import notificationService from "../../services/notificationService";
 
 // class FormPost extends Component {
 //     constructor(props) {
@@ -76,8 +77,45 @@ const FormPost = ({
         setUrlToImage(event.target.value);
     }
 
+    const notifications = {
+        titleRequired: "Title is must be at least ten characters long",
+        contentRequired: "Title is must be at least twenty characters long",
+        urlToImageRequired: "Url To Image must be valid url",
+    };
+
+    const validateInput = () => {
+
+        let isValid = true;
+        const errors = {};
+
+        if (!title || title.trim().length < 10) {
+            isValid = false;
+            errors.title = notifications.titleRequired;
+        }
+
+        if (!content || content.trim().length < 20) {
+            isValid = false;
+            errors.content = notifications.contentRequired;
+        }
+
+        const urlToImageRegex = /(http[s]?:\/\/.*.(?:png|jpg|gif|svg|jpeg))/i;
+
+        if (!urlToImageRegex.test(urlToImage)) {
+            isValid = false
+            errors.urlToImage = notifications.urlToImageRequired;
+        }
+
+        return isValid;
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        if (!validateInput()){
+            notificationService.errorMsg('Provided data is not valid')
+            return
+        }
+
         postService.addPost(title, content, urlToImage, authContext.token)
             .then((res) => {
                 setTitle('');

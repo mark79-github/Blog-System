@@ -20,8 +20,37 @@ const FormSignIn = () => {
         setPassword(event.target.value);
     }
 
+    const notifications = {
+        emailRequired: "Email must be valid",
+        passwordRequired: "Password must be at least 4 characters long",
+    };
+
+
+    const validateInput = () => {
+
+        let isValid = true;
+        const errors = {};
+
+        if (!email || email.trim().length === 0) {
+            isValid = false;
+            errors.email = notifications.emailRequired;
+        }
+
+        if (!password || password.trim().length < 4) {
+            isValid = false;
+            errors.password = notifications.passwordRequired;
+        }
+
+        return isValid;
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        if (!validateInput()){
+            notificationService.errorMsg('Data is not valid')
+            return
+        }
 
         authService.login(email, password)
             .then((response) => {

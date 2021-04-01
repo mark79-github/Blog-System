@@ -63,16 +63,61 @@ import notificationService from "../../services/notificationService";
 // }
 
 const FormSignUp = () => {
+    const authContext = useContext(AuthContext);
+    let history = useHistory();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const [displayName, setDisplayName] = useState('');
 
-    let history = useHistory();
-    const authContext = useContext(AuthContext);
+    const notifications = {
+        emailRequired: "Please provide your email address",
+        nicknameRequired: "Please provide your nickname",
+        passwordRequired: "Please provide your password",
+        passwordsDoNotMatch: "Passwords do not match",
+    };
+
+    const validateInput = () => {
+
+        let isValid = true;
+        const errors = {};
+
+        if (!email || email.trim().length === 0) {
+            isValid = false;
+            errors.email = notifications.emailRequired;
+        }
+
+        if (!displayName || displayName.trim().length < 4) {
+            isValid = false;
+            errors.nickname = notifications.nicknameRequired;
+        }
+
+        if (!password || password.trim().length < 4) {
+            isValid = false;
+            errors.password = notifications.passwordRequired;
+        }
+
+        if (!repeatPassword || repeatPassword.trim().length < 4) {
+            isValid = false;
+            errors.repeatPassword = notifications.passwordRequired;
+        }
+
+        if (repeatPassword && password !== repeatPassword) {
+            isValid = false;
+            errors.repeatPassword = notifications.passwordsDoNotMatch;
+        }
+
+        return isValid;
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        if (!validateInput()){
+            notificationService.errorMsg('Data is not valid')
+            return
+        }
 
         authService.register(displayName, email, password)
             .then((response) => {
@@ -93,9 +138,9 @@ const FormSignUp = () => {
                 };
             })
             .then(res => {
-            authContext.login(res.token, res.userId, res.displayName);
-            history.push('/');
-        })
+                authContext.login(res.token, res.userId, res.displayName);
+                history.push('/');
+            })
             .catch(err => {
                 notificationService.errorMsg(err.message);
             })
