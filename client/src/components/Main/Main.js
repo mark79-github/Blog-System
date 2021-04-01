@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import queryString from 'query-string';
+import Loader from 'react-loader-spinner';
+
 import * as postService from '../../services/postService';
 import Article from "../Article";
 import TopArticle from "../TopArticle";
@@ -134,13 +136,13 @@ class Main extends Component {
 
     render() {
 
-        // if (this.state.loading) {
-        //     return (
-        //         <div className="main-container">
-        //             <Loader type="Rings" color="white" height={80} width={80}/>
-        //         </div>
-        //     )
-        // }
+        if (this.state.loading) {
+            return (
+                <div className="main-container">
+                    <Loader type="Rings" color="white" height={80} width={80}/>
+                </div>
+            )
+        }
 
         if (!this.state.topPost.length) {
             return (

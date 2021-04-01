@@ -1,8 +1,8 @@
-import FormPost from "../../components/FormPost";
+import AddPost from "../../components/AddPost";
 
 const CreatePostPage = () => {
     return (
-        <FormPost/>
+        <AddPost/>
     );
 }
 

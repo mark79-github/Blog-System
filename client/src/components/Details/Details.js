@@ -101,7 +101,7 @@ const Details = ({match}) => {
         getPostById();
         isMounted.current = true;
         return () => { isMounted.current = false }
-    }, []);
+    }, [getPostById]);
 
     if (!post.hasOwnProperty('title')) {
         return (
