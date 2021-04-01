@@ -134,7 +134,7 @@ exports.deleteCommentOnPost = async (req, res) => {
 }
 
 
-exports.viewPost = async (req, res) => {
+exports.visitPost = async (req, res) => {
     try {
         let post = req.post
         post.visits = Number(post.visits) + 1;
