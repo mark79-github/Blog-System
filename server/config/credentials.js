@@ -9,8 +9,8 @@ const credentials = {
     production: {
         username: "admin",
         password: "admin",
-        db: "blog-system-db",
-        server: "cluster0.rexr9.mongodb.net",
+        db: "blog-system",
+        server: "cluster0.rqyl3.mongodb.net",
         privateKey: "pr1v@t3-k3y",
     }
 }

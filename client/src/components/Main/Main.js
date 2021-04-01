@@ -3,7 +3,6 @@ import queryString from 'query-string';
 import * as postService from '../../services/postService';
 import Article from "../Article";
 import TopArticle from "../TopArticle";
-import Loader from "react-loader-spinner";
 import notificationService from "../../services/notificationService";
 import FormSearch from "../FormSearch";
 
@@ -85,6 +84,8 @@ class Main extends Component {
     constructor(props) {
         super(props);
 
+        this._isMounted = false
+
         this.state = {
             topPost: [],
             posts: [],
@@ -99,45 +100,47 @@ class Main extends Component {
     }
 
     componentWillUnmount() {
-        console.log('Main.js - componentWillUnmount')
+        console.log('Main.js - componentWillUnmount');
+        this._isMounted = false;
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.location.search !== prevProps.location.search) {
-            postService.getAll(this.props.location.search)
-                .then(res => {
+            if (this._isMounted) {
+                this.getAllPosts();
+            }
+        }
+    }
+
+    componentDidMount() {
+        this._isMounted = true;
+        this.getAllPosts();
+    }
+
+    getAllPosts = () => {
+        postService.getAll(this.props.location.search)
+            .then(res => {
+                if (this._isMounted) {
                     this.setState({
                         topPost: res.slice(0, 1),
                         posts: res.slice(1),
                         loading: false
                     })
-                })
-                .catch(err => notificationService.errorMsg(err.message));
-        }
-    }
-
-    componentDidMount() {
-        postService.getAll(this.props.location.search)
-            .then(res => {
-
-                this.setState({
-                    topPost: res.slice(0, 1),
-                    posts: res.slice(1),
-                    loading: false
-                })
+                    // this._isMounted = true;
+                }
             })
             .catch(err => notificationService.errorMsg(err.message));
     }
 
     render() {
 
-        if (this.state.loading) {
-            return (
-                <div className="main-container">
-                    <Loader type="Rings" color="white" height={80} width={80}/>
-                </div>
-            )
-        }
+        // if (this.state.loading) {
+        //     return (
+        //         <div className="main-container">
+        //             <Loader type="Rings" color="white" height={80} width={80}/>
+        //         </div>
+        //     )
+        // }
 
         if (!this.state.topPost.length) {
             return (

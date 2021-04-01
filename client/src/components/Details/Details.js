@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
 // import moment from 'moment';
 import Loader from 'react-loader-spinner';
 import * as postService from "../../services/postService";
@@ -15,19 +15,23 @@ import {useHistory} from "react-router-dom";
 
 const Details = ({match}) => {
     const postId = match.params.id;
+    let authorName = '';
+    const isMounted = useRef(false)
 
     const {token, isLoggedIn, userId} = useContext(AuthContext);
 
     const [post, setPost] = useState({});
-    const [authorName, setAuthorName] = useState('');
+    // const [authorName, setAuthorName] = useState('');
 
     const history = useHistory();
 
     const like = () => {
         postService.likeById(post._id, token)
             .then(post => {
-                setPost(post)
-                notificationService.infoMsg('Liked');
+                // if (!isMounted.value) {
+                    setPost(post);
+                    notificationService.infoMsg('Liked');
+                // }
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)
@@ -37,8 +41,10 @@ const Details = ({match}) => {
     const unlike = () => {
         postService.unlikeById(post._id, token)
             .then(post => {
-                setPost(post);
-                notificationService.infoMsg('Unliked');
+                // if (!isMounted.value) {
+                    setPost(post);
+                    notificationService.infoMsg('Unliked');
+                // }
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)
@@ -64,7 +70,7 @@ const Details = ({match}) => {
     }
 
     const onEditPost = () => {
-        alert('edit');
+        history.push('/post/create');
     }
 
     const onDeletePost = async () => {
@@ -80,7 +86,7 @@ const Details = ({match}) => {
             .then(post => {
                 return Promise.all([post, userService.getById(post.author)])
             }).then(([post, author]) => {
-            setAuthorName(author.displayName);
+            authorName = author.displayName;
             setPost(post);
         })
             .catch(err => {
@@ -88,7 +94,14 @@ const Details = ({match}) => {
             });
     }
 
-    useEffect(getPostById, [postId, post]);
+    // useEffect(getPostById, [postId, post]);
+    // useEffect(getPostById, []);
+
+    useEffect(() => {
+        getPostById();
+        isMounted.current = true;
+        return () => { isMounted.current = false }
+    }, []);
 
     if (!post.hasOwnProperty('title')) {
         return (
