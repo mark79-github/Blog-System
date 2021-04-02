@@ -236,17 +236,7 @@ class Details extends Component {
     onEditPost = () => {
         console.log('test editPost id', this.state.post._id);
 
-        // this.props.history.push('/post/edit');
-
-        this.props.history.push({
-            pathname: `/post/${this.state.post._id}/edit`,
-            search: '',  // query string
-            asd: {  // location state
-                title: this.state.post.title,
-                content: this.state.post.content,
-                urlToImage: this.state.post.urlToImage,
-            },
-        });
+        this.props.history.push(`/post/${this.state.post._id}/edit`);
     }
 
     onDeletePost = async () => {
@@ -379,11 +369,7 @@ class Details extends Component {
 const DetailsWithContext = (props) => (
     <AuthContext.Consumer>
         {({isLoggedIn, userId, token}) => (
-            <>
-                <h1>{isLoggedIn ? "TRUE" : "FALSE"}</h1>
                 <Details {...props} isLoggedIn={isLoggedIn} userId={userId} token={token}/>
-            </>
-
         )}
     </AuthContext.Consumer>
 );

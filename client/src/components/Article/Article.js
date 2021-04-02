@@ -1,13 +1,11 @@
-import {Link} from "react-router-dom";
-
-const Article = ({data}) => {
+const Article = ({data, history}) => {
     const {_id, title, urlToImage} = data;
 
-    const handleClick = async () => {
+    const handleButtonCLick = async () => {
         await fetch(`http://localhost:5000/api/posts/visit/${_id}`, {
             method: "POST",
         })
-            .then(res => res.json())
+            .then(() => history.push(`/post/${_id}`))
             .catch(error => console.error('Error:', error));
     }
 
@@ -18,11 +16,9 @@ const Article = ({data}) => {
             </article>
             <article className="article-description">
                 <h2 className="article-description-title">{title}</h2>
-                <Link to={`/post/${_id}`}>
-                    <button className="article-description-btn" onClick={handleClick}>
-                        Read more
-                    </button>
-                </Link>
+                <button className="article-description-btn" onClick={handleButtonCLick}>
+                    Read more
+                </button>
             </article>
         </article>
     );

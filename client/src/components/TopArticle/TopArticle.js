@@ -1,15 +1,16 @@
-import {Link} from 'react-router-dom';
 import moment from "moment";
 
 const TopArticle = ({data, history}) => {
     let {_id, title, content, author, urlToImage, publishedAt, likes, comments, visits} = data;
     publishedAt = moment(publishedAt).format('DD.MM.YYYY hh:mm');
 
-    const handleClick = async () => {
+    const handleButtonClick = async () => {
         await fetch(`http://localhost:5000/api/posts/visit/${_id}`, {
             method: "POST",
         })
-            .then(res => res.json())
+            .then(() => {
+                history.push(`/post/${_id}`);
+            })
             .catch(error => console.error('Error:', error));
     }
 
@@ -28,11 +29,9 @@ const TopArticle = ({data, history}) => {
             <article className="top-article-description">
                 <h2 className="top-article-description-title">{title}</h2>
                 <p className="top-article-description-content">{content}</p>
-                <Link to={`/post/${_id}`}>
-                    <button className="article-description-btn" onClick={handleClick}>
-                        Read more
-                    </button>
-                </Link>
+                <button className="article-description-btn" onClick={handleButtonClick}>
+                    Read more
+                </button>
             </article>
         </section>
     );

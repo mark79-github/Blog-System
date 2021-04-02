@@ -1,18 +1,15 @@
 import FormPost from "../FormPost";
 import notificationService from "../../services/notificationService";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 
 import * as postService from '../../services/postService';
+import AuthContext from "../AuthContext";
 
 const EditPost = (props) => {
-    const postId = props.match.params.id;
-    console.log('editPost match params id', postId);
-
+    const {token} = useContext(AuthContext);
     const [post, setPost] = useState({});
 
-    useEffect(() => {
-        getPostById(postId)
-    }, []);
+    const postId = props.match.params.id;
 
     const getPostById = async (id) => {
         await postService.getById(id)
@@ -36,12 +33,9 @@ const EditPost = (props) => {
             return
         }
 
-        //TODO postService -> editPost
-        // getToken
-        postService.editPost(title, content, urlToImage, token)
+        postService.editPost(postId, title, content, urlToImage, token)
             .then(() => {
-
-                //TODO Redirect to post : id
+                props.history.push(`/post/${postId}`)
             })
             .catch(err => notificationService.errorMsg(err.message))
         console.log('postService');
@@ -77,6 +71,10 @@ const EditPost = (props) => {
 
         return isValid;
     }
+
+    useEffect(() => {
+        getPostById(postId)
+    }, [postId]);
 
     return (
         <div className="main-container">

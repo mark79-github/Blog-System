@@ -68,9 +68,9 @@ export const addPost = (title, content, urlToImage, token) => {
         .catch(err => console.error('Error:' + err));
 };
 
-export const editPost = (title, content, urlToImage, token) => {
-    return fetch(api, {
-        method: "PUT",
+export const editPost = (id, title, content, urlToImage, token) => {
+    return fetch(api + '/' + id, {
+        method: "PATCH",
         headers: {
             'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json',
