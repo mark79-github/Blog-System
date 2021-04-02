@@ -88,17 +88,17 @@ const FormSignUp = () => {
             errors.email = notifications.emailRequired;
         }
 
-        if (!displayName || displayName.trim().length < 4) {
+        if (!displayName || displayName.trim().length < 3) {
             isValid = false;
             errors.nickname = notifications.nicknameRequired;
         }
 
-        if (!password || password.trim().length < 4) {
+        if (!password || password.trim().length < 3) {
             isValid = false;
             errors.password = notifications.passwordRequired;
         }
 
-        if (!repeatPassword || repeatPassword.trim().length < 4) {
+        if (!repeatPassword || repeatPassword.trim().length < 3) {
             isValid = false;
             errors.repeatPassword = notifications.passwordRequired;
         }

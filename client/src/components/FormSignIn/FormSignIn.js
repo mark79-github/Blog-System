@@ -22,7 +22,7 @@ const FormSignIn = () => {
 
     const notifications = {
         emailRequired: "Email must be valid",
-        passwordRequired: "Password must be at least 4 characters long",
+        passwordRequired: "Password must be at least 3 characters long",
     };
 
 
@@ -36,7 +36,7 @@ const FormSignIn = () => {
             errors.email = notifications.emailRequired;
         }
 
-        if (!password || password.trim().length < 4) {
+        if (!password || password.trim().length < 3) {
             isValid = false;
             errors.password = notifications.passwordRequired;
         }

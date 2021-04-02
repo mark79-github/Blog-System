@@ -1,7 +1,28 @@
 import FormPost from "../FormPost";
 import notificationService from "../../services/notificationService";
+import {useEffect, useState} from "react";
 
-const EditPost = ({data}) => {
+import * as postService from '../../services/postService';
+
+const EditPost = (props) => {
+    const postId = props.match.params.id;
+    console.log('editPost match params id', postId);
+
+    const [post, setPost] = useState({});
+
+    useEffect(() => {
+        getPostById(postId)
+    }, []);
+
+    const getPostById = async (id) => {
+        await postService.getById(id)
+            .then((res) => {
+                setPost(res);
+            })
+            .catch(err => {
+                notificationService.errorMsg(err.message)
+            })
+    }
 
     const editPost = (event) => {
         event.preventDefault();
@@ -15,6 +36,14 @@ const EditPost = ({data}) => {
             return
         }
 
+        //TODO postService -> editPost
+        // getToken
+        postService.editPost(title, content, urlToImage, token)
+            .then(() => {
+
+                //TODO Redirect to post : id
+            })
+            .catch(err => notificationService.errorMsg(err.message))
         console.log('postService');
     }
 
@@ -49,14 +78,14 @@ const EditPost = ({data}) => {
         return isValid;
     }
 
-        return (
-            <div className="main-container">
-                <section className="form-container">
-                    <h2 className="form-container-title post">Edit Post</h2>
-                    <FormPost data={data} onSubmitFormHandler={editPost}/>
-                </section>
-            </div>
-        );
+    return (
+        <div className="main-container">
+            <section className="form-container">
+                <h2 className="form-container-title post">Edit Post</h2>
+                <FormPost data={post} onSubmitFormHandler={editPost}/>
+            </section>
+        </div>
+    );
 
 }
 

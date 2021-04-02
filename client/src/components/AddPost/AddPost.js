@@ -9,6 +9,12 @@ const AddPost = ({data}) => {
     const {token} = useContext(AuthContext);
     const history = useHistory();
 
+    const post = {
+        title: '',
+        content: '',
+        urlToImage: ''
+    }
+
     const addPost = (event) => {
         event.preventDefault();
 
@@ -63,7 +69,7 @@ const AddPost = ({data}) => {
         <div className="main-container">
             <section className="form-container">
                 <h2 className="form-container-title post">Create Post</h2>
-                <FormPost data={data} onSubmitFormHandler={addPost}/>
+                <FormPost data={post} onSubmitFormHandler={addPost}/>
             </section>
         </div>
     );

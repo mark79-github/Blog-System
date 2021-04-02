@@ -68,6 +68,19 @@ export const addPost = (title, content, urlToImage, token) => {
         .catch(err => console.error('Error:' + err));
 };
 
+export const editPost = (title, content, urlToImage, token) => {
+    return fetch(api, {
+        method: "PUT",
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({title, content, urlToImage})
+    })
+        .then(res => res.json())
+        .catch(err => console.error('Error:' + err));
+};
+
 export const deleteCommentByIds = (id, commentId, token) => {
     return fetch(api + '/comment/' + id + '/delete/' + commentId, {
         method: "DELETE",

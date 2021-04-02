@@ -59,34 +59,31 @@ const FormPost = ({
                       data,
                       onSubmitFormHandler
                   }) => {
-    const authContext = useContext(AuthContext);
-    let history = useHistory();
-
-    const [title, setTitle] = useState(data.title);
-    const [content, setContent] = useState(data.content);
-    const [urlToImage, setUrlToImage] = useState(data.urlToImage);
-
-    const handleTitleInputHandler = (event) => {
-        setTitle(event.target.value);
-    }
-
-    const handleContentInputHandler = (event) => {
-        setContent(event.target.value);
-    }
-
-    const handleUrlToImageInputHandler = (event) => {
-        setUrlToImage(event.target.value);
-    }
+    // const authContext = useContext(AuthContext);
+    // let history = useHistory();
+    //
+    // const [title, setTitle] = useState(data.title);
+    // const [content, setContent] = useState(data.content);
+    // const [urlToImage, setUrlToImage] = useState(data.urlToImage);
+    //
+    // const handleTitleInputHandler = (event) => {
+    //     setTitle(event.target.value);
+    // }
+    //
+    // const handleContentInputHandler = (event) => {
+    //     setContent(event.target.value);
+    // }
+    //
+    // const handleUrlToImageInputHandler = (event) => {
+    //     setUrlToImage(event.target.value);
+    // }
 
     return (
         <form className="form" onSubmit={onSubmitFormHandler}>
-            <input type="text" name="title" placeholder="Title" value={title}
-                   onChange={handleTitleInputHandler}/>
-            <textarea name="content" placeholder="Content" value={content}
-                      onChange={handleContentInputHandler}/>
-            <input type="text" name="urlToImage" placeholder="Image url" value={urlToImage}
-                   onChange={handleUrlToImageInputHandler}/>
-            <input type="submit" value="Create"/>
+            <input type="text" name="title" placeholder="Title" defaultValue={data.title}/>
+            <textarea name="content" placeholder="Content" defaultValue={data.content}/>
+            <input type="text" name="urlToImage" placeholder="Image url" defaultValue={data.urlToImage} />
+            <input type="submit" value="Save"/>
         </form>
     );
 }

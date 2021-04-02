@@ -234,12 +234,12 @@ class Details extends Component {
     }
 
     onEditPost = () => {
-        console.log('test editPost');
+        console.log('test editPost id', this.state.post._id);
 
         // this.props.history.push('/post/edit');
 
         this.props.history.push({
-            pathname: '/post/edit',
+            pathname: `/post/${this.state.post._id}/edit`,
             search: '',  // query string
             asd: {  // location state
                 title: this.state.post.title,
