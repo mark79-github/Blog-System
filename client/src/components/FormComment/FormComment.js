@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import notificationService from "../../services/notificationService";
 
 // class FormComment extends Component {
 //     constructor(props) {
@@ -42,8 +43,31 @@ const FormComment = ({onNewComment}) => {
         setComment(event.target.value);
     }
 
+    const notifications = {
+        commentRequired: "Comment must be at least ten characters long",
+    };
+
+
+    const validateInput = () => {
+
+        let isValid = true;
+        const errors = {};
+
+        if (!comment || comment.trim().length < 10) {
+            isValid = false;
+            errors.comment = notifications.commentRequired;
+        }
+
+        return isValid;
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        if (!validateInput()){
+            notificationService.errorMsg('Provided data is not valid')
+            return
+        }
 
         onNewComment(comment);
         setComment('');
