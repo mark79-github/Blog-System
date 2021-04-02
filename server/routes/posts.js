@@ -22,6 +22,6 @@ router.put('/comment/:id', [middleware.verifyToken, middleware.getPost], postCon
 
 router.delete('/comment/:id/delete/:commentId', [middleware.verifyToken, middleware.getPost], postController.deleteCommentOnPost);
 
-router.post('/view/:id', [middleware.getPost], postController.visitPost);
+router.post('/visit/:id', [middleware.getPost], postController.visitPost);
 
 module.exports = router;

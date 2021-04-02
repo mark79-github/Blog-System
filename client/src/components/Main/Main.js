@@ -159,7 +159,7 @@ class Main extends Component {
                 <FormSearch onSearch={this.onSearch}/>
 
                 {this.state.topPost.map(x => {
-                    return (<TopArticle key={x._id} data={x}/>)
+                    return (<TopArticle key={x._id} data={x} {...this.props}/>)
                 })}
 
                 {
@@ -168,7 +168,7 @@ class Main extends Component {
                         <section className="sub-article">
                             {this.state.posts.map(x => {
                                 return (
-                                    <Article key={x._id} data={x}/>
+                                    <Article {...this.props} key={x._id} data={x}/>
                                 )
                             })}
                         </section>

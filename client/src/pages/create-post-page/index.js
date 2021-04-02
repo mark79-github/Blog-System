@@ -2,10 +2,11 @@ import AddPost from "../../components/AddPost";
 
 const CreatePostPage = () => {
     const post = {
-        title: '1',
-        content: '2',
-        urlToImage: '3'
+        title: '',
+        content: '',
+        urlToImage: ''
     }
+
     return (
         <AddPost data={post}/>
     );

@@ -1,12 +1,12 @@
 import {Link} from 'react-router-dom';
 import moment from "moment";
 
-const TopArticle = ({data}) => {
+const TopArticle = ({data, history}) => {
     let {_id, title, content, author, urlToImage, publishedAt, likes, comments, visits} = data;
     publishedAt = moment(publishedAt).format('DD.MM.YYYY hh:mm');
 
-    const handleClick = () => {
-        fetch(`http://localhost:5000/api/posts/view/${_id}`, {
+    const handleClick = async () => {
+        await fetch(`http://localhost:5000/api/posts/visit/${_id}`, {
             method: "POST",
         })
             .then(res => res.json())

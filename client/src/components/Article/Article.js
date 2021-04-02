@@ -3,8 +3,8 @@ import {Link} from "react-router-dom";
 const Article = ({data}) => {
     const {_id, title, urlToImage} = data;
 
-    const handleClick = () => {
-        fetch(`http://localhost:5000/api/posts/view/${_id}`, {
+    const handleClick = async () => {
+        await fetch(`http://localhost:5000/api/posts/visit/${_id}`, {
             method: "POST",
         })
             .then(res => res.json())

@@ -56,7 +56,8 @@ import notificationService from "../../services/notificationService";
 // }
 
 const FormPost = ({
-                      data
+                      data,
+                      onSubmitFormHandler
                   }) => {
     const authContext = useContext(AuthContext);
     let history = useHistory();
@@ -77,57 +78,8 @@ const FormPost = ({
         setUrlToImage(event.target.value);
     }
 
-    const notifications = {
-        titleRequired: "Title is must be at least ten characters long",
-        contentRequired: "Title is must be at least twenty characters long",
-        urlToImageRequired: "Url To Image must be valid url",
-    };
-
-    const validateInput = () => {
-
-        let isValid = true;
-        const errors = {};
-
-        if (!title || title.trim().length < 10) {
-            isValid = false;
-            errors.title = notifications.titleRequired;
-        }
-
-        if (!content || content.trim().length < 20) {
-            isValid = false;
-            errors.content = notifications.contentRequired;
-        }
-
-        const urlToImageRegex = /(http[s]?:\/\/.*.(?:png|jpg|gif|svg|jpeg))/i;
-
-        if (!urlToImageRegex.test(urlToImage)) {
-            isValid = false
-            errors.urlToImage = notifications.urlToImageRequired;
-        }
-
-        return isValid;
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        if (!validateInput()){
-            notificationService.errorMsg('Provided data is not valid')
-            return
-        }
-
-        postService.addPost(title, content, urlToImage, authContext.token)
-            .then((res) => {
-                setTitle('');
-                setContent('');
-                setUrlToImage('');
-                history.push('/');
-            })
-            .catch(err => console.error("Error: ", err))
-    }
-
     return (
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={onSubmitFormHandler}>
             <input type="text" name="title" placeholder="Title" value={title}
                    onChange={handleTitleInputHandler}/>
             <textarea name="content" placeholder="Content" value={content}

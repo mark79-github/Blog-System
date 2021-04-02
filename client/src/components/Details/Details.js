@@ -9,9 +9,8 @@ import FormComment from "../FormComment";
 import Comment from "../Comment";
 import notificationService from "../../services/notificationService";
 import AuthContext from "../AuthContext";
-import Edit from "../Edit/Edit";
+import Edit from "../Edit";
 import Delete from "../Delete";
-import {Redirect} from "react-router-dom";
 
 // const Details = ({match}) => {
 //     const postId = match.params.id;
@@ -182,7 +181,7 @@ class Details extends Component {
         super(props);
 
         this.authorName = '';
-        this._idMounted = false;
+        this._isMounted = false;
 
         this.state = {
             post: {},
@@ -236,17 +235,24 @@ class Details extends Component {
 
     onEditPost = () => {
         console.log('test editPost');
-        return (
-            <Redirect to={'/toErrorPage'}/>
-        )
+
+        // this.props.history.push('/post/edit');
+
+        this.props.history.push({
+            pathname: '/post/edit',
+            search: '',  // query string
+            asd: {  // location state
+                title: this.state.post.title,
+                content: this.state.post.content,
+                urlToImage: this.state.post.urlToImage,
+            },
+        });
     }
 
     onDeletePost = async () => {
         await postService.deleteById(this.state.post._id, this.props.token)
             .then(() => {
-                return (
-                    <Redirect to={'/'}/>
-                )
+                this.props.history.push('/');
             })
             .catch(err => notificationService.errorMsg(err.message))
     }
@@ -275,23 +281,24 @@ class Details extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('Details.js didUpdate');
+        console.log('Details.js prevState.post.visits', prevState.post.visits);
+        console.log('Details.js this.state.post.visits', this.state.post.visits);
     }
 
     componentDidMount() {
         this._isMounted = true;
-        console.log('this._isMounted', this._isMounted);
+        console.log(this.props);
         this.getPostById(this.props.match.params.id);
     }
 
     render() {
 
-        if (this.state.loading){
-                return (
-                    <div className="main-container">
-                        <Loader type="Rings" color="white" height={80} width={80}/>
-                    </div>
-                )
+        if (this.state.loading) {
+            return (
+                <div className="main-container">
+                    <Loader type="Rings" color="white" height={80} width={80}/>
+                </div>
+            )
         }
         // if (Object.keys(this.state.post).length === 0) {
         //     return (
@@ -369,12 +376,14 @@ class Details extends Component {
     }
 }
 
-const DetailsWithContext = props => (
+const DetailsWithContext = (props) => (
     <AuthContext.Consumer>
-        {() => (
-            <Details
-                {...props}
-            />
+        {({isLoggedIn, userId, token}) => (
+            <>
+                <h1>{isLoggedIn ? "TRUE" : "FALSE"}</h1>
+                <Details {...props} isLoggedIn={isLoggedIn} userId={userId} token={token}/>
+            </>
+
         )}
     </AuthContext.Consumer>
 );

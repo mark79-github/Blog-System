@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import Logout from "./components/Logout";
 import Notification from "./components/Notification";
 import notificationService from "./services/notificationService";
+import EditPostPage from "./pages/edit-post-page";
 
 let logoutTimer;
 
@@ -84,7 +85,9 @@ const App = () => {
                     <Route path={'/'} component={(props) => <HomePage {...props}/>} exact/>
 
                     <Route path={'/post/create'} component={CreatePostPage} exact/>
-                    <Route path={'/post/:id'} component={DetailsPage}/>
+                    {/*<Route path={'/post/:id/edit'} component={(props) => <EditPostPage {...props}/>} exact/>*/}
+                    <Route path={'/post/:id/edit'} component={EditPostPage} exact/>
+                    <Route path={'/post/:id'} component={DetailsPage} exact/>
 
                     <Route path={'/user/sign'} component={SignPage} exact/>
                     <Route path={'/user/logout'} component={Logout} exact/>

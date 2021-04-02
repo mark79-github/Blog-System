@@ -1,8 +1,8 @@
 import Details from "../../components/Details";
 
-const DetailsPage = ({match}) => {
+const DetailsPage = (props) => {
     return (
-        <Details match={match}/>
+        <Details {...props}/>
     );
 }
 
