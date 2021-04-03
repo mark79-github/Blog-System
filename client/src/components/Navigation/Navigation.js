@@ -22,7 +22,7 @@ const Navigation = () => {
                                     ?
                                     <>
                                         <NavigationItem linkTo={'/post/create'}>Add Post</NavigationItem>
-                                        <NavigationItem linkTo={`/?author=${userId}`}>My Posts</NavigationItem>
+                                        <NavigationItem linkTo={`/?author=${userId}`}>Own Posts</NavigationItem>
                                         <NavigationItem linkTo={'/user/logout'}>Logout, {displayName}</NavigationItem>
                                     </>
                                     : <NavigationItem linkTo={'/user/sign'}>Sign</NavigationItem>

@@ -49,7 +49,6 @@ exports.updatePost = async (req, res) => {
          * If the fields exist, update the document, otherwise, keep the existing record
          * */
         const titleUpdate = req.body.title
-        console.log("titleUpdate", titleUpdate);
         post.title = titleUpdate ? titleUpdate : post.title
 
         const contentUpdate = req.body.content

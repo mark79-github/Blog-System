@@ -1,6 +1,11 @@
 import {Component} from 'react';
+import Edit from "../Icons/Edit";
 
 class Like extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     handleClick = () => {
         this.props.onLike();
     }
