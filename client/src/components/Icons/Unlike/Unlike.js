@@ -8,9 +8,9 @@ class Unlike extends Component {
 
     render() {
         return (
-            <span className="main-article-details-thumb-down">
-                <i className="far fa-thumbs-down" onClick={this.handleClick}>Unlike</i>
-            </span>
+            <div className="main-article-details-likes-icons">
+                <i className="far fa-thumbs-down" onClick={this.handleClick}/>
+            </div>
         )
     }
 }

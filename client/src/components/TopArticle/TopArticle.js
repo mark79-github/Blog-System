@@ -20,15 +20,30 @@ const TopArticle = ({data, history}) => {
                 <img src={urlToImage} alt=""/>
             </article>
             <article className="top-article-details">
-                <span className="top-article-details-date">{publishedAt}</span>
-                <span className="top-article-details-author">{author}</span>
-                <span className="top-article-details-comments">Comments: {comments.length || 0}</span>
-                <span className="top-article-details-likes">Likes: {likes.length || 0}</span>
-                <span className="top-article-details-readers">Visits: {visits}</span>
+                <div className="top-article-details-date">
+                    <span>Published at:</span>
+                    {publishedAt}
+                </div>
+                <div className="top-article-details-author">
+                    <span>Post author:</span>
+                    {author}
+                </div>
+                <div className="top-article-details-comments">
+                    <span>Comments:</span>
+                    {comments.length}
+                </div>
+                <div className="top-article-details-likes">
+                    <span>Likes:</span>
+                    {likes.length}
+                </div>
+                <div className="main-article-details-readers">
+                    <span>Views:</span>
+                    {visits}
+                </div>
             </article>
             <article className="top-article-description">
-                <h2 className="top-article-description-title">{title}</h2>
-                <p className="top-article-description-content">{content}</p>
+                <h2 className="main-article-description-title">{title}</h2>
+                <p className="main-article-description-content">{content}</p>
                 <button className="article-description-btn" onClick={handleButtonClick}>
                     Read more
                 </button>

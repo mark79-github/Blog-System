@@ -20,7 +20,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
 }
 
 header {
@@ -34,9 +33,9 @@ header {
 }
 
 .header-search-form {
-    display: flex;
     flex-grow: 1;
     margin: 0 auto;
+    display: flex;
 }
 
 .header-search-form-submit {
@@ -70,12 +69,23 @@ header {
     color: white;
 }
 
-.header-select-form {
-    height: 30px;
+.header-select-label {
+    color: white;
+    font-size: 18px;
+    font-weight: bolder;
 }
 
-.header-search-select-label {
+.header-select-select {
+    height: 30px;
+    min-width: 150px;
+    border-radius: 6px;
+    background: darkblue;
     color: white;
+    font-size: 18px;
+}
+
+.header-select-select > option {
+    font-size: 18px;
 }
 
 header nav ul {
@@ -133,31 +143,12 @@ header nav ul li a {
 }
 
 .top-article-details {
-    background: white;
-    color: darkblue;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.top-article-details-info {
-    padding: 10px 20px;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.top-article-details-icon-wrapper {
-    display: flex;
-    justify-content: stretch;
-    align-content: center;
-    align-items: flex-end;
-    padding: 10px 20px;
+    background: darkgray;
 }
 
 .top-article-details span {
-    /*font-size: 20px;*/
-    /*font-weight: 500;*/
+    font-size: 18px;
+    font-weight: 300;
 }
 
 .top-article-description-title {
@@ -165,22 +156,11 @@ header nav ul li a {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding: 0 12px;
 }
 
 .top-article-description-content {
     font-size: 20px;
-}
-
-.main-article-description-title {
-    font-weight: bold;
-    font-size: 30px;
-    padding: 10px 20px;
-}
-
-.main-article-description-content {
-    font-size: 18px;
-    font-style: italic;
-    padding: 10px 20px;
 }
 
 .article-description-btn {
@@ -202,24 +182,9 @@ header nav ul li a {
     color: white;
 }
 
-.far,
-.fas {
-    border: 1px solid darkblue;
-    color: darkblue;
-    font-size: 20px;
-    font-weight: 600;
-    padding: 10px 40px;
-    border-radius: 8px;
-    margin-left: 10px;
-}
-
 .far:hover,
 .fas:hover {
     cursor: pointer;
-
-    border: 1px solid white;
-    background: darkblue;
-    color: white;
 }
 
 .top-article-comment {
@@ -227,36 +192,11 @@ header nav ul li a {
     margin: 0 auto;
 }
 
-.top-article-comment-content-header {
-    padding: 10px 20px;
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.main-article-comment-content-details {
-    padding: 10px 20px;
-}
-
-.main-article-comment-content-details .far {
-    /*border: 1px solid white;*/
-    background: darkblue;
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    padding: 10px 10px;
-    /*border-radius: 8px;*/
-}
-
-.main-article-comment-content-details .far:hover {
-    cursor: pointer;
-    border: 1px solid darkblue;
-    background: white;
-    color: darkblue;
-}
-
-.main-article-comment-content-details span {
-    padding-right: 10px;
-    text-decoration: underline;
+.top-article-comment form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*align-items: center;*/
 }
 
 .sub-article {
@@ -273,6 +213,9 @@ header nav ul li a {
     color: white;
     flex-grow: 1;
     margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .article-image img {
@@ -280,7 +223,7 @@ header nav ul li a {
     border-top-right-radius: 8px;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    vertical-align: middle;
 }
 
 .article-description {
@@ -294,6 +237,7 @@ header nav ul li a {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    padding: 0 8px;
 }
 
 footer {
@@ -315,51 +259,6 @@ footer p {
 
 #input {
     width: 250px;
-}
-
-.form-comment {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 10px;
-}
-
-.form-comment > label {
-    font-size: 20px;
-    font-weight: 600;
-}
-
-.form-comment > input[type='submit'] {
-    background: darkblue;
-    color: white;
-    border: 1px solid white;
-    border-radius: 8px;
-    font-size: 20px;
-    padding: 10px;
-    font-weight: 600;
-    margin-top: 20px;
-}
-
-.form-comment > input[type='submit']:hover {
-    cursor: pointer;
-    background: white;
-    color: darkblue;
-}
-
-#comment {
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 100px;
-    max-height: 200px;
-    color: darkblue;
-    font-size: 18px;
-    margin-top: 20px;
-}
-
-#comment::placeholder {
-    color: darkblue;
-    font-size: 18px;
-    font-style: italic;
 }
 
 .sign-form-wrapper {

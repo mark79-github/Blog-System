@@ -1,5 +1,4 @@
 import React, {useContext} from "react";
-import {Link} from "react-router-dom";
 import AuthContext from "../AuthContext";
 import NavigationItem from "../NavigationItem";
 
@@ -11,9 +10,11 @@ const Navigation = () => {
             <div className="header-container">
                 <section className="navigation">
                     <section className="logo-wrapper">
-                        <Link to={'/'}>
-                            <img src="/logo.png" alt="Logo"/>
-                        </Link>
+                        <nav>
+                            <ul>
+                                <NavigationItem linkTo={'/'}>Blog System</NavigationItem>
+                            </ul>
+                        </nav>
                     </section>
                     <section>
                         <nav>

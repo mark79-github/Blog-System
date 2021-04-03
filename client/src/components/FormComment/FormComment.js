@@ -64,7 +64,7 @@ const FormComment = ({onNewComment}) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        if (!validateInput()){
+        if (!validateInput()) {
             notificationService.errorMsg('Provided data is not valid')
             return
         }
@@ -74,8 +74,8 @@ const FormComment = ({onNewComment}) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="comment">Comment:</label>
+        <form className="form-comment" onSubmit={handleSubmit}>
+            <label htmlFor="comment"/>
             <textarea name="comment" id="comment" placeholder="Leave your comment..."
                       value={comment} onChange={handleInputChange}/>
             <input type="submit" value="Post comment"/>

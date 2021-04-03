@@ -26,7 +26,18 @@ exports.getAllPosts = async (req, res) => {
             options.title = {$regex: title, $options: "i"};
         }
 
-        const posts = await Post.find(options)
+        // const posts = await Post.find(options)
+        const posts = await Post
+            .aggregate()
+            .match(options)
+            .addFields({commentsLength: {"$size": "$comments"}})
+            .addFields({likesLength: {"$size": "$likes"}})
+            .sort({publishedAt: -1})
+
+        // Array.from(posts).map(x => {
+        //     console.log(`Title:${x.title} => Likes:${x.likes.length}`);
+        // })
+
         res.status(200).json(posts)
     } catch (error) {
         response.serverError(res, error.message)

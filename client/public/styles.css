@@ -20,6 +20,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 10px 0;
 }
 
 header {
@@ -27,13 +28,15 @@ header {
 }
 
 .header-search {
+    display: flex;
     max-width: 1000px;
     margin: 0 auto;
 }
 
 .header-search-form {
-    margin: 0 auto;
     display: flex;
+    flex-grow: 1;
+    margin: 0 auto;
 }
 
 .header-search-form-submit {
@@ -67,6 +70,14 @@ header {
     color: white;
 }
 
+.header-select-form {
+    height: 30px;
+}
+
+.header-search-select-label {
+    color: white;
+}
+
 header nav ul {
     display: flex;
 }
@@ -92,7 +103,7 @@ header nav ul li a {
 
 .main-container {
     background: darkblue;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -101,7 +112,7 @@ header nav ul li a {
 }
 
 .top-article {
-    max-width: 1000px;
+    width: 100%;
     margin: 10px auto;
     color: white;
     border-radius: 12px;
@@ -119,15 +130,33 @@ header nav ul li a {
     object-fit: contain;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+    vertical-align: middle;
 }
 
 .top-article-details {
-    background: darkgray;
+    background: white;
+    color: darkblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.top-article-details-info {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.top-article-details-icon-wrapper {
+    display: flex;
+    justify-content: stretch;
+    align-content: center;
+    align-items: flex-end;
 }
 
 .top-article-details span {
-    font-size: 18px;
-    font-weight: 300;
+    /*font-size: 20px;*/
+    /*font-weight: 500;*/
 }
 
 .top-article-description-title {
@@ -135,11 +164,22 @@ header nav ul li a {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0 12px;
 }
 
 .top-article-description-content {
     font-size: 20px;
+}
+
+.main-article-description-title {
+    font-weight: bold;
+    font-size: 30px;
+    padding: 10px 20px;
+}
+
+.main-article-description-content {
+    font-size: 18px;
+    font-style: italic;
+    padding: 20px;
 }
 
 .article-description-btn {
@@ -149,7 +189,7 @@ header nav ul li a {
     border-radius: 4px;
     font-size: 20px;
     padding: 15px 30px;
-    margin: 10px;
+    margin: 10px 20px;
 }
 
 .article-description-btn:hover {
@@ -161,9 +201,24 @@ header nav ul li a {
     color: white;
 }
 
+.far,
+.fas {
+    border: 1px solid darkblue;
+    color: darkblue;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px 40px;
+    border-radius: 8px;
+    margin-left: 10px;
+}
+
 .far:hover,
 .fas:hover {
     cursor: pointer;
+
+    border: 1px solid white;
+    background: darkblue;
+    color: white;
 }
 
 .top-article-comment {
@@ -171,15 +226,40 @@ header nav ul li a {
     margin: 0 auto;
 }
 
-.top-article-comment form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /*align-items: center;*/
+.top-article-comment-content-header {
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.main-article-comment-content-details {
+    padding: 10px 20px;
+}
+
+.main-article-comment-content-details .far {
+    /*border: 1px solid white;*/
+    background: darkblue;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px 10px;
+    /*border-radius: 8px;*/
+}
+
+.main-article-comment-content-details .far:hover {
+    cursor: pointer;
+    border: 1px solid darkblue;
+    background: white;
+    color: darkblue;
+}
+
+.main-article-comment-content-details span {
+    padding-right: 10px;
+    text-decoration: underline;
 }
 
 .sub-article {
-    max-width: 1000px;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -202,6 +282,7 @@ header nav ul li a {
     border-top-right-radius: 8px;
     width: 100%;
     height: 100%;
+    object-fit: contain;
     vertical-align: middle;
 }
 
@@ -216,7 +297,7 @@ header nav ul li a {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0 8px;
+    padding: 0 20px;
 }
 
 footer {
@@ -238,6 +319,51 @@ footer p {
 
 #input {
     width: 250px;
+}
+
+.form-comment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+}
+
+.form-comment > label {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.form-comment > input[type='submit'] {
+    background: darkblue;
+    color: white;
+    border: 1px solid white;
+    border-radius: 8px;
+    font-size: 20px;
+    padding: 10px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.form-comment > input[type='submit']:hover {
+    cursor: pointer;
+    background: white;
+    color: darkblue;
+}
+
+#comment {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+    max-height: 200px;
+    color: darkblue;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+#comment::placeholder {
+    color: darkblue;
+    font-size: 18px;
+    font-style: italic;
 }
 
 .sign-form-wrapper {

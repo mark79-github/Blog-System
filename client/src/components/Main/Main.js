@@ -7,6 +7,7 @@ import Article from "../Article";
 import TopArticle from "../TopArticle";
 import notificationService from "../../services/notificationService";
 import FormSearch from "../FormSearch";
+import FormOrder from "../FormOrder";
 
 // const Main = ({searchQry}) => {
 //     console.log('main beginning', searchQry);
@@ -148,7 +149,10 @@ class Main extends Component {
             return (
                 <div className="main-container">
                     <FormSearch onSearch={this.onSearch}/>
-                    <h1 style={{color: "white", textAlign: "center"}}>No posts found on given criteria</h1>
+                    <FormOrder/>
+                    <section className="top-article">
+                        <h1 style={{color: "white", textAlign: "center"}}>No posts found on given criteria</h1>
+                    </section>
                 </div>
             )
         }
@@ -157,6 +161,7 @@ class Main extends Component {
             <div className="main-container">
 
                 <FormSearch onSearch={this.onSearch}/>
+                <FormOrder/>
 
                 {this.state.topPost.map(x => {
                     return (<TopArticle key={x._id} data={x} {...this.props}/>)

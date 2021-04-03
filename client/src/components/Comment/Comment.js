@@ -22,17 +22,17 @@ const Comment = ({data, onDeleteComment}) => {
     }, [user]);
 
     return (
-        <article className="main-article-comment-content-details">
-            <p>
-                <span>#{index} by {authorDisplayName} </span>
-                {
-                    authContext.userId === user
-                        ? <i className="far fa-trash-alt" onClick={handleClick}/>
-                        : null
-                }
-            </p>
-            <p>{comment}</p>
-        </article>
+            <article className="main-article-comment-content-details">
+                <p>
+                    <span>#{index}</span><span>By {authorDisplayName}</span>
+                    {
+                        authContext.userId === user
+                            ? <i className="far fa-trash-alt" onClick={handleClick}/>
+                            : null
+                    }
+                </p>
+                <p>{comment}</p>
+            </article>
     );
 }
 

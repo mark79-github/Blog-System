@@ -3,14 +3,15 @@ import {Component} from 'react';
 import Loader from 'react-loader-spinner';
 import * as postService from "../../services/postService";
 import * as userService from "../../services/userService";
-import Like from "../Like";
-import Unlike from "../Unlike";
+import Like from "../Icons/Like";
+import Unlike from "../Icons/Unlike";
 import FormComment from "../FormComment";
 import Comment from "../Comment";
 import notificationService from "../../services/notificationService";
 import AuthContext from "../AuthContext";
-import Edit from "../Edit";
-import Delete from "../Delete";
+import Edit from "../Icons/Edit";
+import Delete from "../Icons/Delete";
+import Comments from "../Icons/Comment";
 
 // const Details = ({match}) => {
 //     const postId = match.params.id;
@@ -184,18 +185,15 @@ class Details extends Component {
         this._isMounted = false;
 
         this.state = {
-            post: {},
-            loading: true,
+            post: {}
         };
     }
 
     like = () => {
         postService.likeById(this.state.post._id, this.props.token)
             .then(post => {
-                // if (!isMounted.value) {
                 this.setState({post});
                 notificationService.infoMsg('Liked');
-                // }
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)
@@ -205,10 +203,8 @@ class Details extends Component {
     unlike = () => {
         postService.unlikeById(this.state.post._id, this.props.token)
             .then(post => {
-                // if (!isMounted.value) {
                 this.setState({post});
                 notificationService.infoMsg('Unliked');
-                // }
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)
@@ -234,8 +230,6 @@ class Details extends Component {
     }
 
     onEditPost = () => {
-        console.log('test editPost id', this.state.post._id);
-
         this.props.history.push(`/post/${this.state.post._id}/edit`);
     }
 
@@ -255,8 +249,7 @@ class Details extends Component {
             if (this._isMounted) {
                 this.authorName = author.displayName;
                 this.setState({
-                    post,
-                    loading: false
+                    post
                 });
 
             }
@@ -270,96 +263,116 @@ class Details extends Component {
         this._isMounted = false;
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('Details.js prevState.post.visits', prevState.post.visits);
-        console.log('Details.js this.state.post.visits', this.state.post.visits);
-    }
-
     componentDidMount() {
         this._isMounted = true;
-        console.log(this.props);
         this.getPostById(this.props.match.params.id);
     }
 
     render() {
 
-        if (this.state.loading) {
+        if (Object.keys(this.state.post).length === 0) {
             return (
                 <div className="main-container">
                     <Loader type="Rings" color="white" height={80} width={80}/>
                 </div>
             )
         }
-        // if (Object.keys(this.state.post).length === 0) {
-        //     return (
-        //         <div className="main-container">
-        //             <Loader type="Rings" color="white" height={80} width={80}/>
-        //         </div>
-        //     )
-        // }
 
         return (
             <div className="main-container">
                 <section className="top-article">
                     <article className="top-article-image">
-                        <img src={this.state.post.urlToImage} alt=""/>
+                        <img src={this.state.post.urlToImage} alt="Url To Image"/>
                     </article>
-                    <hr/>
-                    <article className="top-article-details">
-                        <span className="main-article-details-date">Date: {this.state.post.publishedAt}</span>
-                        <span className="main-article-details-author">Author: {this.authorName}</span>
-                        <span
-                            className="main-article-details-comments">Comments: {this.state.post.comments.length || 0}</span>
-                        <span
-                            className="main-article-details-likes">Likes: {this.state.post.likes.length || 0}</span>
-                        <span
-                            className="main-article-details-readers">Visits: {this.state.post.visits}</span>
-                        {
-                            this.props.isLoggedIn
-                                ?
-                                !this.state.post.likes.some(x => x === this.props.userId)
-                                    ? <Like onLike={this.like}/>
-                                    : <Unlike onUnlike={this.unlike}/>
-                                : null
-                        }
-                        {
-                            this.state.post.author === this.props.userId
-                                ?
-                                <>
-                                    <Edit onEdit={this.onEditPost}/>
-                                    <Delete onDelete={this.onDeletePost}/>
-                                </>
-                                : null
-                        }
-                    </article>
-                    <hr/>
                     <article className="top-article-description">
                         <h2 className="main-article-description-title">{this.state.post.title}</h2>
                         <p className="main-article-description-content">{this.state.post.content}</p>
                     </article>
+                    <article className="top-article-details">
+
+                        <article className="top-article-details-info">
+                            <div className="main-article-details-date">
+                                <span>Published: </span>
+                                {this.state.post.publishedAt}
+                            </div>
+                            <div className="main-article-details-author">
+                                <span>Post author: </span>
+                                {this.authorName}
+                            </div>
+                            <div className="main-article-details-comments">
+                                <span>Comments: </span>
+                                {this.state.post.comments.length}
+                            </div>
+                            <div className="main-article-details-likes">
+                                <span>Likes: </span>
+                                {this.state.post.likes.length}
+                            </div>
+                            <div className="main-article-details-readers">
+                                <span>Views: </span>
+                                {this.state.post.visits}
+                            </div>
+                        </article>
+
+                        <article className="top-article-details-icon-wrapper">
+                            <Comments/>
+                            {
+                                this.state.post.author === this.props.userId
+                                    ?
+                                    <>
+                                        <Edit onEdit={this.onEditPost}/>
+                                        <Delete onDelete={this.onDeletePost}/>
+                                    </>
+                                    : null
+                            }
+
+                            {
+                                this.props.isLoggedIn
+                                    ?
+                                    <div className="main-article-details-likes-icons">
+                                        {
+                                            !this.state.post.likes.some(x => x === this.props.userId)
+                                                ? <Like onLike={this.like}/>
+                                                : <Unlike onUnlike={this.unlike}/>
+                                        }
+                                    </div>
+                                    : null
+                            }
+
+                        </article>
+
+                    </article>
+                    <article className="top-article-comment-content">
+                        {
+                            this.state.post.comments.length > 0
+                                ?
+                                <>
+                                    <h2 className="top-article-comment-content-header">Comments:</h2>
+                                    {
+                                        this.state.post.comments.map((commentObj, index) => {
+                                            commentObj.index = index + 1;
+                                            return <Comment
+                                                key={index + 1}
+                                                data={commentObj}
+                                                onDeleteComment={this.deleteComment}
+                                            />
+                                        })
+                                    }
+                                </>
+                                : null
+
+                        }
+                    </article>
+
                     {
                         this.props.isLoggedIn ?
                             <>
-                                <hr/>
                                 <article className="top-article-comment">
                                     <FormComment onNewComment={this.onNewComment}/>
                                 </article>
                             </>
                             : null
                     }
-                    <hr/>
-                    <article className="top-article-comment-content">
-                        {
-                            this.state.post.comments.map((commentObj, index) => {
-                                commentObj.index = index + 1;
-                                return <Comment
-                                    key={index + 1}
-                                    data={commentObj}
-                                    onDeleteComment={this.deleteComment}
-                                />
-                            })
-                        }
-                    </article>
+
                 </section>
             </div>
         );
@@ -369,13 +382,9 @@ class Details extends Component {
 const DetailsWithContext = (props) => (
     <AuthContext.Consumer>
         {({isLoggedIn, userId, token}) => (
-                <Details {...props} isLoggedIn={isLoggedIn} userId={userId} token={token}/>
+            <Details {...props} isLoggedIn={isLoggedIn} userId={userId} token={token}/>
         )}
     </AuthContext.Consumer>
 );
 
 export default DetailsWithContext;
-
-/*
-
- */
