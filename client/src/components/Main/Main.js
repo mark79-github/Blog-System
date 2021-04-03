@@ -129,7 +129,6 @@ class Main extends Component {
                         posts: res.slice(1),
                         loading: false
                     })
-                    // this._isMounted = true;
                 }
             })
             .catch(err => notificationService.errorMsg(err.message));
@@ -137,7 +136,7 @@ class Main extends Component {
 
     render() {
 
-        if (this.state.loading) {
+        if (Object.keys(this.state.topPost).length === 0) {
             return (
                 <div className="main-container">
                     <Loader type="Rings" color="white" height={80} width={80}/>
@@ -156,6 +155,8 @@ class Main extends Component {
                 </div>
             )
         }
+
+
 
         return (
             <div className="main-container">

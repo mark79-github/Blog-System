@@ -1,7 +1,7 @@
-const Comments = () => {
+const Comments = (props) => {
 
     const handleClick = () => {
-        console.log()
+        props.onClick();
     }
 
     return (

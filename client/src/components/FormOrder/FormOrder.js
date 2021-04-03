@@ -22,16 +22,18 @@ class FormOrder extends Component {
     render() {
         return (
             <section className="header-select">
-                <form action="#" className="header-select-form" onChange={this.formOnChangeHandler}>
-                    <label className="header-select-label">Order By
-                        <select className="header-select-select" value={this.state.orderBy}
-                                onChange={this.selectChangeHandler}>
-                            <option value="likes asc">Likes</option>
-                            <option value="views desc">Views</option>
-                            <option value="comments">Comments</option>
-                            <option value="createdAt">Created</option>
-                        </select>
-                    </label>
+                <form className="header-select-form" onChange={this.formOnChangeHandler}>
+                    <select className="header-select-select" value={this.state.orderBy}
+                            onChange={this.selectChangeHandler}>
+                        <option value="likes">Likes ascending</option>
+                        <option value="likes">Likes descending</option>
+                        <option value="views">Views ascending</option>
+                        <option value="views">Views descending</option>
+                        <option value="comments">Comments ascending</option>
+                        <option value="comments">Comments descending</option>
+                        <option value="createdAt">Created ascending</option>
+                        <option value="createdAt">Created descending</option>
+                    </select>
                 </form>
             </section>
         );

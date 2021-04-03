@@ -1,5 +1,5 @@
 import {Component} from 'react';
-// import moment from 'moment';
+import moment from 'moment';
 import Loader from 'react-loader-spinner';
 import * as postService from "../../services/postService";
 import * as userService from "../../services/userService";
@@ -182,10 +182,12 @@ class Details extends Component {
         super(props);
 
         this.authorName = '';
+        this.publishedAt = new Date().toDateString();
         this._isMounted = false;
 
         this.state = {
-            post: {}
+            post: {},
+            hideComments: true
         };
     }
 
@@ -241,6 +243,13 @@ class Details extends Component {
             .catch(err => notificationService.errorMsg(err.message))
     }
 
+    showComments = () => {
+        this.setState(prevState => ({
+            ...prevState,
+            hideComments: !prevState.hideComments
+        }));
+    }
+
     getPostById = (postId) => {
         postService.getById(postId)
             .then(post => {
@@ -248,6 +257,7 @@ class Details extends Component {
             }).then(([post, author]) => {
             if (this._isMounted) {
                 this.authorName = author.displayName;
+                this.publishedAt = moment(post.publishedAt).format('DD.MM.YYYY hh:mm');
                 this.setState({
                     post
                 });
@@ -282,7 +292,7 @@ class Details extends Component {
             <div className="main-container">
                 <section className="top-article">
                     <article className="top-article-image">
-                        <img src={this.state.post.urlToImage} alt="Url To Image"/>
+                        <img src={this.state.post.urlToImage} alt=""/>
                     </article>
                     <article className="top-article-description">
                         <h2 className="main-article-description-title">{this.state.post.title}</h2>
@@ -293,7 +303,7 @@ class Details extends Component {
                         <article className="top-article-details-info">
                             <div className="main-article-details-date">
                                 <span>Published: </span>
-                                {this.state.post.publishedAt}
+                                {this.publishedAt}
                             </div>
                             <div className="main-article-details-author">
                                 <span>Post author: </span>
@@ -314,7 +324,7 @@ class Details extends Component {
                         </article>
 
                         <article className="top-article-details-icon-wrapper">
-                            <Comments/>
+                            <Comments onClick={this.showComments}/>
                             {
                                 this.state.post.author === this.props.userId
                                     ?
@@ -341,38 +351,43 @@ class Details extends Component {
                         </article>
 
                     </article>
-                    <article className="top-article-comment-content">
-                        {
-                            this.state.post.comments.length > 0
-                                ?
-                                <>
-                                    <h2 className="top-article-comment-content-header">Comments:</h2>
-                                    {
-                                        this.state.post.comments.map((commentObj, index) => {
-                                            commentObj.index = index + 1;
-                                            return <Comment
-                                                key={index + 1}
-                                                data={commentObj}
-                                                onDeleteComment={this.deleteComment}
-                                            />
-                                        })
-                                    }
-                                </>
-                                : null
-
-                        }
-                    </article>
-
                     {
-                        this.props.isLoggedIn ?
-                            <>
-                                <article className="top-article-comment">
-                                    <FormComment onNewComment={this.onNewComment}/>
-                                </article>
-                            </>
-                            : null
-                    }
+                        this.state.hideComments
+                            ? null
+                            : <article className="top-article-comment">
+                                {/*<article className={`top-article-comment ${this.hideComments ? "hidden" : ""}`}>*/}
+                                <article className="top-article-comment-content">
+                                    {
+                                        this.state.post.comments.length > 0
+                                            ?
+                                            <>
+                                                <h2 className="top-article-comment-content-header">Comments:</h2>
+                                                {
+                                                    this.state.post.comments.map((commentObj, index) => {
+                                                        commentObj.index = index + 1;
+                                                        return <Comment
+                                                            key={index + 1}
+                                                            data={commentObj}
+                                                            onDeleteComment={this.deleteComment}
+                                                        />
+                                                    })
+                                                }
+                                            </>
+                                            : null
 
+                                    }
+                                </article>
+                                {
+                                    this.props.isLoggedIn ?
+                                        <>
+                                            <article className="top-article-comment">
+                                                <FormComment onNewComment={this.onNewComment}/>
+                                            </article>
+                                        </>
+                                        : null
+                                }
+                            </article>
+                    }
                 </section>
             </div>
         );

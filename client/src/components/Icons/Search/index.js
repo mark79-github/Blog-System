@@ -1,1 +1,0 @@
-export {defaukt} from './Search';

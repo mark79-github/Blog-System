@@ -1,8 +1,11 @@
 import moment from "moment";
+import AuthContext from "../AuthContext";
+import {useContext} from "react";
 
 const TopArticle = ({data, history}) => {
     let {_id, title, content, author, urlToImage, publishedAt, likes, comments, visits} = data;
     publishedAt = moment(publishedAt).format('DD.MM.YYYY hh:mm');
+    author = useContext(AuthContext).displayName;
 
     const handleButtonClick = async () => {
         await fetch(`http://localhost:5000/api/posts/visit/${_id}`, {

@@ -31,6 +31,7 @@ header {
     display: flex;
     max-width: 1000px;
     margin: 0 auto;
+    flex-grow: 1;
 }
 
 .header-search-form {
@@ -72,6 +73,14 @@ header {
 
 .header-select-form {
     height: 30px;
+}
+
+.header-select-select {
+    height: 30px;
+    min-width: 200px;
+    margin-left: 50px;
+    border-radius: 6px;
+    border: none;
 }
 
 .header-search-select-label {
@@ -179,7 +188,7 @@ header nav ul li a {
 .main-article-description-content {
     font-size: 18px;
     font-style: italic;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
 }
 
 .article-description-btn {
@@ -233,7 +242,7 @@ header nav ul li a {
 }
 
 .main-article-comment-content-details {
-    padding: 10px 20px;
+    padding: 0 20px;
 }
 
 .main-article-comment-content-details .far {
@@ -297,7 +306,7 @@ header nav ul li a {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0 20px;
+    padding: 10px 20px;
 }
 
 footer {
@@ -325,7 +334,7 @@ footer p {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 10px;
+    margin: 0 20px 10px 20px;
 }
 
 .form-comment > label {
@@ -338,10 +347,10 @@ footer p {
     color: white;
     border: 1px solid white;
     border-radius: 8px;
-    font-size: 20px;
+    font-size: 18px;
     padding: 10px;
-    font-weight: 600;
-    margin-top: 20px;
+    font-weight: 500;
+    margin-top: 10px;
 }
 
 .form-comment > input[type='submit']:hover {
@@ -437,7 +446,11 @@ footer p {
 }
 
 .form textarea {
+    width: 800px;
+    height: 150px;
     min-width: 500px;
+    max-width: 800px;
     min-height: 100px;
+    max-height: 200px;
     outline: none;
 }
