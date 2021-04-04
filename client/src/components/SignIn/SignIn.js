@@ -1,4 +1,4 @@
-import FormSignIn from "../FormSignIn/FormSignIn";
+import FormSignIn from "../FormSignIn";
 
 const SignIn = () => {
     return (

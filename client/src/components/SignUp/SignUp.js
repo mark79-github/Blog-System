@@ -1,4 +1,4 @@
-import FormSignUp from "../FormSignUp/FormSignUp";
+import FormSignUp from "../FormSignUp";
 
 const SignUp = () => {
     return (

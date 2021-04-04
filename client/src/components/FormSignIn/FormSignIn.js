@@ -1,91 +1,83 @@
-import {useContext, useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, {useContext} from "react";
 
+import {useFormik} from "formik";
+import * as Yup from "yup";
 import * as authService from "../../services/authService";
-import AuthContext from "../AuthContext";
 import notificationService from "../../services/notificationService";
+import AuthContext from "../AuthContext";
+import {useHistory} from "react-router-dom";
+
+const initialValues = {
+    email: "",
+    password: "",
+}
+
+const validationSchema = Yup.object({
+    email: Yup.string()
+        .email("Invalid email format")
+        .required("Required field!"),
+    password: Yup.string()
+        .min(5, "Password must be at least 5 characters long")
+        .required("Required field!"),
+})
 
 const FormSignIn = () => {
-    const authContext = useContext(AuthContext);
-    let history = useHistory();
+    const {login} = useContext(AuthContext);
+    const history = useHistory();
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const formik = useFormik({
+        initialValues,
+        validationSchema,
+        onSubmit: ({email, password}) => {
+            authService.login(email, password)
+                .then((response) => {
 
-    const handleEmailInputChange = (event) => {
-        setEmail(event.target.value);
-    }
+                    if (response.hasOwnProperty('token')) {
+                        login(response.token, response.user._id, response.user.displayName);
+                        history.push('/');
+                    }
 
-    const handlePasswordInputChange = (event) => {
-        setPassword(event.target.value);
-    }
-
-    const notifications = {
-        emailRequired: "Email must be valid",
-        passwordRequired: "Password must be at least 3 characters long",
-    };
-
-
-    const validateInput = () => {
-
-        let isValid = true;
-        const errors = {};
-
-        if (!email || email.trim().length === 0) {
-            isValid = false;
-            errors.email = notifications.emailRequired;
+                    if (response.hasOwnProperty('message')) {
+                        throw Error(response.message);
+                    }
+                })
+                .catch(err => {
+                    formik.resetForm();
+                    notificationService.errorMsg(err.message);
+                });
         }
-
-        if (!password || password.trim().length < 3) {
-            isValid = false;
-            errors.password = notifications.passwordRequired;
-        }
-
-        return isValid;
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        if (!validateInput()){
-            notificationService.errorMsg('Data is not valid')
-            return
-        }
-
-        authService.login(email, password)
-            .then((response) => {
-                setEmail('');
-                setPassword('');
-
-                if (response.hasOwnProperty('token')) {
-                    authContext.login(response.token, response.user._id, response.user.displayName);
-                    history.push('/');
-                }
-                // if (response.hasOwnProperty('user')) {
-                //     localStorage.setItem('authUser', JSON.stringify({
-                //         _id: response.user._id,
-                //         displayName: response.user.displayName
-                //     }));
-                // }
-                if (response.hasOwnProperty('message')) {
-                    throw Error(response.message);
-                }
-            })
-            .catch(err => {
-                notificationService.errorMsg(err.message);
-            });
-    }
+    });
 
     return (
-        <form className="form" onSubmit={handleSubmit}>
-            <input type="email" name="email" placeholder="Email" value={email}
-                   onChange={handleEmailInputChange}/>
-            <input type="password" name="password" placeholder="Password" value={password}
-                   onChange={handlePasswordInputChange}/>
-            <input type="submit" value="Sign In"/>
+        <form className="form" onSubmit={formik.handleSubmit}>
+            <div className="form-row">
+                <input
+                    type="text"
+                    name="email"
+                    placeholder="Email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                />
+                {formik.errors.email && formik.touched.email && (
+                    <span className="form-input-error">{formik.errors.email}</span>
+                )}
+            </div>
+            <div className="form-row">
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                />
+                {formik.errors.password && formik.touched.password && (
+                    <span className="form-input-error">{formik.errors.password}</span>
+                )}
+            </div>
+            {/*disabled={!(formik.dirty && formik.isValid)}*/}
+            <button type="submit"> Sign In</button>
         </form>
     );
-
 }
 
 export default FormSignIn;

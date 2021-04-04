@@ -12,7 +12,7 @@ const Navigation = () => {
                     <section className="logo-wrapper">
                         <nav>
                             <ul>
-                                <NavigationItem linkTo={'/'}>Blog System</NavigationItem>
+                                <NavigationItem linkTo={'/'}>All Posts</NavigationItem>
                             </ul>
                         </nav>
                     </section>
