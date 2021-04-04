@@ -1,6 +1,7 @@
-import AddPost from "../../components/AddPost";
+import AddPost from '../../components/AddPost';
 
 const CreatePostPage = () => {
+
     return (
         <AddPost/>
     );

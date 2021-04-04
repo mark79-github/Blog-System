@@ -1,40 +1,5 @@
 import {useState} from 'react';
-import notificationService from "../../services/notificationService";
-
-// class FormComment extends Component {
-//     constructor(props) {
-//         super(props);
-//
-//         this.state = {
-//             value: ''
-//         }
-//     }
-//
-//     handleChange = (event) => {
-//         // console.log(event.target.value)
-//         this.setState({value: event.target.value});
-//     }
-//
-//     handleSubmit = (event) => {
-//         postService.commentById(this.props.commentId, this.state.value)
-//             .then((comment) => {
-//                 return this.setState({value: ''})
-//             })
-//             .catch(err => console.error('Error:', err));
-//         event.preventDefault();
-//     }
-//
-//     render() {
-//         return (
-//             <form onSubmit={this.handleSubmit}>
-//                 <label htmlFor="comment">Comment: </label>
-//                 <textarea name="comment" id="comment" placeholder="Leave your comment..."
-//                           value={this.state.value} onChange={this.handleChange}/>
-//                 <input type="submit" value="Post comment"/>
-//             </form>
-//         )
-//     }
-// }
+import notificationService from '../../services/notificationService';
 
 const FormComment = ({onNewComment}) => {
     const [comment, setComment] = useState('');
@@ -43,10 +8,10 @@ const FormComment = ({onNewComment}) => {
         setComment(event.target.value);
     }
 
+    //TODO with Formik
     const notifications = {
         commentRequired: "Comment must be at least ten characters long",
     };
-
 
     const validateInput = () => {
 

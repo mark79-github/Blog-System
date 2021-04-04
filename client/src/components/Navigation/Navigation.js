@@ -1,6 +1,8 @@
-import React, {useContext} from "react";
-import AuthContext from "../AuthContext";
-import NavigationItem from "../NavigationItem";
+import React, {useContext} from 'react';
+
+import AuthContext from '../AuthContext';
+
+import NavigationItem from '../NavigationItem';
 
 const Navigation = () => {
     const {isLoggedIn, displayName, userId} = useContext(AuthContext);

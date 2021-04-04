@@ -2,19 +2,19 @@ import {Component} from 'react';
 import moment from 'moment';
 import Loader from 'react-loader-spinner';
 
-import * as postService from "../../services/postService";
-import * as userService from "../../services/userService";
-import notificationService from "../../services/notificationService";
+import * as postService from '../../services/postService';
+import * as userService from '../../services/userService';
+import notificationService from '../../services/notificationService';
 
-import AuthContext from "../AuthContext";
+import AuthContext from '../AuthContext';
 
-import Like from "../Icons/Like";
-import Unlike from "../Icons/Unlike";
-import FormComment from "../FormComment";
-import Comment from "../Comment";
-import Edit from "../Icons/Edit";
-import Delete from "../Icons/Delete";
-import Comments from "../Icons/Comment";
+import Like from '../Icons/Like';
+import Unlike from '../Icons/Unlike';
+import FormComment from '../FormComment';
+import Comment from '../Comment';
+import Edit from '../Icons/Edit';
+import Delete from '../Icons/Delete';
+import Comments from '../Icons/Comment';
 
 class Details extends Component {
     constructor(props) {

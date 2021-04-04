@@ -1,14 +1,15 @@
 import {useContext, useEffect, useState} from 'react';
+
+import AuthContext from '../AuthContext';
+
 import * as userService from '../../services/userService';
-import notificationService from "../../services/notificationService";
-import AuthContext from "../AuthContext";
+import notificationService from '../../services/notificationService';
+
 
 const Comment = ({data, onDeleteComment}) => {
     const {_id, index, comment, user} = data;
     const authContext = useContext(AuthContext);
     const [authorDisplayName, setAuthorDisplayName] = useState('');
-
-    // const userId = user._id;
 
     const handleClick = () => onDeleteComment(_id);
 

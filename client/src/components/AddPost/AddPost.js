@@ -1,9 +1,12 @@
-import FormPost from "../FormPost";
-import notificationService from "../../services/notificationService";
-import * as postService from "../../services/postService";
-import AuthContext from "../AuthContext";
-import {useContext} from "react";
-import {useHistory} from "react-router-dom";
+import {useContext} from 'react';
+import {useHistory} from 'react-router-dom';
+
+import notificationService from '../../services/notificationService';
+import * as postService from '../../services/postService';
+
+import AuthContext from '../AuthContext';
+
+import FormPost from '../FormPost';
 
 const AddPost = () => {
     const {token} = useContext(AuthContext);
@@ -23,7 +26,7 @@ const AddPost = () => {
             .then(() => {
                 history.push('/');
             })
-            .catch(err => console.error("Error: ", err))
+            .catch(err => notificationService.errorMsg(err.message))
     }
 
     return (

@@ -9,7 +9,7 @@ const config = {
         privateKey,
     },
     production: {
-        PORT: 80,
+        PORT: 5000,
         DB: `mongodb+srv://${username}:${password}@${server}/${db}?retryWrites=true&w=majority`,
         saltRounds: 7,
         authCookie: 'jwt-auth-cookie',

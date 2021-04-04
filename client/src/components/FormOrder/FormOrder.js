@@ -15,10 +15,12 @@ class FormOrder extends Component {
         })
     }
 
+
     formOnChangeHandler = (event) => {
         console.log(event.target.value);
     }
 
+    //TODO Not implemented hide from DOM with display:none
     render() {
         return (
             <section className="header-select">

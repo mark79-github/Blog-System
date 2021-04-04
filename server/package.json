@@ -1,7 +1,7 @@
 {
   "name": "blog-system-server",
   "version": "1.0.0",
-  "description": "Server part of Blog System Application",
+  "description": "Server Part of Blog System Application",
   "main": "index.js",
   "author": "mark79-github",
   "license": "MIT",

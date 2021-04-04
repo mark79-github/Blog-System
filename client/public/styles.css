@@ -81,6 +81,7 @@ header {
     margin-left: 50px;
     border-radius: 6px;
     border: none;
+    display: none;
 }
 
 .header-search-select-label {

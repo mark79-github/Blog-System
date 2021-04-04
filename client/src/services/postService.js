@@ -1,106 +1,62 @@
-const api = 'http://localhost:5000/api/posts';
+import {api} from '../utils/globals';
+import {request} from '../utils/data';
 
 export const getAll = (query) => {
-    let url = api;
+    let url = api.posts.base;
 
     if (query) {
         url += query;
     }
 
-    return fetch(url)
-        .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+    return request(url, 'GET');
 };
 
 export const getById = (id) => {
-    return fetch(api + '/' + id)
-        .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+
+    const apiWithPostId = `${api.posts.base}/${id}`
+    return request(apiWithPostId, 'GET')
 };
 
 export const likeById = (id, token) => {
-    return fetch(api + '/like/' + id, {
-        method: "PUT",
-        headers: {
-            authorization: 'Bearer ' + token
-        }
-    })
-        .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+
+    const apiWithPostId = `${api.posts.like}/${id}`
+    return request(apiWithPostId, 'PUT', {}, {}, token);
 };
 
 export const unlikeById = (id, token) => {
-    return fetch(api + '/unlike/' + id, {
-        method: "PUT",
-        headers: {
-            authorization: 'Bearer ' + token
-        }
-    })
-        .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+
+    const apiWithPostId = `${api.posts.unlike}/${id}`
+    return request(apiWithPostId, 'PUT', {}, {}, token);
 };
 
 export const commentById = (id, comment, token) => {
-    return fetch(api + '/comment/' + id, {
-        method: "PUT",
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            comment
-        })
-    })
-        .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+
+    const data = {comment}
+    const apiWithPostId = `${api.posts.comment}/${id}`
+    return request(apiWithPostId, 'PUT', data, {}, token);
 };
 
 export const addPost = (title, content, urlToImage, token) => {
-    return fetch(api, {
-        method: "POST",
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({title, content, urlToImage})
-    })
-        .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+
+    const data = {title, content, urlToImage}
+    return request(api.posts.base, 'POST', data, {}, token);
 };
 
 export const editPost = (id, title, content, urlToImage, token) => {
-    return fetch(api + '/' + id, {
-        method: "PATCH",
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({title, content, urlToImage})
-    })
-        .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+
+    const data = {title, content, urlToImage}
+    const apiWithPostId = `${api.posts.base}/${id}`
+    return request(apiWithPostId, 'PATCH', data, {}, token);
 };
 
 export const deleteCommentByIds = (id, commentId, token) => {
-    return fetch(api + '/comment/' + id + '/delete/' + commentId, {
-        method: "DELETE",
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+
+    const apiWithPostIdAndCommentId = `${api.posts.comment}/${id}/delete/${commentId}`
+    return request(apiWithPostIdAndCommentId, 'DELETE', {}, {}, token);
 };
 
 export const deleteById = (id, token) => {
-    return fetch(api + '/' + id, {
-        method: "DELETE",
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+
+    const apiWithPostId = `${api.posts.base}/${id}`
+    return request(apiWithPostId, 'DELETE', {}, {}, token);
 };

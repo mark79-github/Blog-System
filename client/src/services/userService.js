@@ -1,7 +1,8 @@
-const api = 'http://localhost:5000/api/users';
+import {api} from '../utils/globals';
+import {request} from '../utils/data';
 
 export const getById = (id) => {
-    return fetch(api + '/' + id)
-        .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+
+    const apiWithUserId = `${api.users.base}/${id}`;
+    return request(apiWithUserId, 'GET');
 };

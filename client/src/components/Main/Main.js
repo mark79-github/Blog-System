@@ -1,86 +1,14 @@
-import React, {Component} from "react";
+import React, {Component} from 'react';
 import queryString from 'query-string';
 import Loader from 'react-loader-spinner';
 
 import * as postService from '../../services/postService';
-import Article from "../Article";
-import TopArticle from "../TopArticle";
-import notificationService from "../../services/notificationService";
-import FormSearch from "../FormSearch";
-import FormOrder from "../FormOrder";
+import notificationService from '../../services/notificationService';
 
-// const Main = ({searchQry}) => {
-//     console.log('main beginning', searchQry);
-//
-//     const [topPost, setTopPost] = useState([]);
-//     const [posts, setPosts] = useState([]);
-//     const [loading, setLoading] = useState(true);
-//     const [filter, setFilter] = useState(searchQry);
-//
-//     const onSearch = (searchObj) => {
-//         // console.log('OnSearch', filter);
-//         // console.log('OnSearch', searchObj);
-//         setFilter(searchObj);
-//         // console.log('after setFilter', filter);
-//     }
-//
-//     useEffect(() => {
-//         console.log('useEffect filter', filter);
-//     }, [filter])
-//
-//     useEffect(() => {
-//
-//         console.log('filter in useEffect', filter)
-//
-//         postService.getAll(filter)
-//             .then(res => {
-//
-//                 console.log('posts', res);
-//
-//                 if (!res.length) {
-//                     setLoading(false);
-//                     return;
-//                 }
-//                 setTopPost(res.slice(0, 1));
-//                 setPosts(res.slice(1));
-//                 setLoading(false);
-//             }).catch(err => notificationService.errorMsg(err.message));
-//     }, []);
-//
-//     if (loading) {
-//         return (
-//             <div className="main-container">
-//                 <Loader type="Rings" color="white" height={80} width={80}/>
-//             </div>
-//         )
-//     }
-//
-//     if (!topPost.length) {
-//         return (
-//             <div className="main-container">
-//                 <h1 style={{color: "white", textAlign: "center"}}>No posts found on given criteria</h1>
-//             </div>
-//         )
-//     }
-//
-//     return (
-//         <div className="main-container">
-//
-//             <FormSearch onSearch={onSearch}/>
-//
-//             {topPost.map(x => {
-//                 return (<TopArticle key={x._id} data={x}/>)
-//             })}
-//
-//             <section className="sub-article">
-//                 {posts.map(x => {
-//                     return (<Article key={x._id} data={x}/>)
-//                 })}
-//             </section>
-//
-//         </div>
-//     );
-// }
+import Article from '../Article';
+import TopArticle from '../TopArticle';
+import FormSearch from '../FormSearch';
+import FormOrder from '../FormOrder';
 
 class Main extends Component {
 
@@ -103,7 +31,6 @@ class Main extends Component {
     }
 
     componentWillUnmount() {
-        console.log('Main.js - componentWillUnmount');
         this._isMounted = false;
     }
 
@@ -139,7 +66,7 @@ class Main extends Component {
         if (this.state.loading) {
             return (
                 <div className="main-container">
-                        <Loader type="Rings" color="white" height={80} width={80}/>
+                    <Loader type="Rings" color="white" height={80} width={80}/>
                 </div>
             )
         }
@@ -155,14 +82,6 @@ class Main extends Component {
                 </div>
             )
         }
-
-        // if (Object.keys(this.state.topPost).length === 0) {
-        //     return (
-        //         <div className="main-container">
-        //             <Loader type="Rings" color="white" height={80} width={80}/>
-        //         </div>
-        //     )
-        // }
 
         return (
             <div className="main-container">

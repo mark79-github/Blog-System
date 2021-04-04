@@ -1,21 +1,14 @@
-const api = 'http://localhost:5000/api/auth';
+import {api} from '../utils/globals'
+import {request} from '../utils/data';
 
 export const register = (displayName, email, password) => {
-    return fetch(api + '/register', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({displayName, email, password})
-    })
-        .then(res => res.json())
-        .catch(err => console.error('Error:' + err));
+
+    const data = {displayName, email, password}
+    return request(api.auth.registerURL, 'POST', data);
 };
 
 export const login = async (email, password) => {
-    return fetch(api + '/login', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({email, password})
-    })
-        .then(res => res.json())
-        .catch(err => console.error(err));
+
+    const data = {email, password}
+    return request(api.auth.loginURL, 'POST', data);
 };

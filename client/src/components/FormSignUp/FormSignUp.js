@@ -1,33 +1,35 @@
-import React, {useContext} from "react";
+import React, {useContext} from 'react';
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
+import {useHistory} from 'react-router-dom';
 
-import {useFormik} from "formik";
-import * as Yup from "yup";
-import * as authService from "../../services/authService";
-import notificationService from "../../services/notificationService";
-import AuthContext from "../AuthContext";
-import {useHistory} from "react-router-dom";
+import * as authService from '../../services/authService';
+import notificationService from '../../services/notificationService';
+
+import AuthContext from '../AuthContext';
+import {globalConstants, notificationMsg} from "../../utils/globals";
 
 const initialValues = {
-    displayName: "",
-    email: "",
-    password: "",
-    repeatPassword: ""
+    displayName: '',
+    email: '',
+    password: '',
+    repeatPassword: '',
 }
 
 const validationSchema = Yup.object({
     displayName: Yup.string()
-        .min(3, "Display name must be at least 3 characters long")
-        .max(15, "Display name must be at most 15 characters long")
-        .required("Required field!"),
+        .min(globalConstants.DISPLAY_NAME_MIN_LENGTH, notificationMsg.displayNameMinLength)
+        .max(globalConstants.DISPLAY_NAME_MAX_LENGTH, notificationMsg.displayNameMaxLength)
+        .required(notificationMsg.requiredField),
     email: Yup.string()
-        .email("Invalid email format")
-        .required("Required field!"),
+        .email(notificationMsg.emailValidate)
+        .required(notificationMsg.requiredField),
     password: Yup.string()
-        .min(5, "Password must be at least 5 characters long")
-        .required("Required field!"),
+        .min(globalConstants.PASSWORD_MIN_LENGTH, notificationMsg.passwordMinLength)
+        .required(notificationMsg.requiredField),
     repeatPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "Repeat password not match")
-        .required("Required field!")
+        .oneOf([Yup.ref('password')], notificationMsg.repeatPasswordValidate)
+        .required(notificationMsg.requiredField)
 });
 
 const FormSignUp = () => {
@@ -112,13 +114,8 @@ const FormSignUp = () => {
                 )}
             </div>
 
-            <button
-                type="submit"
-                // disabled={!(formik.dirty && formik.isValid)}
-            >
-                Sign Up
-            </button>
-
+            <button type="submit"> Sign Up</button>
+            {/*disabled={!(formik.dirty && formik.isValid)}*/}
         </form>
     );
 }

@@ -1,16 +1,19 @@
-import moment from "moment";
-import AuthContext from "../AuthContext";
-import {useContext} from "react";
-import BtnReadMore from "../BtnReadMore";
+import {useContext} from 'react';
+import moment from 'moment';
+
+import AuthContext from '../AuthContext';
+
+import BtnReadMore from '../BtnReadMore';
 
 const TopArticle = ({data, history}) => {
     let {_id, title, content, author, urlToImage, publishedAt, likes, comments, visits} = data;
     publishedAt = moment(publishedAt).format('DD.MM.YYYY hh:mm');
     author = useContext(AuthContext).displayName;
 
+    //TODO to fix fetch
     const handleButtonClick = async () => {
         await fetch(`http://localhost:5000/api/posts/visit/${_id}`, {
-            method: "POST",
+            method: 'POST',
         })
             .then(() => {
                 history.push(`/post/${_id}`);

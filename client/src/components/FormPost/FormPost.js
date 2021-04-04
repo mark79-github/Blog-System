@@ -1,16 +1,18 @@
-import * as Yup from "yup";
-import {useFormik} from "formik";
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
+
+import {globalConstants, notificationMsg} from "../../utils/globals";
 
 const validationSchema = Yup.object({
     title: Yup.string().trim()
-        .min(5, "Title must be at least 5 characters long")
-        .required("Required field!"),
+        .min(globalConstants.TITLE_MIN_LENGTH, notificationMsg.titleMinLength)
+        .required(notificationMsg.requiredField),
     content: Yup.string().trim()
-        .min(20, "Content must be at least 20 characters long")
-        .required("Required field!"),
+        .min(globalConstants.CONTENT_MIN_LENGTH, notificationMsg.contentMinLength)
+        .required(notificationMsg.requiredField),
     urlToImage: Yup.string().trim()
-        .matches(/^(http[s]?:\/\/.*.(?:png|jpg|gif|svg|jpeg))$/i, "Provide valid url with image")
-        .required("Required field!"),
+        .matches(globalConstants.URL_TO_IMAGE, notificationMsg.urlToImageValidate)
+        .required(notificationMsg.requiredField),
 })
 
 const FormPost = ({data, onSubmitFormHandler}) => {

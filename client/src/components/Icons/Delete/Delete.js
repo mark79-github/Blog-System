@@ -1,4 +1,5 @@
 const Delete = ({onDelete}) => {
+
     const handleClick = () => {
         onDelete();
     }

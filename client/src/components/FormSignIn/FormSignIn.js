@@ -1,24 +1,26 @@
-import React, {useContext} from "react";
+import React, {useContext} from 'react';
+import {useHistory} from 'react-router-dom';
+import {useFormik} from 'formik';
+import * as Yup from 'yup';
 
-import {useFormik} from "formik";
-import * as Yup from "yup";
-import * as authService from "../../services/authService";
-import notificationService from "../../services/notificationService";
-import AuthContext from "../AuthContext";
-import {useHistory} from "react-router-dom";
+import * as authService from '../../services/authService';
+import notificationService from '../../services/notificationService';
+
+import AuthContext from '../AuthContext';
+import {globalConstants, notificationMsg} from '../../utils/globals';
 
 const initialValues = {
-    email: "",
-    password: "",
+    email: '',
+    password: '',
 }
 
 const validationSchema = Yup.object({
     email: Yup.string()
-        .email("Invalid email format")
-        .required("Required field!"),
+        .email(notificationMsg.emailValidate)
+        .required(notificationMsg.requiredField),
     password: Yup.string()
-        .min(5, "Password must be at least 5 characters long")
-        .required("Required field!"),
+        .min(globalConstants.PASSWORD_MIN_LENGTH, notificationMsg.passwordMinLength)
+        .required(notificationMsg.requiredField),
 })
 
 const FormSignIn = () => {

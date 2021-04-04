@@ -1,4 +1,4 @@
-import logo from "../../logo.svg";
+import logo from '../../logo.svg';
 import './NotFound.css';
 
 const NotFound = () => {
@@ -7,7 +7,7 @@ const NotFound = () => {
             <header className="app-header">
                 <h1>Error 404</h1>
                 <p>Page Not Found</p>
-                <img src={logo} className="app-logo" alt="logo"/>
+                <img src={logo} className="app-logo" alt=""/>
                 <a className="app-link" href="/" target="_self" rel="noopener noreferrer">Return to Home</a>
             </header>
         </div>
