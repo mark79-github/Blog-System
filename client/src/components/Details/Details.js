@@ -63,6 +63,7 @@ class Details extends Component {
     }
 
     onNewComment = (comment) => {
+        console.log('OnNewComment', comment);
         postService.commentById(this.state.post._id, comment, this.props.token)
             .then(post => {
                 this.setState({post});

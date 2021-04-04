@@ -31,8 +31,8 @@ export const unlikeById = (id, token) => {
 
 export const commentById = (id, comment, token) => {
 
-    const data = {comment}
-    const apiWithPostId = `${api.posts.comment}/${id}`
+    const data = comment;
+    const apiWithPostId = `${api.posts.comment}/${id}`;
     return request(apiWithPostId, 'PUT', data, {}, token);
 };
 

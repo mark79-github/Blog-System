@@ -21,12 +21,13 @@ const api = {
 };
 
 const globalConstants = {
-    AUTH_TOKEN : 'authToken',
+    AUTH_TOKEN: 'authToken',
     TITLE_MIN_LENGTH: 5,
     PASSWORD_MIN_LENGTH: 5,
     CONTENT_MIN_LENGTH: 20,
     DISPLAY_NAME_MIN_LENGTH: 3,
     DISPLAY_NAME_MAX_LENGTH: 15,
+    COMMENT_MIN_LENGTH: 10,
     URL_TO_IMAGE: /^(http[s]?:\/\/.*.(?:png|jpg|gif|svg|jpeg))$/i,
 }
 
@@ -39,6 +40,7 @@ const notificationMsg = {
     contentMinLength: `Content must be at least ${globalConstants.CONTENT_MIN_LENGTH} characters long`,
     displayNameMinLength: `Display name must be at least ${globalConstants.DISPLAY_NAME_MIN_LENGTH} characters long`,
     displayNameMaxLength: `Display name must be at most ${globalConstants.DISPLAY_NAME_MAX_LENGTH} characters long`,
+    commentMinLength: `Comment must be at least ${globalConstants.COMMENT_MIN_LENGTH} characters long`,
     urlToImageValidate: `Provide valid URL with image`,
     emailValidate: `Invalid email format`,
     repeatPasswordValidate: 'Repeat password not match',

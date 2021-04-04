@@ -362,14 +362,32 @@ footer p {
     flex-direction: column;
     justify-content: center;
     margin: 0 20px 10px 20px;
+    position: relative;
 }
 
-.form-comment > label {
-    font-size: 20px;
-    font-weight: 600;
-}
+/*.form-comment > label {*/
+/*    font-size: 20px;*/
+/*    font-weight: 600;*/
+/*}*/
 
-.form-comment > input[type='submit'] {
+/*.form-comment > input[type='submit'] {*/
+/*    background: darkblue;*/
+/*    color: white;*/
+/*    border: 1px solid white;*/
+/*    border-radius: 8px;*/
+/*    font-size: 18px;*/
+/*    padding: 10px;*/
+/*    font-weight: 500;*/
+/*    margin-top: 10px;*/
+/*}*/
+
+/*.form-comment > input[type='submit']:hover {*/
+/*    cursor: pointer;*/
+/*    background: white;*/
+/*    color: darkblue;*/
+/*}*/
+
+.form-comment > button {
     background: darkblue;
     color: white;
     border: 1px solid white;
@@ -380,7 +398,7 @@ footer p {
     margin-top: 10px;
 }
 
-.form-comment > input[type='submit']:hover {
+.form-comment > button:hover {
     cursor: pointer;
     background: white;
     color: darkblue;
@@ -393,7 +411,7 @@ footer p {
     max-height: 200px;
     color: darkblue;
     font-size: 18px;
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
 #comment::placeholder {
@@ -509,12 +527,20 @@ footer p {
     top: 40px;
 }
 
-.form-textarea-error {
+.form-post-textarea-error {
     color: gold;
     font-size: 10px;
     position: absolute;
     left: 0;
     top: 170px;
+}
+
+.form-comment-textarea-error {
+    color: gold;
+    font-size: 14px;
+    position: absolute;
+    left: 0;
+    top: 120px;
 }
 
 .form textarea {

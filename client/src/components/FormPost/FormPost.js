@@ -52,7 +52,7 @@ const FormPost = ({data, onSubmitFormHandler}) => {
                     onChange={formik.handleChange}
                 />
                 {formik.errors.content && formik.touched.content && (
-                    <span className="form-textarea-error">{formik.errors.content}</span>
+                    <span className="form-post-textarea-error">{formik.errors.content}</span>
                 )}
             </div>
             <div className="form-row">
