@@ -203,12 +203,26 @@ header nav ul li a {
 
 .article-description-btn:hover {
     cursor: pointer;
+    background: white;
+    color: darkblue;
+    border: 1px solid darkblue;
 }
 
-.article-description-btn a {
-    text-decoration: none;
+.articles-empty-container {
     color: white;
+    text-align: center;
+    flex-basis: 100%;
+    min-height: 60vh;
+    position: relative;
 }
+
+.articles-empty-container h1{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 
 .far,
 .fas {

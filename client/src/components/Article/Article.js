@@ -1,3 +1,5 @@
+import BtnReadMore from "../BtnReadMore";
+
 const Article = ({data, history}) => {
     const {_id, title, urlToImage} = data;
 
@@ -16,9 +18,7 @@ const Article = ({data, history}) => {
             </article>
             <article className="article-description">
                 <h2 className="article-description-title">{title}</h2>
-                <button className="article-description-btn" onClick={handleButtonCLick}>
-                    Read more
-                </button>
+                <BtnReadMore onClick={handleButtonCLick}/>
             </article>
         </article>
     );

@@ -10,7 +10,6 @@ const NavigationItem = (props) => {
     return (
         <li className="listItem">
             {
-                // !props.hasOwnProperty('userId')
                 !props.userId
                     ? <Link to={props.linkTo}>{props.children}</Link>
                     : <Link to={{pathname:'/', author:props.linkTo}} onClick={clickHandler}>{props.children}</Link>

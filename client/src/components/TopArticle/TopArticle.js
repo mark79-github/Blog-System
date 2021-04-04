@@ -1,6 +1,7 @@
 import moment from "moment";
 import AuthContext from "../AuthContext";
 import {useContext} from "react";
+import BtnReadMore from "../BtnReadMore";
 
 const TopArticle = ({data, history}) => {
     let {_id, title, content, author, urlToImage, publishedAt, likes, comments, visits} = data;
@@ -47,9 +48,7 @@ const TopArticle = ({data, history}) => {
             <article className="top-article-description">
                 <h2 className="main-article-description-title">{title}</h2>
                 <p className="main-article-description-content">{content}</p>
-                <button className="article-description-btn" onClick={handleButtonClick}>
-                    Read more
-                </button>
+                <BtnReadMore onClick={handleButtonClick}/>
             </article>
         </section>
     );

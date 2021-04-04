@@ -136,10 +136,10 @@ class Main extends Component {
 
     render() {
 
-        if (Object.keys(this.state.topPost).length === 0) {
+        if (this.state.loading) {
             return (
                 <div className="main-container">
-                    <Loader type="Rings" color="white" height={80} width={80}/>
+                        <Loader type="Rings" color="white" height={80} width={80}/>
                 </div>
             )
         }
@@ -149,14 +149,20 @@ class Main extends Component {
                 <div className="main-container">
                     <FormSearch onSearch={this.onSearch}/>
                     <FormOrder/>
-                    <section className="top-article">
-                        <h1 style={{color: "white", textAlign: "center"}}>No posts found on given criteria</h1>
+                    <section className="articles-empty-container">
+                        <h1>No posts found on given criteria</h1>
                     </section>
                 </div>
             )
         }
 
-
+        // if (Object.keys(this.state.topPost).length === 0) {
+        //     return (
+        //         <div className="main-container">
+        //             <Loader type="Rings" color="white" height={80} width={80}/>
+        //         </div>
+        //     )
+        // }
 
         return (
             <div className="main-container">
