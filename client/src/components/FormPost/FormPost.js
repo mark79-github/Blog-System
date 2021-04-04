@@ -1,7 +1,7 @@
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
-import {globalConstants, notificationMsg} from "../../utils/globals";
+import {globalConstants, notificationMsg} from '../../utils/globals';
 
 const validationSchema = Yup.object({
     title: Yup.string().trim()

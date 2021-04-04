@@ -7,6 +7,7 @@ import * as postService from '../../services/postService';
 import AuthContext from '../AuthContext';
 
 import FormPost from '../FormPost';
+import {notificationMsg} from '../../utils/globals';
 
 class EditPost extends Component {
 
@@ -28,17 +29,16 @@ class EditPost extends Component {
 
         postService.editPost(this.postId, title, content, urlToImage, this.props.token)
             .then(() => {
-                this.props.history.push(`/post/${this.postId}`)
+                this.props.history.push(`/post/${this.postId}`);
+                notificationService.successMsg(notificationMsg.editPostSuccessfully);
             })
             .catch(err => notificationService.errorMsg(err.message))
     }
 
     componentDidMount() {
         postService.getById(this.postId)
-            .then(res => {
-                this.setState({
-                    post: res
-                })
+            .then(post => {
+                this.setState({post});
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)

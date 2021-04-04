@@ -15,6 +15,7 @@ import Comment from '../Comment';
 import Edit from '../Icons/Edit';
 import Delete from '../Icons/Delete';
 import Comments from '../Icons/Comment';
+import {globalConstants, notificationMsg} from '../../utils/globals';
 
 class Details extends Component {
     constructor(props) {
@@ -34,7 +35,7 @@ class Details extends Component {
         postService.likeById(this.state.post._id, this.props.token)
             .then(post => {
                 this.setState({post});
-                notificationService.infoMsg('Liked');
+                notificationService.successMsg(notificationMsg.likeSuccessfully);
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)
@@ -45,7 +46,7 @@ class Details extends Component {
         postService.unlikeById(this.state.post._id, this.props.token)
             .then(post => {
                 this.setState({post});
-                notificationService.infoMsg('Unliked');
+                notificationService.successMsg(notificationMsg.unlikeSuccessfully);
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)
@@ -56,6 +57,7 @@ class Details extends Component {
         postService.deleteCommentByIds(this.state.post._id, commentId, this.props.token)
             .then(post => {
                 this.setState({post});
+                notificationService.successMsg(notificationMsg.deleteCommentSuccessfully);
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)
@@ -63,10 +65,10 @@ class Details extends Component {
     }
 
     onNewComment = (comment) => {
-        console.log('OnNewComment', comment);
         postService.commentById(this.state.post._id, comment, this.props.token)
             .then(post => {
                 this.setState({post});
+                notificationService.successMsg(notificationMsg.commentSuccessfully);
             })
             .catch(err => notificationService.errorMsg(err.message));
     }
@@ -79,6 +81,7 @@ class Details extends Component {
         await postService.deleteById(this.state.post._id, this.props.token)
             .then(() => {
                 this.props.history.push('/');
+                notificationService.successMsg(notificationMsg.deleteCommentSuccessfully);
             })
             .catch(err => notificationService.errorMsg(err.message))
     }
@@ -88,6 +91,9 @@ class Details extends Component {
             ...prevState,
             hideComments: !prevState.hideComments
         }));
+        this.state.hideComments
+            ? notificationService.infoMsg(notificationMsg.showCommentsSuccessfully)
+            : notificationService.infoMsg(notificationMsg.hideCommentsSuccessfully)
     }
 
     getPostById = (postId) => {
@@ -98,10 +104,7 @@ class Details extends Component {
             if (this._isMounted) {
                 this.authorName = author.displayName;
                 this.publishedAt = moment(post.publishedAt).format('DD.MM.YYYY hh:mm');
-                this.setState({
-                    post
-                });
-
+                this.setState({post});
             }
         })
             .catch(err => {

@@ -9,6 +9,7 @@ import Article from '../Article';
 import TopArticle from '../TopArticle';
 import FormSearch from '../FormSearch';
 import FormOrder from '../FormOrder';
+import {notificationMsg} from '../../utils/globals';
 
 class Main extends Component {
 
@@ -27,7 +28,22 @@ class Main extends Component {
     onSearch = (title) => {
         const result = queryString.parse(this.props.location.search);
         Object.assign(result, {title});
-        this.props.history.push(`/?${queryString.stringify(result)}`)
+        this.props.history.push(`/?${queryString.stringify(result)}`);
+        notificationService.infoMsg(notificationMsg.searchSuccessfully);
+    }
+
+    getAllPosts = () => {
+        postService.getAll(this.props.location.search)
+            .then(res => {
+                if (this._isMounted) {
+                    this.setState({
+                        topPost: res.slice(0, 1),
+                        posts: res.slice(1),
+                        loading: false
+                    })
+                }
+            })
+            .catch(err => notificationService.errorMsg(err.message));
     }
 
     componentWillUnmount() {
@@ -45,20 +61,6 @@ class Main extends Component {
     componentDidMount() {
         this._isMounted = true;
         this.getAllPosts();
-    }
-
-    getAllPosts = () => {
-        postService.getAll(this.props.location.search)
-            .then(res => {
-                if (this._isMounted) {
-                    this.setState({
-                        topPost: res.slice(0, 1),
-                        posts: res.slice(1),
-                        loading: false
-                    })
-                }
-            })
-            .catch(err => notificationService.errorMsg(err.message));
     }
 
     render() {

@@ -7,6 +7,7 @@ import * as postService from '../../services/postService';
 import AuthContext from '../AuthContext';
 
 import FormPost from '../FormPost';
+import {notificationMsg} from '../../utils/globals';
 
 const AddPost = () => {
     const {token} = useContext(AuthContext);
@@ -25,6 +26,7 @@ const AddPost = () => {
         postService.addPost(title, content, urlToImage, token)
             .then(() => {
                 history.push('/');
+                notificationService.successMsg(notificationMsg.addPostSuccessfully);
             })
             .catch(err => notificationService.errorMsg(err.message))
     }

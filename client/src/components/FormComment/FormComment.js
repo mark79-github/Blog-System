@@ -1,7 +1,7 @@
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
-import {globalConstants, notificationMsg} from "../../utils/globals";
+import {globalConstants, notificationMsg} from '../../utils/globals';
 
 const initialValues = {
     comment: '',
@@ -20,7 +20,6 @@ const FormComment = ({onNewComment}) => {
         validationSchema,
         validateOnMount: true,
         onSubmit: (values => {
-            console.log('values', values);
             onNewComment({comment: values.comment})
             formik.resetForm();
         }),

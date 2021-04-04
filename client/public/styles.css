@@ -122,6 +122,11 @@ header nav ul li a {
     border-radius: 4px;
 }
 
+header nav ul li a:hover {
+    color: darkblue;
+    border: 1px solid darkblue;
+    background: white;
+}
 
 .main-container {
     background: darkblue;

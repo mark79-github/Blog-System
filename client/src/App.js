@@ -38,7 +38,7 @@ const App = () => {
             displayName,
             expirationTime: expiration.toISOString()
         }));
-        notificationService.infoMsg(notificationMsg.loginSuccessfully);
+        notificationService.successMsg(notificationMsg.loginSuccessfully);
     }, []);
 
     const logout = useCallback(() => {
