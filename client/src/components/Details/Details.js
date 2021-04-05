@@ -15,7 +15,7 @@ import Comment from '../Comment';
 import Edit from '../Icons/Edit';
 import Delete from '../Icons/Delete';
 import Comments from '../Icons/Comment';
-import {globalConstants, notificationMsg} from '../../utils/globals';
+import {notificationMsg} from '../../utils/globals';
 
 class Details extends Component {
     constructor(props) {
@@ -91,9 +91,11 @@ class Details extends Component {
             ...prevState,
             hideComments: !prevState.hideComments
         }));
-        this.state.hideComments
+        !this.state.post.comments.length && !this.props.userId
+            ? notificationService.infoMsg(notificationMsg.noComments)
+            : this.state.hideComments
             ? notificationService.infoMsg(notificationMsg.showCommentsSuccessfully)
-            : notificationService.infoMsg(notificationMsg.hideCommentsSuccessfully)
+            : notificationService.infoMsg(notificationMsg.hideCommentsSuccessfully);
     }
 
     getPostById = (postId) => {

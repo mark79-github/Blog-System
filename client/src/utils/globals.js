@@ -44,6 +44,7 @@ const notificationMsg = {
     deletePostSuccessfully: 'Post deleted successfully',
     showCommentsSuccessfully: 'Comments show successfully',
     hideCommentsSuccessfully: 'Comments hide successfully',
+    noComments: 'There are no comments to display',
     requiredField: 'Required field ...',
     titleMinLength: `Title must be at least ${globalConstants.TITLE_MIN_LENGTH} characters long`,
     passwordMinLength: `Password must be at least ${globalConstants.PASSWORD_MIN_LENGTH} characters long`,

@@ -167,6 +167,7 @@ header nav ul li a:hover {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
+    border-radius: 8px;
 }
 
 .top-article-details-info {
@@ -248,9 +249,15 @@ header nav ul li a:hover {
     color: darkblue;
     font-size: 20px;
     font-weight: 600;
-    padding: 10px 40px;
-    border-radius: 8px;
     margin-left: 10px;
+
+    /*rectangle*/
+    /*padding: 10px 40px;*/
+    /*border-radius: 8px;*/
+
+    /*circle*/
+    padding: 20px;
+    border-radius: 50%;
 }
 
 .far:hover,
@@ -278,13 +285,13 @@ header nav ul li a:hover {
 }
 
 .main-article-comment-content-details .far {
-    /*border: 1px solid white;*/
     background: darkblue;
     color: white;
     font-size: 20px;
     font-weight: 600;
-    padding: 10px 10px;
-    /*border-radius: 8px;*/
+
+    border-radius: 50%;
+    padding: 20px;
 }
 
 .main-article-comment-content-details .far:hover {
