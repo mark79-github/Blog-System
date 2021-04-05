@@ -264,7 +264,7 @@ header nav ul li a:hover {
 .fas:hover {
     cursor: pointer;
 
-    border: 1px solid white;
+    /*border: 1px solid white;*/
     background: darkblue;
     color: white;
 }
@@ -296,7 +296,7 @@ header nav ul li a:hover {
 
 .main-article-comment-content-details .far:hover {
     cursor: pointer;
-    border: 1px solid darkblue;
+    /*border: 1px solid darkblue;*/
     background: white;
     color: darkblue;
 }

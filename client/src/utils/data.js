@@ -11,7 +11,7 @@ const request = async (url, method, data = {}, options = {}, token) => {
     };
 
     return await fetch(url, {
-        method,
+        method: method || 'GET',
         headers,
         body: Object.keys(data).length ? JSON.stringify(data) : undefined,
         ...options

@@ -8,13 +8,13 @@ export const getAll = (query) => {
         url += query;
     }
 
-    return request(url, 'GET');
+    return request(url);
 };
 
 export const getById = (id) => {
 
     const apiWithPostId = `${api.posts.base}/${id}`
-    return request(apiWithPostId, 'GET')
+    return request(apiWithPostId)
 };
 
 export const likeById = (id, token) => {
