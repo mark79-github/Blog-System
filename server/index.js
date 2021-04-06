@@ -20,4 +20,9 @@ app.use('/api/auth', authRoute);
 app.use('/api/users', usersRoute);
 app.use('/api/posts', blogsRoute);
 
+app.use('/', (req, res) => {
+    res.send('Blog Post Application');
+})
+
+
 app.listen(PORT, () => console.log(msg.APPLICATION_RUNNING(PORT)));
