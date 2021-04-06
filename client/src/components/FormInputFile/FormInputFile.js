@@ -1,49 +1,74 @@
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
-const validationSchema = Yup.object().shape({
-    file: Yup
-        .mixed()
-        .required("You need to provide a file")
-        .test("fileSize", "The file is too large", (value) => {
-            return value && value[0].length <= 2000000;
-        })
-        .test("type", "Only the following formats are accepted: .jpeg, .jpg, .bmp, .png", (value) => {
-            return value && (
-                value[0].type === "image/jpeg" ||
-                value[0].type === "image/jpg" ||
-                value[0].type === "image/bmp" ||
-                value[0].type === "image/png"
-            );
-        }),
-});
+const FormInputFile = () => {
 
-const formik = useFormik({
-    initialValues: {},
-    validationSchema,
-    validateOnMount: true,
-    onSubmit: (values => {
-        formik.resetForm();
-    }),
-});
+    const validationSchema = Yup.object().shape({
+        file: Yup.mixed()
+            .required("You need to provide a file")
+            .test("size", "The file is too large", (value) => {
+                return value && value.size <= 2 * 1024 * 1024;
+            })
+            .test("type", "Only the following formats are accepted: .jpeg, .jpg, .bmp, .png", (value) => {
+                return value && (
+                    value.type === "image/jpeg" ||
+                    value.type === "image/jpg" ||
+                    value.type === "image/bmp" ||
+                    value.type === "image/png"
+                );
+            }),
+    });
+    const formik = useFormik({
+        initialValues: {file: null},
+        validationSchema,
+        validateOnChange: true,
+        onSubmit: (values) => {
 
-return (
-    <form className="form-input" onSubmit={formik.handleSubmit}>
-        {/*<div className="form-row">*/}
-        <input
-            type="file"
-            id="customFile"
-            name="customFile"
-            value={formik.values.customFile}
-            onChange={formik.handleChange}
-        />
-        {formik.errors.customFile && formik.touched.customFile && (
-            <span className="form-comment-textarea-error">{formik.errors.customFile}</span>
-        )}
-        {/*</div>*/}
-        <button type="submit">Post Comment</button>
-    </form>
-);
+            const formData = new FormData();
+            formData.append("file", values.file);
+            formData.append('upload_preset', 'll7qfuac');
+
+            try {
+                const API_ENDPOINT = 'https://api.cloudinary.com/v1_1/mark79/upload';
+                fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data)
+                        console.log(data.url);
+                    })
+                    .catch(err => console.error('Error:', err));
+
+            } catch (err) {
+                console.log(err.message);
+            }
+        },
+
+    });
+
+    return (
+        <form className="form-input" onSubmit={formik.handleSubmit}>
+            <label htmlFor="file" style={{color:"white"}}>Прикачи файл</label>
+            <input
+                type="file"
+                name="file"
+                id="file"
+                style={{color:"white"}}
+                onChange={(event) => {
+                    formik.setFieldValue("file", event.target.files[0]);
+                }}
+            />
+            {formik.errors.file && formik.touched.file && (
+                <span className="form-comment-textarea-error">{formik.errors.file}</span>
+            )}
+            <button type="submit">Post Image</button>
+        </form>
+    );
+
+}
+
+export default FormInputFile;
 
 
 // export default function FormInputFile() {

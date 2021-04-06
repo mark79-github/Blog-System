@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {useHistory} from 'react-router-dom';
@@ -14,6 +14,7 @@ const initialValues = {
     email: '',
     password: '',
     repeatPassword: '',
+    file: ''
 }
 
 const validationSchema = Yup.object({
@@ -29,7 +30,13 @@ const validationSchema = Yup.object({
         .required(notificationMsg.requiredField),
     repeatPassword: Yup.string()
         .oneOf([Yup.ref('password')], notificationMsg.repeatPasswordValidate)
+        .required(notificationMsg.requiredField),
+    file: Yup.mixed()
         .required(notificationMsg.requiredField)
+        .test('size', notificationMsg.largeFileSize, (value) => {
+            return value && value.size <= globalConstants.MAX_FILE_SIZE;
+        })
+        .test('type', notificationMsg.supportedFormats, value => value && globalConstants.IMAGE_FORMATS.includes(value.type)),
 });
 
 const FormSignUp = () => {
@@ -39,6 +46,9 @@ const FormSignUp = () => {
     const formik = useFormik({
         initialValues,
         validationSchema,
+        validateOnChange: true,
+        validateOnBlur: true,
+        validateOnMount: true,
         onSubmit: ({displayName, email, password}) => {
             authService.register(displayName, email, password)
                 .then((response) => {
@@ -113,7 +123,27 @@ const FormSignUp = () => {
                     <span className="form-input-error">{formik.errors.repeatPassword}</span>
                 )}
             </div>
-
+            <div className="form-row">
+                <div className="wrapper">
+                    <div className="file-upload">
+                        <input
+                            type="file"
+                            id="name"
+                            name="file"
+                            onChange={(event) => {
+                                formik.setFieldValue('file', event.target.files[0]);
+                                formik.setFieldTouched('file', true);
+                            }}
+                        />
+                        <i className="fa fa-arrow-up"/>
+                    </div>
+                </div>
+                {formik.errors.file && formik.touched.file && (
+                    <span className="form-input-error">{formik.errors.file}</span>
+                ) || formik.values.file && (
+                    <span className="form-input-error">{formik.values.file.name}</span>
+                )}
+            </div>
             <button type="submit"> Sign Up</button>
             {/*disabled={!(formik.dirty && formik.isValid)}*/}
         </form>

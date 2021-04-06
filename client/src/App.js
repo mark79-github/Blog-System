@@ -1,17 +1,21 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Route, Switch} from 'react-router-dom';
+
+import notificationService from './services/notificationService';
+
 import AuthContext from './components/AuthContext';
+
 import HomePage from './pages/home-page';
 import SignPage from './pages/sign-page';
 import DetailsPage from './pages/details-page';
 import ErrorPage from './pages/error-page';
 import CreatePostPage from './pages/create-post-page';
+import EditPostPage from './pages/edit-post-page';
+import Notification from './components/Notification';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Logout from './components/Logout';
-import Notification from './components/Notification';
-import notificationService from './services/notificationService';
-import EditPostPage from './pages/edit-post-page';
+
 import {globalConstants, notificationMsg} from './utils/globals';
 
 let logoutTimer;
