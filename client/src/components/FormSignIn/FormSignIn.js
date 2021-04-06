@@ -31,7 +31,7 @@ const FormSignIn = () => {
         initialValues,
         validationSchema,
         onSubmit: ({email, password}) => {
-            authService.login(email, password)
+            authService.login(email.toLowerCase(), password)
                 .then((response) => {
 
                     if (response.hasOwnProperty('token')) {

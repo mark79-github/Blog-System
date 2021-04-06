@@ -16,12 +16,15 @@ import Edit from '../Icons/Edit';
 import Delete from '../Icons/Delete';
 import Comments from '../Icons/Comment';
 import {notificationMsg} from '../../utils/globals';
+import Avatar from "../Icons/Avatar";
+
 
 class Details extends Component {
     constructor(props) {
         super(props);
 
         this.authorName = '';
+        this.avatarImageUrl = '';
         this.publishedAt = new Date().toDateString();
         this._isMounted = false;
 
@@ -105,6 +108,7 @@ class Details extends Component {
             }).then(([post, author]) => {
             if (this._isMounted) {
                 this.authorName = author.displayName;
+                this.avatarImageUrl = author.avatarImageUrl;
                 this.publishedAt = moment(post.publishedAt).format('DD.MM.YYYY hh:mm');
                 this.setState({post});
             }
@@ -153,6 +157,7 @@ class Details extends Component {
                             <div className="main-article-details-author">
                                 <span>Post author: </span>
                                 {this.authorName}
+                                <Avatar img={this.avatarImageUrl}/>
                             </div>
                             <div className="main-article-details-comments">
                                 <span>Comments: </span>
@@ -167,6 +172,10 @@ class Details extends Component {
                                 {this.state.post.visits}
                             </div>
                         </article>
+
+                        {/*<article className="top-article-avatar-wrapper">*/}
+                        {/*    <Avatar img={this.avatarImageUrl}/>*/}
+                        {/*</article>*/}
 
                         <article className="top-article-details-icon-wrapper">
                             <Comments onClick={this.showComments}/>

@@ -13,7 +13,8 @@ exports.register = async (req, res) => {
         const newUser = await new User({
             email: req.body.email,
             displayName: req.body.displayName,
-            password: hash
+            password: hash,
+            avatarImageUrl: req.body.avatarImageUrl
         }).save();
         const token = await utils.generateAccessToken(newUser._id);
         res.status(200).json({token, newUser});

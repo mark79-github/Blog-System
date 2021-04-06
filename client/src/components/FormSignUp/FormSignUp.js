@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {useHistory} from 'react-router-dom';
@@ -40,7 +40,7 @@ const validationSchema = Yup.object({
 });
 
 const FormSignUp = () => {
-    const {login} = useContext(AuthContext);
+    const authContext = useContext(AuthContext);
     const history = useHistory();
 
     const formik = useFormik({
@@ -49,27 +49,39 @@ const FormSignUp = () => {
         validateOnChange: true,
         validateOnBlur: true,
         validateOnMount: true,
-        onSubmit: ({displayName, email, password}) => {
-            authService.register(displayName, email, password)
-                .then((response) => {
-                    if (response.hasOwnProperty('message')) {
-                        throw Error(response.message);
-                    }
+        onSubmit: ({displayName, email, password, file}) => {
 
-                    return {
-                        token: response.token,
-                        userId: response.newUser._id,
-                        displayName: response.newUser.displayName
-                    };
-                })
-                .then(res => {
-                    login(res.token, res.userId, res.displayName);
-                    history.push('/');
-                })
-                .catch(err => {
-                    formik.resetForm();
-                    notificationService.errorMsg(err.message);
-                })
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append('upload_preset', 'll7qfuac');
+
+            const API_ENDPOINT = 'https://api.cloudinary.com/v1_1/mark79/upload';
+            fetch(API_ENDPOINT, {
+                method: 'POST',
+                body: formData
+            }).then(res => {
+                if (!res.ok) {
+                    throw Error('Cannot upload avatar image');
+                }
+                return res.json();
+            }).then(cloudinary => {
+                return authService.register(displayName, email.toLowerCase(), password, cloudinary.url)
+            }).then(response => {
+                if (response.hasOwnProperty('message')) {
+                    throw Error(response.message);
+                }
+                return {
+                    token: response.token,
+                    userId: response.newUser._id,
+                    displayName: response.newUser.displayName
+                };
+            }).then(({token, userId, displayName}) => {
+                authContext.login(token, userId, displayName);
+                history.push('/');
+            }).catch(err => {
+                formik.resetForm();
+                notificationService.errorMsg(err.message);
+            })
         }
     });
 
@@ -140,8 +152,6 @@ const FormSignUp = () => {
                 </div>
                 {formik.errors.file && formik.touched.file && (
                     <span className="form-input-error">{formik.errors.file}</span>
-                ) || formik.values.file && (
-                    <span className="form-input-error">{formik.values.file.name}</span>
                 )}
             </div>
             <button type="submit"> Sign Up</button>
