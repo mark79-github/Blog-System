@@ -29,7 +29,7 @@ const Comment = ({data, onDeleteComment}) => {
 
     return (
         <article className="main-article-comment-content-details">
-            <span>#{index}</span><span>{authorDisplayName}</span>
+            <span>#{index}</span> <span>{authorDisplayName}</span>
             <Avatar img={authorAvatarImgURL}/>
             {
                 authContext.userId === user
