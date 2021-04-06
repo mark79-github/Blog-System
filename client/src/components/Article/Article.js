@@ -1,15 +1,15 @@
 import BtnReadMore from '../BtnReadMore';
+import {api} from "../../utils/globals";
+import {request} from "../../utils/data";
 
 const Article = ({data, history}) => {
     const {_id, title, urlToImage} = data;
 
-    //TODO to fix fetch
     const handleButtonCLick = async () => {
-        await fetch(`http://localhost:5000/api/posts/visit/${_id}`, {
-            method: 'POST',
-        })
-            .then(() => history.push(`/post/${_id}`))
-            .catch(error => console.error('Error:', error));
+        await request(`${api.posts.visit}/${_id}`, 'POST')
+            .then(() => {
+                history.push(`/post/${_id}`);
+            }).catch(error => console.error('Error:', error));
     }
 
     return (

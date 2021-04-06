@@ -1,4 +1,5 @@
-const baseURL = "http://localhost:5000";
+// const baseURL = "http://localhost:5000";
+const baseURL =  'https://blog-system-application.herokuapp.com';
 // const baseURL = `http://localhost:${node.env.PORT}`;
 const authURL = `${baseURL}/api/auth`;
 const usersURL = `${baseURL}/api/users`;
@@ -17,6 +18,7 @@ const api = {
         like: `${postURL}/like`,
         unlike: `${postURL}/unlike`,
         comment: `${postURL}/comment`,
+        visit: `${postURL}/visit`
     }
 };
 
