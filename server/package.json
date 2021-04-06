@@ -6,8 +6,7 @@
   "author": "mark79-github",
   "license": "MIT",
   "scripts": {
-    "start": "SET NODE_ENV=development && nodemon ./index.js",
-    "production": "SET NODE_ENV=production && nodemon ./index.js"
+    "start": "node ./index.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
