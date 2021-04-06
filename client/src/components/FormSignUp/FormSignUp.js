@@ -14,7 +14,8 @@ const initialValues = {
     email: '',
     password: '',
     repeatPassword: '',
-    file: ''
+    file: '',
+    filename: '',
 }
 
 const validationSchema = Yup.object({
@@ -137,6 +138,14 @@ const FormSignUp = () => {
             </div>
             <div className="form-row">
                 <div className="wrapper">
+                    <input
+                        id="filename"
+                        type="text"
+                        name="filename"
+                        placeholder="Select file"
+                        readOnly
+                        value={formik.values.file && formik.values.filename}
+                    />
                     <div className="file-upload">
                         <input
                             type="file"
@@ -145,6 +154,7 @@ const FormSignUp = () => {
                             onChange={(event) => {
                                 formik.setFieldValue('file', event.target.files[0]);
                                 formik.setFieldTouched('file', true);
+                                formik.setFieldValue('filename', event.target.files[0].name)
                             }}
                         />
                         <i className="fa fa-arrow-up"/>
