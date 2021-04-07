@@ -27,6 +27,9 @@ exports.getUser = async (req, res, next) => {
         if (!user) {
             return response.missing(res, `No user found with id: ${req.params.id}`)
         }
+
+        // remove password hash from result
+        Object.assign(user, {password: undefined})
         req.user = user
         next()
     } catch (error) {
