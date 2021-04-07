@@ -1,40 +1,52 @@
 import {Component} from 'react'
 
+const selectOptions = [
+    {
+        label: "Last published",
+        value: "publishedAt",
+    },
+    {
+        label: "Most likes",
+        value: "likes",
+    },
+    {
+        label: "Most comments",
+        value: "comments",
+    },
+    {
+        label: "Most views",
+        value: "visits",
+    },
+];
+
 class FormOrder extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            orderBy: 'Comments'
+            orderBy: 'publishedAt'
         };
     }
 
     selectChangeHandler = (event) => {
-        this.setState({
-            orderBy: event.target.value
-        })
+        this.setState({orderBy: event.target.value});
     }
 
-
-    formOnChangeHandler = (event) => {
-        console.log(event.target.value);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.orderBy !== this.state.orderBy) {
+            this.props.onOrderChange(this.state.orderBy);
+        }
     }
 
-    //TODO Not implemented hide from DOM with display:none
     render() {
         return (
             <section className="header-select">
-                <form className="header-select-form" onChange={this.formOnChangeHandler}>
+                <form className="header-select-form">
                     <select className="header-select-select" value={this.state.orderBy}
                             onChange={this.selectChangeHandler}>
-                        <option value="likes">Likes ascending</option>
-                        <option value="likes">Likes descending</option>
-                        <option value="views">Views ascending</option>
-                        <option value="views">Views descending</option>
-                        <option value="comments">Comments ascending</option>
-                        <option value="comments">Comments descending</option>
-                        <option value="createdAt">Created ascending</option>
-                        <option value="createdAt">Created descending</option>
+                        {selectOptions.map((option, index) => (
+                            <option key={index} value={option.value}>{option.label}</option>
+                        ))}
                     </select>
                 </form>
             </section>

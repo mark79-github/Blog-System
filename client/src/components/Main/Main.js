@@ -22,6 +22,7 @@ class Main extends Component {
             topPost: [],
             posts: [],
             loading: true,
+            orderBy: 'publishedAt'
         }
     }
 
@@ -32,10 +33,26 @@ class Main extends Component {
         notificationService.infoMsg(notificationMsg.searchSuccessfully);
     }
 
+    onOrderChange = (value) => {
+        this.setState({
+            orderBy: value
+        });
+        notificationService.infoMsg(notificationMsg.orderSuccessfully);
+    }
+
     getAllPosts = () => {
         postService.getAll(this.props.location.search)
             .then(res => {
                 if (this._isMounted) {
+
+                    res.sort((f, s) => {
+                        if (Array.isArray(f[this.state.orderBy])) {
+                            return s[this.state.orderBy].length - f[this.state.orderBy].length
+                        } else {
+                            return s[this.state.orderBy] - f[this.state.orderBy]
+                        }
+                    });
+
                     this.setState({
                         topPost: res.slice(0, 1),
                         posts: res.slice(1),
@@ -52,6 +69,12 @@ class Main extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.location.search !== prevProps.location.search) {
+            if (this._isMounted) {
+                this.getAllPosts();
+            }
+        }
+
+        if (prevState.orderBy !== this.state.orderBy) {
             if (this._isMounted) {
                 this.getAllPosts();
             }
@@ -79,7 +102,7 @@ class Main extends Component {
                     <FormSearch onSearch={this.onSearch}/>
                     <FormOrder/>
                     <section className="articles-empty-container">
-                        <h1>No posts found on given criteria</h1>
+                        <h1>No posts found</h1>
                     </section>
                 </div>
             )
@@ -89,7 +112,7 @@ class Main extends Component {
             <div className="main-container">
 
                 <FormSearch onSearch={this.onSearch}/>
-                <FormOrder/>
+                <FormOrder onOrderChange={this.onOrderChange}/>
 
                 {this.state.topPost.map(x => {
                     return (<TopArticle key={x._id} data={x} {...this.props}/>)

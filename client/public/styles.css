@@ -81,7 +81,7 @@ header {
     margin-left: 50px;
     border-radius: 6px;
     border: none;
-    display: none;
+    /*display: none;*/
 }
 
 .header-search-select-label {
@@ -207,6 +207,10 @@ header nav ul li a:hover {
     max-width: 60px;
     max-height: 60px;
     object-fit: cover;
+}
+
+.main-article-details-author-wrapper img {
+    border-radius: 50%;
 }
 
 .main-article-description-title {
