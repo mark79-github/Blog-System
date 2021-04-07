@@ -6,7 +6,7 @@
   "author": "mark79-github",
   "license": "MIT",
   "scripts": {
-    "start": "node ./index.js"
+    "start": "nodemon ./index.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
