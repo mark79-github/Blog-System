@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# Blog System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Final project
 
-## Available Scripts
+### [ReactJS - march 2021](https://softuni.bg/trainings/3315/reactjs-march-2021) course of [SoftUni](https://softuni.bg/)
 
-In the project directory, you can run:
+## Project Description
 
-### `yarn start`
+Blog System is a blog like application for posting all sort of articles.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## MERN Application
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Built With
 
-### `yarn test`
+#### Front-end:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
+* [react-router](https://reactrouter.com/) - React Router is a collection of navigational components that compose
+  declaratively with your application.
+* [react-toastify](https://www.npmjs.com/package/react-toastify) - React-Toastify allows you to add notifications to
+  your app with ease.
+* [moment](https://momentjs.com/) - Parse, validate, manipulate, and display dates and times in JavaScript.
+* [react-loader-spinner](https://www.npmjs.com/package/react-loader-spinner) - react-spinner-loader provides simple
+  React SVG spinner component which can be implemented for async await operation before data loads to the view.
+* [formik](https://formik.org/) - Formik is the world's most popular open source form library for React and React
+  Native.
+* [yup](https://www.npmjs.com/package/yup) - Yup is a JavaScript schema builder for value parsing and validation.
 
-### `yarn build`
+#### Back-end:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* [Node.js](https://nodejs.org/en/) - Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+* [express](https://expressjs.com/) - Fast, minimalist web framework for Node.js
+* [mongoose](https://mongoosejs.com/) - Elegant MongoDB object modeling for Node.js
+* [bcrypt](https://www.npmjs.com/package/bcrypt) - A library to help you hash passwords.
+* [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) - JSON Web Token (JWT) is an open standard that defines a
+  way for securely transmitting information between parties as a JSON object.
+* [cors](https://www.npmjs.com/package/cors) - CORS is a node.js package for providing a Connect/Express middleware that
+  can be used to enable CORS with various options.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Author
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* **Martin Dimitrov** - [mark79-github](https://github.com/mark79-github/)
 
-### `yarn eject`
+## Functionality
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Public Part
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+###### The public part is visible by any user with or without authentication:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **Sign page** 
+  _Anonymous users can sign in/up. For register user have to provide display name, email, password and to
+  upload an image._
+- **Home page** 
+  _All users can view all posts, search by title or change the order by different criteria. Authenticated
+  users have ability to view their own posts._
+- **Details page** 
+  _All users can view detail information for each post. Guests can see only the button to show/hide
+  comments for given post. Other users can see the option to like/dislike the article. The author of post have ability
+  to edit or delete post. At the comments section of detail view authenticated users can write or delete comments._
+- **Error page**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Private Part
 
-## Learn More
+###### The private part is visible by authenticated users:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Create/Edit post page** 
+  _Authenticated users have ability to create/edit posts._
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### User
 
-### Code Splitting
+* model with the following fields : displayName, avatarImageUrl, email,password.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Post
 
-### Analyzing the Bundle Size
+* model with the following fields : title, content, author, urlToImage, publishedAt, comments, likes, visits.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## License
 
-### Making a Progressive Web App
+* this project is licensed under the MIT License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Deploy
 
-### Advanced Configuration
+* See application LIVE at: [https://blog-system-application.netlify.app](https://blog-system-application.netlify.app/)
+* Server running at: [https://blog-system-application.herokuapp.com](https://blog-system-application.herokuapp.com/)
+* MongoDB Atlas for storing database at cloud service: [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
