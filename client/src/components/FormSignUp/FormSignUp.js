@@ -7,7 +7,7 @@ import * as authService from '../../services/authService';
 import notificationService from '../../services/notificationService';
 
 import AuthContext from '../AuthContext';
-import {globalConstants, notificationMsg} from "../../utils/globals";
+import {api, globalConstants, notificationMsg} from '../../utils/globals';
 
 const initialValues = {
     displayName: '',
@@ -56,13 +56,13 @@ const FormSignUp = () => {
             formData.append("file", file);
             formData.append('upload_preset', 'll7qfuac');
 
-            const API_ENDPOINT = 'https://api.cloudinary.com/v1_1/mark79/upload';
+            const API_ENDPOINT = api.cloudinary.base;
             fetch(API_ENDPOINT, {
                 method: 'POST',
                 body: formData
             }).then(res => {
                 if (!res.ok) {
-                    throw Error('Cannot upload avatar image');
+                    throw Error(notificationMsg.avatarUploadError);
                 }
                 return res.json();
             }).then(cloudinary => {

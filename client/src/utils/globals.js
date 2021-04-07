@@ -1,5 +1,6 @@
 // const baseURL = "http://localhost:5000";
-const baseURL =  'https://blog-system-application.herokuapp.com';
+const baseURL = 'https://blog-system-application.herokuapp.com';
+const cloudinaryURL = 'https://api.cloudinary.com/v1_1/mark79/upload';
 const authURL = `${baseURL}/api/auth`;
 const usersURL = `${baseURL}/api/users`;
 const postURL = `${baseURL}/api/posts`;
@@ -18,6 +19,9 @@ const api = {
         unlike: `${postURL}/unlike`,
         comment: `${postURL}/comment`,
         visit: `${postURL}/visit`
+    },
+    cloudinary: {
+        base: cloudinaryURL
     }
 };
 
@@ -62,6 +66,7 @@ const notificationMsg = {
     repeatPasswordValidate: 'Repeat password not match',
     largeFileSize: 'The file is too large',
     supportedFormats: 'Accepted formats: .jpeg, .jpg, .bmp, .png',
+    avatarUploadError: 'Avatar image upload error',
 };
 
 const routes = {};
