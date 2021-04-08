@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Route, Switch} from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 
 import notificationService from './services/notificationService';
 
@@ -89,14 +89,28 @@ const App = () => {
 
                     <Route path={'/'} component={(props) => <HomePage {...props}/>} exact/>
 
-                    <Route path={'/post/create'} component={CreatePostPage} exact/>
+                    <Route exact path="/post/create" render={() => (
+                        !token ? <Redirect to="/user/sign"/> : <CreatePostPage/>
+                    )}/>
+                    {/*<Route path={'/post/create'} component={CreatePostPage} exact/>*/}
+
                     <Route path={'/post/:id/edit'} component={(props) => <EditPostPage {...props}/>} exact/>
                     <Route path={'/post/:id'} component={DetailsPage} exact/>
 
-                    <Route path={'/user/sign'} component={SignPage} exact/>
-                    <Route path={'/user/logout'} component={Logout} exact/>
+                    <Route exact path="/user/sign" render={() => (
+                        token ? <Redirect to="/"/> : <SignPage/>
+                    )}/>
+                    {/*<Route path={'/user/sign'} component={SignPage} exact/>*/}
+
+                    <Route exact path="/user/logout" render={() => (
+                        !token ? <Redirect to="/"/> : <Logout/>
+                    )}/>
+                    {/*<Route path={'/user/logout'} component={Logout} exact/>*/}
 
                     <Route component={ErrorPage}/>
+
+
+
 
                 </Switch>
                 <Footer/>

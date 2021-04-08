@@ -15,4 +15,4 @@ const credentials = {
     }
 }
 
-module.exports = credentials.production;
+module.exports = credentials[process.env.NODE_ENV.trim()];

@@ -43,7 +43,7 @@ class FormOrder extends Component {
             <section className="header-select">
                 <form className="header-select-form">
                     <select className="header-select-select" value={this.state.orderBy}
-                            onChange={this.selectChangeHandler}>
+                            onChange={this.selectChangeHandler} disabled={this.props.disabled}>
                         {selectOptions.map((option, index) => (
                             <option key={index} value={option.value}>{option.label}</option>
                         ))}

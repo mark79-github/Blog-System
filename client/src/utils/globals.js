@@ -1,6 +1,13 @@
-// const baseURL = "http://localhost:5000";
-const baseURL = 'https://blog-system-application.herokuapp.com';
+import {config} from './config';
+
 const cloudinaryURL = 'https://api.cloudinary.com/v1_1/mark79/upload';
+
+const getBaseUrl = () => {
+    return config[process.env.NODE_ENV.trim()].baseURL;
+}
+
+const baseURL = getBaseUrl();
+
 const authURL = `${baseURL}/api/auth`;
 const usersURL = `${baseURL}/api/users`;
 const postURL = `${baseURL}/api/posts`;

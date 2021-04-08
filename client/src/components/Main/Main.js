@@ -100,7 +100,7 @@ class Main extends Component {
             return (
                 <div className="main-container">
                     <FormSearch onSearch={this.onSearch}/>
-                    <FormOrder/>
+                    <FormOrder onOrderChange={this.onOrderChange} disabled={true}/>
                     <section className="articles-empty-container">
                         <h1>No posts found</h1>
                     </section>
