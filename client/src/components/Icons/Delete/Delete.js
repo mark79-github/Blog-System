@@ -1,3 +1,5 @@
+import styles from '../Icons.module.css';
+
 const Delete = ({onDelete}) => {
 
     const handleClick = () => {
@@ -5,11 +7,9 @@ const Delete = ({onDelete}) => {
     }
 
     return (
-        // <div className="main-article-details-delete-icon">
         <div>
-            <i className="far fa-trash-alt" onClick={handleClick}/>
+            <i className={`${styles.icon} far fa-trash-alt`} onClick={handleClick}/>
         </div>
-        // </div>
     );
 }
 

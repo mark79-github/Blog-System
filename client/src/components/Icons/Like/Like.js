@@ -1,20 +1,16 @@
-import {Component} from 'react';
+import styles from '../Icons.module.css';
 
-class Like extends Component {
+const Like = (props) => {
 
-    handleClick = () => {
-        this.props.onLike();
+    const handleClick = () => {
+        props.onLike();
     }
 
-    render() {
-        return (
-            // <div className="main-article-details-likes-icons">
-            <div>
-                <i className="far fa-thumbs-up" onClick={this.handleClick}/>
-            </div>
-            // </div>
-        )
-    }
+    return (
+        <div>
+            <i className={`${styles.icon} far fa-thumbs-up`} onClick={handleClick}/>
+        </div>
+    )
 }
 
 export default Like;

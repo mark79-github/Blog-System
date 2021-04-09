@@ -1,16 +1,4 @@
-top-article
-top-article-image
-top-article-details
-top-article-details-date
-top-article-details-author
-top-article-details-comments
-top-article-details-likes
-main-article-details-readers
-top-article-description
-main-article-description-title
-main-article-description-content
-
-.top-article {
+.article {
     width: 100%;
     margin: 10px auto;
     color: white;
@@ -19,11 +7,11 @@ main-article-description-content
     flex-basis: 100%;
 }
 
-.top-article-image {
+.wrapper {
     text-align: center;
 }
 
-.top-article-image img {
+.img {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -32,7 +20,7 @@ main-article-description-content
     vertical-align: middle;
 }
 
-.top-article-details {
+.details {
     background: white;
     color: darkblue;
     display: flex;
@@ -40,4 +28,16 @@ main-article-description-content
     align-items: center;
     padding: 10px 20px;
     border-radius: 8px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 30px;
+    padding: 10px 20px;
+}
+
+.content {
+    font-size: 18px;
+    font-style: italic;
+    padding: 0 20px 20px 20px;
 }

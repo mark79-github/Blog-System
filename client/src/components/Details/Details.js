@@ -6,6 +6,8 @@ import * as postService from '../../services/postService';
 import * as userService from '../../services/userService';
 import notificationService from '../../services/notificationService';
 
+import styles from './Details.module.css';
+
 import AuthContext from '../../contexts';
 
 import Like from '../Icons/Like';
@@ -131,53 +133,48 @@ class Details extends Component {
 
         if (Object.keys(this.state.post).length === 0) {
             return (
-                <div className="main-container">
+                <div className={styles.container}>
                     <Loader type="Rings" color="white" height={80} width={80}/>
                 </div>
             )
         }
 
         return (
-            <div className="main-container">
-                <section className="top-article">
-                    <article className="top-article-image">
-                        <img src={this.state.post.urlToImage} alt=""/>
+            <div className={styles.container}>
+                <section className={styles.article}>
+                    <article className={styles.wrapper}>
+                        <img className={styles.img} src={this.state.post.urlToImage} alt=""/>
                     </article>
-                    <article className="top-article-description">
-                        <h2 className="main-article-description-title">{this.state.post.title}</h2>
-                        <p className="main-article-description-content">{this.state.post.content}</p>
+                    <article>
+                        <h2 className={styles.title}>{this.state.post.title}</h2>
+                        <p className={styles.content}>{this.state.post.content}</p>
                     </article>
-                    <article className="top-article-details">
-
-                        <article className="top-article-details-info">
-                            <div className="main-article-details-date">
+                    <article className={styles.details}>
+                        <article className={styles.info}>
+                            <div>
                                 <span>Published: </span>
                                 {this.publishedAt}
                             </div>
-                            <div className="main-article-details-author">
+                            <div className={styles.author}>
                                 <span>Post author: </span>
                                 {this.authorName}
                                 <Avatar img={this.avatarImageUrl}/>
                             </div>
-                            <div className="main-article-details-comments">
+                            <div>
                                 <span>Comments: </span>
                                 {this.state.post.comments.length}
                             </div>
-                            <div className="main-article-details-likes">
+                            <div>
                                 <span>Likes: </span>
                                 {this.state.post.likes.length}
                             </div>
-                            <div className="main-article-details-readers">
+                            <div>
                                 <span>Views: </span>
                                 {this.state.post.visits}
                             </div>
                         </article>
 
-                        {/*<article className="top-article-avatar-wrapper">*/}
-                        {/*    <Avatar img={this.avatarImageUrl}/>*/}
-                        {/*</article>*/}
-
-                        <article className="top-article-details-icon-wrapper">
+                        <article className={styles.icons}>
                             <Comments onClick={this.showComments}/>
                             {
                                 this.state.post.author === this.props.userId
@@ -192,7 +189,7 @@ class Details extends Component {
                             {
                                 this.props.isLoggedIn
                                     ?
-                                    <div className="main-article-details-likes-icons">
+                                    <div>
                                         {
                                             !this.state.post.likes.some(x => x === this.props.userId)
                                                 ? <Like onLike={this.like}/>
@@ -208,13 +205,13 @@ class Details extends Component {
                     {
                         this.state.hideComments
                             ? null
-                            : <article className="top-article-comment">
-                                <article className="top-article-comment-content">
+                            : <article className={styles.comment}>
+                                <article>
                                     {
                                         this.state.post.comments.length > 0
                                             ?
                                             <>
-                                                <h2 className="top-article-comment-content-header">Comments:</h2>
+                                                <h2 className={styles.header}>Comments:</h2>
                                                 {
                                                     this.state.post.comments.map((commentObj, index) => {
                                                         commentObj.index = index + 1;
@@ -233,7 +230,7 @@ class Details extends Component {
                                 {
                                     this.props.isLoggedIn ?
                                         <>
-                                            <article className="top-article-comment">
+                                            <article className={styles.comment}>
                                                 <FormComment onNewComment={this.onNewComment}/>
                                             </article>
                                         </>

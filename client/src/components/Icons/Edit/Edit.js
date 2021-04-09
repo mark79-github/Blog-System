@@ -1,3 +1,5 @@
+import styles from '../Icons.module.css';
+
 const Edit = ({onEdit}) => {
 
     const handleClick = () => {
@@ -5,11 +7,9 @@ const Edit = ({onEdit}) => {
     }
 
     return (
-        // <div className="main-article-details-edit-icon">
         <div>
-            <i className="far fa-edit" onClick={handleClick}/>
+            <i className={`${styles.icon} far fa-edit`} onClick={handleClick}/>
         </div>
-        // </div>
     );
 }
 

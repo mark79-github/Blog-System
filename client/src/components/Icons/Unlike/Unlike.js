@@ -1,20 +1,16 @@
-import {Component} from 'react';
+import styles from '../Icons.module.css';
 
-class Unlike extends Component {
+const Unlike = (props) => {
 
-    handleClick = () => {
-        this.props.onUnlike();
+    const handleClick = () => {
+        props.onUnlike();
     }
 
-    render() {
-        return (
-            // <div className="main-article-details-likes-icons">
-            <div>
-                <i className="far fa-thumbs-down" onClick={this.handleClick}/>
-            </div>
-            // </div>
-        )
-    }
+    return (
+        <div>
+            <i className={`${styles.icon} far fa-thumbs-down`} onClick={handleClick}/>
+        </div>
+    );
 }
 
 export default Unlike;

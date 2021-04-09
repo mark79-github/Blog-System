@@ -1,3 +1,5 @@
+import styles from '../Icons.module.css';
+
 const Comments = (props) => {
 
     const handleClick = () => {
@@ -5,11 +7,9 @@ const Comments = (props) => {
     }
 
     return (
-        // <div className="main-article-details-comment-icon">
         <div>
-            <i className="far fa-comments" onClick={handleClick}/>
+            <i className={`${styles.icon} far fa-comments`} onClick={handleClick}/>
         </div>
-        // </div>
     )
 
 }

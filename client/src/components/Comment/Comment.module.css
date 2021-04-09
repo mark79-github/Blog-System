@@ -1,5 +1,5 @@
 .container {
-    padding: 0 20px;
+    padding: 0 20px 10px 20px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -13,4 +13,20 @@
 
 .p {
     flex-basis: 100%;
+}
+
+.icon {
+    background: darkblue;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+
+    border-radius: 50%;
+    padding: 20px;
+}
+
+.icon:hover {
+    cursor: pointer;
+    background: white;
+    color: darkblue;
 }

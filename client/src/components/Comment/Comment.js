@@ -35,7 +35,7 @@ const Comment = ({data, onDeleteComment}) => {
             <Avatar img={authorAvatarImgURL}/>
             {
                 authContext.userId === user
-                    ? <i className="far fa-trash-alt" onClick={handleClick}/>
+                    ? <i className={`${styles.icon} far fa-trash-alt`} onClick={handleClick}/>
                     : null
             }
             <p className={styles.p}>{comment}</p>

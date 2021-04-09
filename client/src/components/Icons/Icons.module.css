@@ -1,0 +1,14 @@
+.icon {
+    border: 1px solid darkblue;
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 10px;
+    padding: 20px;
+    border-radius: 50%;
+}
+
+.icon:hover {
+    cursor: pointer;
+    background: darkblue;
+    color: white;
+}

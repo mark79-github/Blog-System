@@ -2,6 +2,8 @@
 
 #### Final project of SoftUni's course
 
+![Software University 2021](./client/public/logo.png)
+
 ### [ReactJS - March 2021](https://softuni.bg/trainings/3315/reactjs-march-2021)
 
 ## Project Description

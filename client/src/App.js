@@ -18,6 +18,7 @@ import Logout from './components/Logout';
 
 import {globalConstants, notificationMsg} from './utils/globals';
 import isAuth from "./hoc";
+import CustomErrorBoundary from "./components/CustomErrorBoundary/CustomErrorBoundary";
 
 let logoutTimer;
 
@@ -83,34 +84,36 @@ const App = () => {
                 logout: logout
             }}>
                 <Header/>
-                <Switch>
+                <CustomErrorBoundary>
+                    <Switch>
 
-                    <Route path={'/'} component={(props) => <HomePage {...props}/>} exact/>
+                        <Route path={'/'} component={(props) => <HomePage {...props}/>} exact/>
 
-                    <Route exact path='/post/create' component={isAuth(CreatePostPage)}/>
+                        <Route exact path='/post/create' component={isAuth(CreatePostPage)}/>
 
-                    <Route exact path='/post/:id/edit' render={(props) => (
-                        !!token ? <EditPostPage {...props}/> : <Redirect to='/user/sign'/>
-                    )}/>
-                    {/*<Route exact path={'/post/:id/edit'} component={(props) => <EditPostPage {...props}/>}/>*/}
-                    {/*<Route exact path={'/post/:id/edit'} component={isAuth(<EditPostPage/>)}/>*/}
+                        <Route exact path='/post/:id/edit' render={(props) => (
+                            !!token ? <EditPostPage {...props}/> : <Redirect to='/user/sign'/>
+                        )}/>
+                        {/*<Route exact path={'/post/:id/edit'} component={(props) => <EditPostPage {...props}/>}/>*/}
+                        {/*<Route exact path={'/post/:id/edit'} component={isAuth(<EditPostPage/>)}/>*/}
 
-                    <Route path={'/post/:id'} component={DetailsPage} exact/>
+                        <Route path={'/post/:id'} component={DetailsPage} exact/>
 
-                    <Route exact path="/user/sign" render={() => (
-                        !!token ? <Redirect to='/'/> : <SignPage/>
-                    )}/>
-                    {/*<Route path={'/user/sign'} component={SignPage} exact/>*/}
+                        <Route exact path="/user/sign" render={() => (
+                            !!token ? <Redirect to='/'/> : <SignPage/>
+                        )}/>
+                        {/*<Route path={'/user/sign'} component={SignPage} exact/>*/}
 
-                    <Route exact path="/user/logout" render={() => (
-                        !!token ? <Logout/> : <Redirect to="/"/>
-                    )}/>
-                    {/*<Route path={'/user/logout'} component={Logout} exact/>*/}
+                        <Route exact path="/user/logout" render={() => (
+                            !!token ? <Logout/> : <Redirect to="/"/>
+                        )}/>
+                        {/*<Route path={'/user/logout'} component={Logout} exact/>*/}
 
-                    <Route exact path='/error' component={ErrorPage}/>
-                    <Route component={ErrorPage}/>
+                        <Route exact path='/error' component={ErrorPage}/>
+                        <Route component={ErrorPage}/>
 
-                </Switch>
+                    </Switch>
+                </CustomErrorBoundary>
                 <Footer/>
             </AuthContext.Provider>
         </>
