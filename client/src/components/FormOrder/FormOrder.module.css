@@ -1,0 +1,13 @@
+.form {
+    height: 30px;
+}
+
+.select {
+    height: 30px;
+    min-width: 200px;
+    margin-left: 50px;
+    border-radius: 6px;
+    border: none;
+    /*display: none;*/
+}
+

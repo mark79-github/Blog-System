@@ -3,7 +3,7 @@ import {Redirect, Route, Switch} from 'react-router-dom';
 
 import notificationService from './services/notificationService';
 
-import AuthContext from './components/AuthContext';
+import AuthContext from './contexts';
 
 import HomePage from './pages/home-page';
 import SignPage from './pages/sign-page';
@@ -17,15 +17,13 @@ import Footer from './components/Footer';
 import Logout from './components/Logout';
 
 import {globalConstants, notificationMsg} from './utils/globals';
+import isAuth from "./hoc";
 
 let logoutTimer;
 
 const App = () => {
 
     const [token, setToken] = useState(false);
-
-    // TODO After refresh not keeping token state
-
     const [userId, setUserId] = useState('');
     const [displayName, setDisplayName] = useState('');
     const [tokenExpirationDate, setTokenExpirationDate] = useState();
@@ -89,28 +87,28 @@ const App = () => {
 
                     <Route path={'/'} component={(props) => <HomePage {...props}/>} exact/>
 
-                    <Route exact path="/post/create" render={() => (
-                        !token ? <Redirect to="/user/sign"/> : <CreatePostPage/>
-                    )}/>
-                    {/*<Route path={'/post/create'} component={CreatePostPage} exact/>*/}
+                    <Route exact path='/post/create' component={isAuth(CreatePostPage)}/>
 
-                    <Route path={'/post/:id/edit'} component={(props) => <EditPostPage {...props}/>} exact/>
+                    <Route exact path='/post/:id/edit' render={(props) => (
+                        !!token ? <EditPostPage {...props}/> : <Redirect to='/user/sign'/>
+                    )}/>
+                    {/*<Route exact path={'/post/:id/edit'} component={(props) => <EditPostPage {...props}/>}/>*/}
+                    {/*<Route exact path={'/post/:id/edit'} component={isAuth(<EditPostPage/>)}/>*/}
+
                     <Route path={'/post/:id'} component={DetailsPage} exact/>
 
                     <Route exact path="/user/sign" render={() => (
-                        token ? <Redirect to="/"/> : <SignPage/>
+                        !!token ? <Redirect to='/'/> : <SignPage/>
                     )}/>
                     {/*<Route path={'/user/sign'} component={SignPage} exact/>*/}
 
                     <Route exact path="/user/logout" render={() => (
-                        !token ? <Redirect to="/"/> : <Logout/>
+                        !!token ? <Logout/> : <Redirect to="/"/>
                     )}/>
                     {/*<Route path={'/user/logout'} component={Logout} exact/>*/}
 
+                    <Route exact path='/error' component={ErrorPage}/>
                     <Route component={ErrorPage}/>
-
-
-
 
                 </Switch>
                 <Footer/>

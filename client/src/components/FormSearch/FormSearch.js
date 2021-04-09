@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import styles from './FormSearch.module.css';
 
 const FormSearch = (props) => {
     const [search, setSearch] = useState('')
@@ -15,12 +16,12 @@ const FormSearch = (props) => {
     }
 
     return (
-        <section className="header-search">
-            <form className="header-search-form" onSubmit={handleSubmit}>
-                <input type="text" name="search" id="search" placeholder="Search by title ..."
+        <section className={styles.header}>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <input type="text" name="search" className={styles.input} placeholder="Search by title ..."
                        value={search}
                        onChange={handleInputChange}/>
-                <input type="submit" className="header-search-form-submit" value="&#xf002;"/>
+                <input type="submit" className={styles.submit} value="&#xf002;"/>
             </form>
         </section>
     );

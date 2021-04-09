@@ -1,6 +1,8 @@
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
+import styles from './FormComment.module.css';
+
 import {globalConstants, notificationMsg} from '../../utils/globals';
 
 const initialValues = {
@@ -26,20 +28,21 @@ const FormComment = ({onNewComment}) => {
     });
 
     return (
-        <form className="form-comment" onSubmit={formik.handleSubmit}>
+        <form className={styles.form} onSubmit={formik.handleSubmit}>
             {/*<div className="form-row">*/}
             <textarea
                 name="comment"
-                id="comment"
+                // id="comment"
+                className={styles.textarea}
                 placeholder="Leave your comment..."
                 value={formik.values.comment}
                 onChange={formik.handleChange}
             />
             {formik.errors.comment && formik.touched.comment && (
-                <span className="form-comment-textarea-error">{formik.errors.comment}</span>
+                <span className={styles.error}>{formik.errors.comment}</span>
             )}
             {/*</div>*/}
-            <button type="submit">Post Comment</button>
+            <button type="submit" className={styles.button}>Post Comment</button>
         </form>
     );
 }

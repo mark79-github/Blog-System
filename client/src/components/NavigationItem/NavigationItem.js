@@ -8,7 +8,7 @@ const NavigationItem = (props) => {
     }
 
     return (
-        <li className="listItem">
+        <li>
             {
                 !props.userId
                     ? <Link to={props.linkTo}>{props.children}</Link>

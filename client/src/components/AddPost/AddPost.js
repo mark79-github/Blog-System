@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom';
 import notificationService from '../../services/notificationService';
 import * as postService from '../../services/postService';
 
-import AuthContext from '../AuthContext';
+import AuthContext from '../../contexts';
 
 import FormPost from '../FormPost';
 import {notificationMsg} from '../../utils/globals';

@@ -1,6 +1,8 @@
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
+import styles from './FormPost.module.css';
+
 import {globalConstants, notificationMsg} from '../../utils/globals';
 
 const validationSchema = Yup.object({
@@ -31,44 +33,47 @@ const FormPost = ({data, onSubmitFormHandler}) => {
     });
 
     return (
-        <form className="form" onSubmit={formik.handleSubmit}>
-            <div className="form-row">
+        <form className={styles.form} onSubmit={formik.handleSubmit}>
+            <div className={styles.row}>
                 <input
                     type="text"
                     name="title"
+                    className={styles.input}
                     placeholder="Title"
                     value={formik.values.title}
                     onChange={formik.handleChange}
                 />
                 {formik.errors.title && formik.touched.title && (
-                    <span className="form-input-error">{formik.errors.title}</span>
+                    <span className={styles.error}>{formik.errors.title}</span>
                 )}
             </div>
-            <div className="form-row">
+            <div className={styles.row}>
                 <textarea
                     name="content"
+                    className={styles.textarea}
                     placeholder="Content"
                     value={formik.values.content}
                     onChange={formik.handleChange}
                 />
                 {formik.errors.content && formik.touched.content && (
-                    <span className="form-post-textarea-error">{formik.errors.content}</span>
+                    <span className={styles['textarea-error']}>{formik.errors.content}</span>
                 )}
             </div>
-            <div className="form-row">
+            <div className={styles.row}>
                 <input
                     type="text"
                     name="urlToImage"
+                    className={styles.input}
                     placeholder="Image URL"
                     value={formik.values.urlToImage}
                     onChange={formik.handleChange}
                 />
                 {formik.errors.urlToImage && formik.touched.urlToImage && (
-                    <span className="form-input-error">{formik.errors.urlToImage}</span>
+                    <span className={styles.error}>{formik.errors.urlToImage}</span>
                 )}
             </div>
             {/*disabled={!(formik.dirty && formik.isValid)}*/}
-            <button type="submit">Save</button>
+            <button type="submit" className={styles.button}>Save</button>
         </form>
     );
 }

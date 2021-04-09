@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from 'react';
 
-import AuthContext from '../AuthContext';
+import AuthContext from '../../contexts';
 
 import * as userService from '../../services/userService';
 import notificationService from '../../services/notificationService';

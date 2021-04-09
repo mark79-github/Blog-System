@@ -1,16 +1,15 @@
 import {Link} from 'react-router-dom';
 import logo from '../../logo.svg';
-import './NotFound.css';
+import styles from './NotFound.module.css';
 
 const NotFound = () => {
     return (
-        <div className="app">
-            <header className="app-header">
+        <div className={styles.app}>
+            <header className={styles.header}>
                 <h1>Error 404</h1>
                 <p>Page Not Found</p>
-                <img src={logo} className="app-logo" alt=""/>
-                <Link to={'/'} className="app-link">Return to Home</Link>
-                {/*<a className="app-link" href="/" target="_self" rel="noopener noreferrer">Return to Home</a>*/}
+                <img src={logo} className={styles.logo} alt=""/>
+                <Link to={'/'} className={styles.link}>Return to Home</Link>
             </header>
         </div>
     );

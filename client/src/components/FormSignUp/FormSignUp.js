@@ -6,8 +6,11 @@ import {useHistory} from 'react-router-dom';
 import * as authService from '../../services/authService';
 import notificationService from '../../services/notificationService';
 
-import AuthContext from '../AuthContext';
+import styles from './FormSignUp.module.css';
+
+import AuthContext from "../../contexts";
 import {api, globalConstants, notificationMsg} from '../../utils/globals';
+
 
 const initialValues = {
     displayName: '',
@@ -87,70 +90,76 @@ const FormSignUp = () => {
     });
 
     return (
-        <form className="form" onSubmit={formik.handleSubmit}>
-            <div className="form-row">
+        <form className={styles.form} onSubmit={formik.handleSubmit}>
+            <div className={styles.row}>
                 <input
                     type="text"
                     name="displayName"
+                    className={styles.input}
                     placeholder="Display Name"
                     value={formik.values.displayName}
                     onChange={formik.handleChange}
                 />
                 {formik.errors.displayName && formik.touched.displayName && (
-                    <span className="form-input-error">{formik.errors.displayName}</span>
+                    <span className={styles.error}>{formik.errors.displayName}</span>
                 )}
             </div>
-            <div className="form-row">
+            <div className={styles.row}>
                 <input
                     type="text"
                     name="email"
+                    className={styles.input}
                     placeholder="Email"
                     value={formik.values.email}
                     onChange={formik.handleChange}
                 />
                 {formik.errors.email && formik.touched.email && (
-                    <span className="form-input-error">{formik.errors.email}</span>
+                    <span className={styles.error}>{formik.errors.email}</span>
                 )}
             </div>
-            <div className="form-row">
+            <div className={styles.row}>
                 <input
                     type="password"
                     name="password"
+                    className={styles.input}
                     placeholder="Password"
                     value={formik.values.password}
                     onChange={formik.handleChange}
                 />
                 {formik.errors.password && formik.touched.password && (
-                    <span className="form-input-error">{formik.errors.password}</span>
+                    <span className={styles.error}>{formik.errors.password}</span>
                 )}
             </div>
-            <div className="form-row">
+            <div className={styles.row}>
                 <input
                     type="password"
                     name="repeatPassword"
+                    className={styles.input}
                     placeholder="Repeat Password"
                     value={formik.values.repeatPassword}
                     onChange={formik.handleChange}
                 />
                 {formik.errors.repeatPassword && formik.touched.repeatPassword && (
-                    <span className="form-input-error">{formik.errors.repeatPassword}</span>
+                    <span className={styles.error}>{formik.errors.repeatPassword}</span>
                 )}
             </div>
-            <div className="form-row">
-                <div className="wrapper">
+            <div className={styles.row}>
+                <div className={styles.wrapper}>
                     <input
                         id="filename"
                         type="text"
                         name="filename"
+                        className={styles.input}
                         placeholder="Select file"
                         readOnly
                         value={formik.values.file && formik.values.filename}
                     />
-                    <div className="file-upload">
+                    <div className={styles.file}>
                         <input
                             type="file"
                             id="name"
                             name="file"
+                            className={styles['input-file']}
                             onChange={(event) => {
                                 formik.setFieldValue('file', event.target.files[0]);
                                 formik.setFieldTouched('file', true);
@@ -161,10 +170,10 @@ const FormSignUp = () => {
                     </div>
                 </div>
                 {formik.errors.file && formik.touched.file && (
-                    <span className="form-input-error">{formik.errors.file}</span>
+                    <span className={styles.error}>{formik.errors.file}</span>
                 )}
             </div>
-            <button type="submit"> Sign Up</button>
+            <button type="submit" className={styles.button}> Sign Up</button>
             {/*disabled={!(formik.dirty && formik.isValid)}*/}
         </form>
     );

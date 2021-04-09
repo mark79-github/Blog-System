@@ -3,10 +3,12 @@ import {useHistory} from 'react-router-dom';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
+import styles from './FormSignIn.module.css';
+
 import * as authService from '../../services/authService';
 import notificationService from '../../services/notificationService';
 
-import AuthContext from '../AuthContext';
+import AuthContext from '../../contexts';
 import {globalConstants, notificationMsg} from '../../utils/globals';
 
 const initialValues = {
@@ -51,33 +53,35 @@ const FormSignIn = () => {
     });
 
     return (
-        <form className="form" onSubmit={formik.handleSubmit}>
-            <div className="form-row">
+        <form className={styles.form} onSubmit={formik.handleSubmit}>
+            <div className={styles.row}>
                 <input
                     type="text"
                     name="email"
+                    className={styles.input}
                     placeholder="Email"
                     value={formik.values.email}
                     onChange={formik.handleChange}
                 />
                 {formik.errors.email && formik.touched.email && (
-                    <span className="form-input-error">{formik.errors.email}</span>
+                    <span className={styles.error}>{formik.errors.email}</span>
                 )}
             </div>
-            <div className="form-row">
+            <div className={styles.row}>
                 <input
                     type="password"
                     name="password"
+                    className={styles.input}
                     placeholder="Password"
                     value={formik.values.password}
                     onChange={formik.handleChange}
                 />
                 {formik.errors.password && formik.touched.password && (
-                    <span className="form-input-error">{formik.errors.password}</span>
+                    <span className={styles.error}>{formik.errors.password}</span>
                 )}
             </div>
             {/*disabled={!(formik.dirty && formik.isValid)}*/}
-            <button type="submit"> Sign In</button>
+            <button type="submit" className={styles.button}>Sign In</button>
         </form>
     );
 }

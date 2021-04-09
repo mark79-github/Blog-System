@@ -6,7 +6,7 @@ import * as postService from '../../services/postService';
 import * as userService from '../../services/userService';
 import notificationService from '../../services/notificationService';
 
-import AuthContext from '../AuthContext';
+import AuthContext from '../../contexts';
 
 import Like from '../Icons/Like';
 import Unlike from '../Icons/Unlike';

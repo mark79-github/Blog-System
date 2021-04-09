@@ -1,0 +1,58 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 20px 10px 20px;
+    position: relative;
+}
+
+.error {
+    color: gold;
+    font-size: 14px;
+    position: absolute;
+    left: 0;
+    top: 120px;
+}
+
+.textarea {
+    width: 800px;
+    height: 150px;
+    /*min-width: 500px;*/
+    /*max-width: 800px;*/
+    /*min-height: 100px;*/
+    /*max-height: 200px;*/
+    outline: none;
+    resize: none;
+    /*margin: 15px 0;*/
+
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+    max-height: 200px;
+    color: darkblue;
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.textarea::placeholder {
+    color: darkblue;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.button {
+    background: darkblue;
+    color: white;
+    border: 1px solid white;
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 10px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.button:hover {
+    cursor: pointer;
+    background: white;
+    color: darkblue;
+}

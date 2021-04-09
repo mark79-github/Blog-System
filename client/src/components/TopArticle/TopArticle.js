@@ -1,7 +1,7 @@
 import {useContext} from 'react';
 import moment from 'moment';
 
-import AuthContext from '../AuthContext';
+import AuthContext from '../../contexts';
 
 import BtnReadMore from '../BtnReadMore';
 import {api} from "../../utils/globals";
