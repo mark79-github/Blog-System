@@ -1,0 +1,23 @@
+/*sign-in */
+/*form-container*/
+/*form-container-title*/
+/*form-container-sub-title*/
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+    padding: 100px;
+}
+
+.title {
+    font-weight: 600;
+    color: white;
+}
+
+.subtitle {
+    color: white;
+    margin: 10px 0 20px 0;
+    font-style: italic;
+}

@@ -1,5 +1,7 @@
 import {useContext, useEffect, useState} from 'react';
 
+import styles from './Comment.module.css';
+
 import AuthContext from '../../contexts';
 
 import * as userService from '../../services/userService';
@@ -28,15 +30,15 @@ const Comment = ({data, onDeleteComment}) => {
     }, [user]);
 
     return (
-        <article className="main-article-comment-content-details">
-            <span>#{index}</span> <span>{authorDisplayName}</span>
+        <article className={styles.container}>
+            <span className={styles.span}>#{index}</span> <span className={styles.span}>{authorDisplayName}</span>
             <Avatar img={authorAvatarImgURL}/>
             {
                 authContext.userId === user
                     ? <i className="far fa-trash-alt" onClick={handleClick}/>
                     : null
             }
-            <p>{comment}</p>
+            <p className={styles.p}>{comment}</p>
         </article>
     );
 }

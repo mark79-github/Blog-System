@@ -1,0 +1,22 @@
+/*header*/
+/*header-container*/
+/*navigation*/
+/*logo-wrapper*/
+
+.header {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: darkblue;
+}
+
+.navigation {
+    background: darkblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.list {
+    display: flex;
+}

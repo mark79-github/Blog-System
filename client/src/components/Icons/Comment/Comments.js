@@ -5,9 +5,11 @@ const Comments = (props) => {
     }
 
     return (
-        <div className="main-article-details-comment-icon">
+        // <div className="main-article-details-comment-icon">
+        <div>
             <i className="far fa-comments" onClick={handleClick}/>
         </div>
+        // </div>
     )
 
 }

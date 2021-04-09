@@ -5,9 +5,11 @@ const Edit = ({onEdit}) => {
     }
 
     return (
-        <div className="main-article-details-edit-icon">
+        // <div className="main-article-details-edit-icon">
+        <div>
             <i className="far fa-edit" onClick={handleClick}/>
         </div>
+        // </div>
     );
 }
 

@@ -8,9 +8,11 @@ class Like extends Component {
 
     render() {
         return (
-            <div className="main-article-details-likes-icons">
+            // <div className="main-article-details-likes-icons">
+            <div>
                 <i className="far fa-thumbs-up" onClick={this.handleClick}/>
             </div>
+            // </div>
         )
     }
 }

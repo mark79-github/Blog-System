@@ -1,0 +1,35 @@
+/*main-container*/
+/*articles-empty-container*/
+/*sub-article*/
+
+.container {
+    background: darkblue;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-container {
+    color: white;
+    text-align: center;
+    flex-basis: 100%;
+    min-height: 60vh;
+    position: relative;
+}
+
+.title {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

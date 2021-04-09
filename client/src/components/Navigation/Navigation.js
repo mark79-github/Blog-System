@@ -1,5 +1,7 @@
 import React, {useContext} from 'react';
 
+import styles from './Navigation.module.css';
+
 import AuthContext from '../../contexts';
 
 import NavigationItem from '../NavigationItem';
@@ -8,19 +10,19 @@ const Navigation = () => {
     const {isLoggedIn, displayName, userId} = useContext(AuthContext);
 
     return (
-        <header>
+        <header className={styles.header}>
             <div className="header-container">
-                <section className="navigation">
+                <section className={styles.navigation}>
                     <section className="logo-wrapper">
                         <nav>
-                            <ul>
+                            <ul className={styles.list}>
                                 <NavigationItem linkTo={'/'}>All Posts</NavigationItem>
                             </ul>
                         </nav>
                     </section>
                     <section>
                         <nav>
-                            <ul>
+                            <ul className={styles.list}>
                                 {isLoggedIn
                                     ?
                                     <>

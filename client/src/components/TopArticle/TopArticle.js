@@ -1,6 +1,8 @@
 import {useContext} from 'react';
 import moment from 'moment';
 
+import styles from './TopArticle.module.css';
+
 import AuthContext from '../../contexts';
 
 import BtnReadMore from '../BtnReadMore';

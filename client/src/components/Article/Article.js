@@ -2,6 +2,8 @@ import BtnReadMore from '../BtnReadMore';
 import {api} from "../../utils/globals";
 import {request} from "../../utils/data";
 
+import styles from './Article.module.css';
+
 const Article = ({data, history}) => {
     const {_id, title, urlToImage} = data;
 
@@ -13,12 +15,12 @@ const Article = ({data, history}) => {
     }
 
     return (
-        <article className="article">
-            <article className="article-image">
-                <img src={urlToImage} alt="react"/>
+        <article className={styles.wrapper}>
+            <article>
+                <img className={styles.img} src={urlToImage} alt=""/>
             </article>
-            <article className="article-description">
-                <h2 className="article-description-title">{title}</h2>
+            <article className={styles.description}>
+                <h2 className={styles.title}>{title}</h2>
                 <BtnReadMore onClick={handleButtonCLick}/>
             </article>
         </article>

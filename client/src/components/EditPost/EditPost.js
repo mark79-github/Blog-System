@@ -4,6 +4,8 @@ import Loader from 'react-loader-spinner';
 import notificationService from '../../services/notificationService';
 import * as postService from '../../services/postService';
 
+import styles from './EditPost.module.css';
+
 import AuthContext from '../../contexts';
 
 import FormPost from '../FormPost';
@@ -49,16 +51,16 @@ class EditPost extends Component {
 
         if (Object.keys(this.state.post).length === 0) {
             return (
-                <div className="main-container">
+                <div className={styles.container}>
                     <Loader type="Rings" color="white" height={80} width={80}/>
                 </div>
             )
         }
 
         return (
-            <div className="main-container">
-                <section className="form-container">
-                    <h2 className="form-container-title post">Edit Post</h2>
+            <div className={styles.container}>
+                <section className={styles.wrapper}>
+                    <h2 className={styles.title}>Edit Post</h2>
                     <FormPost data={this.state.post} onSubmitFormHandler={this.editPost}/>
                 </section>
             </div>

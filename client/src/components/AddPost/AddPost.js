@@ -1,6 +1,8 @@
 import {useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 
+import styles from './AddPost.module.css';
+
 import notificationService from '../../services/notificationService';
 import * as postService from '../../services/postService';
 
@@ -32,9 +34,9 @@ const AddPost = () => {
     }
 
     return (
-        <div className="main-container">
-            <section className="form-container">
-                <h2 className="form-container-title post">Create Post</h2>
+        <div className={styles.container}>
+            <section className={styles.form}>
+                <h2 className={styles.title}>Create Post</h2>
                 <FormPost data={post} onSubmitFormHandler={addPost}/>
             </section>
         </div>

@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+import styles from './NavigationItem.module.css';
+
 const NavigationItem = (props) => {
 
     const clickHandler = () => {
@@ -8,11 +10,11 @@ const NavigationItem = (props) => {
     }
 
     return (
-        <li>
+        <li className={styles.item}>
             {
                 !props.userId
-                    ? <Link to={props.linkTo}>{props.children}</Link>
-                    : <Link to={{pathname:'/', author:props.linkTo}} onClick={clickHandler}>{props.children}</Link>
+                    ? <Link className={styles.link} to={props.linkTo} >{props.children}</Link>
+                    : <Link className={styles.link} to={{pathname:'/', author:props.linkTo}} onClick={clickHandler}>{props.children}</Link>
             }
         </li>
     );

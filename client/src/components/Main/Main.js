@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import queryString from 'query-string';
 import Loader from 'react-loader-spinner';
 
+import styles from './Main.module.css';
+
 import * as postService from '../../services/postService';
 import notificationService from '../../services/notificationService';
 
@@ -90,7 +92,7 @@ class Main extends Component {
 
         if (this.state.loading) {
             return (
-                <div className="main-container">
+                <div className={styles.container}>
                     <Loader type="Rings" color="white" height={80} width={80}/>
                 </div>
             )
@@ -98,18 +100,18 @@ class Main extends Component {
 
         if (!this.state.topPost.length) {
             return (
-                <div className="main-container">
+                <div className={styles.container}>
                     <FormSearch onSearch={this.onSearch}/>
                     <FormOrder onOrderChange={this.onOrderChange} disabled={true}/>
-                    <section className="articles-empty-container">
-                        <h1>No posts found</h1>
+                    <section className={styles['empty-container']}>
+                        <h1 className={styles.title}>No posts found</h1>
                     </section>
                 </div>
             )
         }
 
         return (
-            <div className="main-container">
+            <div className={styles.container}>
 
                 <FormSearch onSearch={this.onSearch}/>
                 <FormOrder onOrderChange={this.onOrderChange}/>
@@ -121,7 +123,7 @@ class Main extends Component {
                 {
                     !!this.state.posts.length
                         ?
-                        <section className="sub-article">
+                        <section className={styles.wrapper}>
                             {this.state.posts.map(x => {
                                 return (
                                     <Article {...this.props} key={x._id} data={x}/>
