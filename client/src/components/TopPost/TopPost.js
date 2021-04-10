@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import moment from 'moment';
 
-import styles from './TopArticle.module.css';
+import styles from './TopPost.module.css';
 
 import BtnReadMore from '../BtnReadMore';
 import {api} from "../../utils/globals";
@@ -9,7 +9,7 @@ import {request} from "../../utils/data";
 import * as userService from "../../services/userService";
 import notificationService from "../../services/notificationService";
 
-const TopArticle = ({data, history}) => {
+const TopPost = ({data, history}) => {
     let {_id, title, content, author, urlToImage, publishedAt, likes, comments, visits} = data;
     publishedAt = moment(publishedAt).format('DD.MM.YYYY hh:mm');
     // author = useContext(AuthContext).displayName;
@@ -67,4 +67,4 @@ const TopArticle = ({data, history}) => {
     );
 }
 
-export default TopArticle;
+export default TopPost;

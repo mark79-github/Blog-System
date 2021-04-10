@@ -1,11 +1,15 @@
+.container {
+    flex-basis: 100%;
+    margin-top: 10px;
+}
+
 .form {
-    height: 30px;
+    width: 100%;
 }
 
 .select {
     height: 30px;
-    min-width: 200px;
-    /*margin-left: 50px;*/
+    width: inherit;
     border-radius: 6px;
     border: none;
 }

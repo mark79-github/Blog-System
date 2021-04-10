@@ -41,8 +41,10 @@
     margin-top: 10px;
 }
 
-.button:hover {
-    cursor: pointer;
-    background: white;
-    color: darkblue;
+@media (hover: hover) and (pointer: fine) {
+    .button:hover {
+        cursor: pointer;
+        background: white;
+        color: darkblue;
+    }
 }

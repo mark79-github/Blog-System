@@ -1,27 +1,30 @@
 import React from 'react';
+import NotFound from "../NotFound";
 
 class CustomErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            hasError: false
+            hasError: false,
+            error: ''
         };
     }
 
-    static getDerivedStateFromError() {
+    static getDerivedStateFromError(error) {
         return {
-            hasError: true
+            hasError: true,
+            error: error.message
         }
     }
 
-    componentDidCatch(error, errorInfo) {
-        console.log('Error from componentDidCatch: ', error);
+    componentDidCatch(error) {
+        console.log('Error from componentDidCatch: ', error.message);
     }
 
     render() {
         if (this.state.hasError) {
-            return <h1 style={{color: "white"}}>I'm soo sorry</h1>
+            return <NotFound error={this.state.error}/>
         }
 
         return this.props.children;

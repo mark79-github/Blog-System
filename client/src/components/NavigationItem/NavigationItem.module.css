@@ -17,14 +17,16 @@
     border-radius: 4px;
 }
 
-.link:hover {
-    color: darkblue;
-    border: 1px solid darkblue;
-    background: white;
-}
-
 @media all and (max-width: 400px) {
     .item {
         margin-left: 0;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .link:hover {
+        color: darkblue;
+        border: 1px solid darkblue;
+        background: white;
     }
 }

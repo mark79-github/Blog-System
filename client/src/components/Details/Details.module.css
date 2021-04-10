@@ -54,6 +54,10 @@
     border-bottom-right-radius: 8px;
 }
 
+.border{
+    border-radius: 0;
+}
+
 .info {
     font-size: 20px;
     font-weight: 600;

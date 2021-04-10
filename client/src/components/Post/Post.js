@@ -2,9 +2,9 @@ import BtnReadMore from '../BtnReadMore';
 import {api} from "../../utils/globals";
 import {request} from "../../utils/data";
 
-import styles from './Article.module.css';
+import styles from './Post.module.css';
 
-const Article = ({data, history}) => {
+const Post = ({data, history}) => {
     const {_id, title, urlToImage} = data;
 
     const handleButtonCLick = async () => {
@@ -27,4 +27,4 @@ const Article = ({data, history}) => {
     );
 }
 
-export default Article;
+export default Post;

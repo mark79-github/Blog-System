@@ -34,12 +34,12 @@ const AddPost = () => {
     }
 
     return (
-        <div className={styles.container}>
-            <section className={styles.form}>
+        <main className={styles.container}>
+            <section className={styles.wrapper}>
                 <h2 className={styles.title}>Create Post</h2>
                 <FormPost data={post} onSubmitFormHandler={addPost}/>
             </section>
-        </div>
+        </main>
     );
 }
 

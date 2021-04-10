@@ -8,15 +8,17 @@
     margin: 10px 20px;
 }
 
-.button:hover {
-    cursor: pointer;
-    background: white;
-    color: darkblue;
-    border: 1px solid darkblue;
-}
-
 @media all and (max-width: 600px) {
     .button {
         font-size: 16px;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .button:hover {
+        cursor: pointer;
+        background: white;
+        color: darkblue;
+        border: 1px solid darkblue;
     }
 }

@@ -1,7 +1,3 @@
-/*form*/
-/*form-row*/
-/*form-input-error*/
-
 .form {
     display: flex;
     flex-direction: column;
@@ -52,14 +48,16 @@
     color: white;
 }
 
-.button:hover {
-    cursor: pointer;
-    background: white;
-    color: darkblue;
-}
+@media (hover: hover) and (pointer: fine) {
+    .button:hover {
+        cursor: pointer;
+        background: white;
+        color: darkblue;
+    }
 
-.button[disabled]:hover {
-    background: darkblue;
-    color: white;
-    cursor: not-allowed;
+    .button[disabled]:hover {
+        background: darkblue;
+        color: white;
+        cursor: not-allowed;
+    }
 }

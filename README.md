@@ -88,8 +88,8 @@ This project is licensed under the following [license](LICENSE)
 
 ## Deploy
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/a456b18c-e699-4167-a469-9ed284ba1981/deploy-status)](https://app.netlify.com/sites/blog-system-application/deploys)
-* See application LIVE at: [https://blog-system-application.netlify.app](https://blog-system-application.netlify.app/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a456b18c-e699-4167-a469-9ed284ba1981/deploy-status)](https://app.netlify.com/sites/blog-system/deploys)
+* See application LIVE at: [https://blog-system.netlify.app](https://blog-system.netlify.app/)
 * Server running at: [https://blog-system-application.herokuapp.com](https://blog-system-application.herokuapp.com/)
 * MongoDB Atlas for storing database at cloud
   service: [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas)

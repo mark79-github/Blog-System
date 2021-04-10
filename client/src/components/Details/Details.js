@@ -133,14 +133,14 @@ class Details extends Component {
 
         if (Object.keys(this.state.post).length === 0) {
             return (
-                <div className={styles.container}>
+                <main className={styles.container}>
                     <Loader type="Rings" color="white" height={80} width={80}/>
-                </div>
+                </main>
             )
         }
 
         return (
-            <div className={styles.container}>
+            <main className={styles.container}>
                 <section className={styles.article}>
                     <article className={styles.wrapper}>
                         <img className={styles.img} src={this.state.post.urlToImage} alt=""/>
@@ -149,7 +149,7 @@ class Details extends Component {
                         <h2 className={styles.title}>{this.state.post.title}</h2>
                         <p className={styles.content}>{this.state.post.content}</p>
                     </article>
-                    <article className={styles.details}>
+                    <article className={`${styles.details} ${!this.state.hideComments && !!this.state.post.comments.length ? styles.border: ''}`}>
                         <article className={styles.info}>
                             <div>
                                 <span>Published: </span>
@@ -239,7 +239,7 @@ class Details extends Component {
                             </article>
                     }
                 </section>
-            </div>
+            </main>
         );
     }
 }

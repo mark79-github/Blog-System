@@ -25,8 +25,10 @@
     padding: 20px;
 }
 
-.icon:hover {
-    cursor: pointer;
-    background: white;
-    color: darkblue;
+@media (hover: hover) and (pointer: fine) {
+    .icon:hover {
+        cursor: pointer;
+        background: white;
+        color: darkblue;
+    }
 }

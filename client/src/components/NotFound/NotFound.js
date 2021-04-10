@@ -2,16 +2,25 @@ import {Link} from 'react-router-dom';
 import logo from '../../logo.svg';
 import styles from './NotFound.module.css';
 
-const NotFound = () => {
+const NotFound = (props) => {
     return (
-        <div className={styles.app}>
+        <main className={styles.app}>
             <header className={styles.header}>
-                <h1>Error 404</h1>
-                <p>Page Not Found</p>
+                {
+                    props.error
+                        ? <>
+                            <h2>Error occurred</h2>
+                            <p>{props.error}</p>
+                        </>
+                        : <>
+                            <h1>Error 404</h1>
+                            <p>Page Not Found</p>
+                        </>
+                }
                 <img src={logo} className={styles.logo} alt=""/>
                 <Link to={'/'} className={styles.link}>Return to Home</Link>
             </header>
-        </div>
+        </main>
     );
 }
 

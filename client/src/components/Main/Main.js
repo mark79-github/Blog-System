@@ -7,8 +7,8 @@ import styles from './Main.module.css';
 import * as postService from '../../services/postService';
 import notificationService from '../../services/notificationService';
 
-import Article from '../Article';
-import TopArticle from '../TopArticle';
+import Post from '../Post';
+import TopPost from '../TopPost';
 import FormSearch from '../FormSearch';
 import FormOrder from '../FormOrder';
 import {notificationMsg} from '../../utils/globals';
@@ -92,32 +92,32 @@ class Main extends Component {
 
         if (this.state.loading) {
             return (
-                <div className={styles.container}>
+                <main className={styles.container}>
                     <Loader type="Rings" color="white" height={80} width={80}/>
-                </div>
+                </main>
             )
         }
 
         if (!this.state.topPost.length) {
             return (
-                <div className={styles.container}>
+                <main className={styles.container}>
                     <FormSearch onSearch={this.onSearch}/>
                     <FormOrder onOrderChange={this.onOrderChange} disabled={true}/>
                     <section className={styles['empty-container']}>
                         <h1 className={styles.title}>No posts found</h1>
                     </section>
-                </div>
+                </main>
             )
         }
 
         return (
-            <div className={styles.container}>
+            <main className={styles.container}>
 
                 <FormSearch onSearch={this.onSearch}/>
                 <FormOrder onOrderChange={this.onOrderChange}/>
 
                 {this.state.topPost.map(x => {
-                    return (<TopArticle key={x._id} data={x} {...this.props}/>)
+                    return (<TopPost key={x._id} data={x} {...this.props}/>)
                 })}
 
                 {
@@ -126,7 +126,7 @@ class Main extends Component {
                         <section className={styles.wrapper}>
                             {this.state.posts.map(x => {
                                 return (
-                                    <Article {...this.props} key={x._id} data={x}/>
+                                    <Post {...this.props} key={x._id} data={x}/>
                                 )
                             })}
                         </section>
@@ -134,7 +134,7 @@ class Main extends Component {
                         null
                 }
 
-            </div>
+            </main>
         );
     }
 }

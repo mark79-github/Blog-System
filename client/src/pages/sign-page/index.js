@@ -8,11 +8,9 @@ import SignIn from '../../components/SignIn';
 const SignPage = () => {
 
     return (
-        <main>
-            <div className={styles.container}>
-                <SignUp/>
-                <SignIn/>
-            </div>
+        <main className={styles.container}>
+            <SignUp/>
+            <SignIn/>
         </main>
     );
 }

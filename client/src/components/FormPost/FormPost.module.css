@@ -47,12 +47,8 @@
 }
 
 .textarea {
-    width: 800px;
+    width: 100%;
     height: 150px;
-    min-width: 500px;
-    max-width: 800px;
-    min-height: 100px;
-    max-height: 200px;
     outline: none;
     resize: none;
     margin: 15px 0;
@@ -68,14 +64,16 @@
     color: white;
 }
 
-.button:hover {
-    cursor: pointer;
-    background: white;
-    color: darkblue;
-}
+@media (hover: hover) and (pointer: fine) {
+    .button:hover {
+        cursor: pointer;
+        background: white;
+        color: darkblue;
+    }
 
-.button[disabled]:hover {
-    background: darkblue;
-    color: white;
-    cursor: not-allowed;
+    .button[disabled]:hover {
+        background: darkblue;
+        color: white;
+        cursor: not-allowed;
+    }
 }

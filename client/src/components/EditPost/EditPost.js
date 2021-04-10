@@ -51,19 +51,19 @@ class EditPost extends Component {
 
         if (Object.keys(this.state.post).length === 0) {
             return (
-                <div className={styles.container}>
+                <main className={styles.container}>
                     <Loader type="Rings" color="white" height={80} width={80}/>
-                </div>
+                </main>
             )
         }
 
         return (
-            <div className={styles.container}>
+            <main className={styles.container}>
                 <section className={styles.wrapper}>
                     <h2 className={styles.title}>Edit Post</h2>
                     <FormPost data={this.state.post} onSubmitFormHandler={this.editPost}/>
                 </section>
-            </div>
+            </main>
         );
     }
 }

@@ -42,7 +42,7 @@ class FormOrder extends Component {
 
     render() {
         return (
-            <section>
+            <section className={styles.container}>
                 <form className={styles.form}>
                     <select className={styles.select} value={this.state.orderBy}
                             onChange={this.selectChangeHandler} disabled={this.props.disabled}>
