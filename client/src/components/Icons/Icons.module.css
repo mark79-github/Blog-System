@@ -7,8 +7,10 @@
     border-radius: 50%;
 }
 
-.icon:hover {
-    cursor: pointer;
-    background: darkblue;
-    color: white;
+@media (hover: hover) and (pointer: fine) {
+    .icon:hover {
+        cursor: pointer;
+        background: darkblue;
+        color: white;
+    }
 }
