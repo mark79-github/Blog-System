@@ -27,7 +27,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    border-radius: 8px;
+    /*border-radius: 8px;*/
 }
 
 .title {
@@ -41,3 +41,11 @@
     font-style: italic;
     padding: 0 20px 20px 20px;
 }
+
+@media all and (max-width: 768px) {
+    .details {
+        flex-direction: column;
+    }
+}
+
+

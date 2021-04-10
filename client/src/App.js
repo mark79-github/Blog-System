@@ -17,8 +17,8 @@ import Footer from './components/Footer';
 import Logout from './components/Logout';
 
 import {globalConstants, notificationMsg} from './utils/globals';
-import isAuth from "./hoc";
-import CustomErrorBoundary from "./components/CustomErrorBoundary/CustomErrorBoundary";
+import isAuth from './hoc';
+import CustomErrorBoundary from './components/CustomErrorBoundary/CustomErrorBoundary';
 
 let logoutTimer;
 

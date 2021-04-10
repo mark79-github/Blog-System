@@ -1,5 +1,6 @@
 .item {
     margin-left: 10px;
+    padding: 20px 0;
 }
 
 .item:first-child {
@@ -20,4 +21,10 @@
     color: darkblue;
     border: 1px solid darkblue;
     background: white;
+}
+
+@media all and (max-width: 400px) {
+    .item {
+        margin-left: 0;
+    }
 }

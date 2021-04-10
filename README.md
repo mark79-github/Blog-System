@@ -2,7 +2,7 @@
 
 #### Final project of SoftUni's course
 
-![Software University 2021](./client/public/logo.png)
+![Software University 2021](client/public/logo.png)
 
 ### [ReactJS - March 2021](https://softuni.bg/trainings/3315/reactjs-march-2021)
 
@@ -88,6 +88,7 @@ This project is licensed under the following [license](LICENSE)
 
 ## Deploy
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a456b18c-e699-4167-a469-9ed284ba1981/deploy-status)](https://app.netlify.com/sites/blog-system-application/deploys)
 * See application LIVE at: [https://blog-system-application.netlify.app](https://blog-system-application.netlify.app/)
 * Server running at: [https://blog-system-application.herokuapp.com](https://blog-system-application.herokuapp.com/)
 * MongoDB Atlas for storing database at cloud

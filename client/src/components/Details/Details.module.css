@@ -49,7 +49,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    border-radius: 8px;
+    /*border-radius: 8px;*/
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .info {
@@ -78,6 +80,12 @@
     padding: 10px 20px;
     font-size: 20px;
     font-weight: 600;
+}
+
+@media all and (max-width: 600px) {
+    .details {
+        flex-direction: column;
+    }
 }
 
 
