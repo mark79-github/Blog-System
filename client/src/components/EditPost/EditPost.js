@@ -17,6 +17,7 @@ class EditPost extends Component {
         super(props);
 
         this.postId = props.match.params.id;
+        this._isMounted = false;
 
         this.state = {
             post: {},
@@ -37,10 +38,17 @@ class EditPost extends Component {
             .catch(err => notificationService.errorMsg(err.message))
     }
 
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
     componentDidMount() {
+        this._isMounted = true;
         postService.getById(this.postId)
             .then(post => {
-                this.setState({post});
+                if (this._isMounted) {
+                    this.setState({post});
+                }
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)

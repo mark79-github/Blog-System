@@ -69,7 +69,7 @@ const FormSignUp = () => {
                 }
                 return res.json();
             }).then(cloudinary => {
-                return authService.register(displayName, email.toLowerCase(), password, cloudinary.url)
+                return authService.register(displayName, email.toLowerCase(), password, cloudinary['secure_url'])
             }).then(response => {
                 if (response.hasOwnProperty('message')) {
                     throw Error(response.message);
