@@ -1,9 +1,11 @@
 .wrapper {
-    max-width: 60px;
-    max-height: 60px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
 }
 
 .img {
     border-radius: 50%;
+    width: inherit;
+    height: inherit;
 }
