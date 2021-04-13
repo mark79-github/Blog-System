@@ -5,3 +5,9 @@ body {
     font-family: 'Lato', sans-serif;
     background: darkblue;
 }
+
+@media all and (max-width: 768px) {
+    #toggle:checked ~ nav > ul {
+        background: red;
+    }
+}
