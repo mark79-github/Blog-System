@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 
 import AuthContext from '../contexts';
 
-const isAuth = (WrappedComponent) => {
+const haveToBeAuthenticated = (WrappedComponent) => {
 
     return (props) => {
         const {isLoggedIn} = useContext(AuthContext);
@@ -19,4 +19,4 @@ const isAuth = (WrappedComponent) => {
     };
 };
 
-export default isAuth;
+export default haveToBeAuthenticated;

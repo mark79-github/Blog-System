@@ -1,7 +1,7 @@
-import React, {useState, useEffect, useCallback} from 'react'
-import AuthContext from "./contexts";
-import {globalConstants, notificationMsg} from "./utils/globals";
-import notificationService from "./services/notificationService";
+import React, {useCallback, useEffect, useState} from 'react'
+import AuthContext from './contexts';
+import {globalConstants, notificationMsg} from './utils/globals';
+import notificationService from './services/notificationService';
 
 let logoutTimer;
 
@@ -11,6 +11,7 @@ const Auth = (props) => {
     const [userId, setUserId] = useState('');
     const [displayName, setDisplayName] = useState('');
     const [tokenExpirationDate, setTokenExpirationDate] = useState();
+    const [loading, setLoading] = useState(true);
 
     const login = useCallback((token, userId, displayName, expirationTime) => {
         setToken(token);
@@ -37,21 +38,15 @@ const Auth = (props) => {
 
     useEffect(() => {
 
-        async function fetchData() {
-
-            const storedData = JSON.parse(localStorage.getItem(globalConstants.AUTH_TOKEN));
-            if (storedData &&
-                storedData.token &&
-                storedData.userId &&
-                storedData.displayName &&
-                new Date(storedData.expirationTime) > new Date()) {
-                await login(storedData.token, storedData.userId, storedData.displayName, new Date(storedData.expirationTime));
-                console.log('login');
-            }
+        const storedData = JSON.parse(localStorage.getItem(globalConstants.AUTH_TOKEN));
+        if (storedData &&
+            storedData.token &&
+            storedData.userId &&
+            storedData.displayName &&
+            new Date(storedData.expirationTime) > new Date()) {
+            login(storedData.token, storedData.userId, storedData.displayName, new Date(storedData.expirationTime));
         }
-
-        fetchData();
-
+        setLoading(false);
     }, [login]);
 
     useEffect(() => {
@@ -61,8 +56,16 @@ const Auth = (props) => {
         } else {
             clearTimeout(logoutTimer);
         }
+        setLoading(false);
     }, [token, logout, tokenExpirationDate]);
 
+
+    if (loading) {
+        return (
+            <>
+            </>
+        );
+    }
 
     return (
         <AuthContext.Provider value={{

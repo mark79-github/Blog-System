@@ -47,7 +47,11 @@ class EditPost extends Component {
         postService.getById(this.postId)
             .then(post => {
                 if (this._isMounted) {
-                    this.setState({post});
+                    if (post.author === this.props.userId) {
+                        this.setState({post});
+                    } else {
+                        this.props.history.push('/');
+                    }
                 }
             })
             .catch(err => {
@@ -78,8 +82,8 @@ class EditPost extends Component {
 
 const EditPostWithContext = (props) => (
     <AuthContext.Consumer>
-        {({token}) => (
-            <EditPost {...props} token={token}/>
+        {({token, userId}) => (
+            <EditPost {...props} token={token} userId={userId}/>
         )}
     </AuthContext.Consumer>
 );
