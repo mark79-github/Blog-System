@@ -143,6 +143,11 @@ const FormSignUp = () => {
                     <span className={styles.error}>{formik.errors.repeatPassword}</span>
                 )}
             </div>
+            <div style={{textAlign: "center", width: "inherit"}}>
+                {formik.values.file instanceof File && (
+                    <img className={styles.img} src={URL.createObjectURL(formik.values.file)} alt=""/>
+                )}
+            </div>
             <div className={styles.row}>
                 <div className={styles.wrapper}>
                     <input

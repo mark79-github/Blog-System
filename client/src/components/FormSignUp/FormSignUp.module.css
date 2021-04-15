@@ -38,6 +38,13 @@
     outline: none;
 }
 
+.img{
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    margin-top: 15px;
+}
+
 .button {
     width: inherit;
     border-radius: 4px;
