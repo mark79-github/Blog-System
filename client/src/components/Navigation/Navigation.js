@@ -13,11 +13,9 @@ const Navigation = () => {
     return (
         <header className={styles.header}>
             <section className={styles.navigation}>
-                <div>
-                    <Link className={styles.link} to={'/'}>All posts</Link>
-                </div>
-                <nav>
-                    <ul className={styles.list}>
+                <Link className={styles.link} to={'/'}>All posts</Link>
+                <nav className={styles.nav}>
+                    <ul className={styles.ul}>
                         {isLoggedIn
                             ?
                             <>
