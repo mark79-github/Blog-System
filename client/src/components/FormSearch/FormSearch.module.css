@@ -9,6 +9,7 @@
     display: flex;
     flex-basis: 100%;
     margin: 0 auto;
+    position: relative;
 }
 
 .submit {
@@ -16,8 +17,11 @@
     font-weight: 600;
     background: transparent;
     border: 0;
-    padding: 0 20px;
     color: white;
+
+    position: absolute;
+    top: 8px;
+    left: calc(100% - 30px);
 }
 
 .input {
@@ -28,6 +32,7 @@
     border: 0;
     border-bottom: 1px solid white;
     position: relative;
+    padding-right: 30px;
 }
 
 .input:focus {
