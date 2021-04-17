@@ -5,7 +5,7 @@
 }
 
 .navbar {
-	height: 80px;
+	height: 60px;
 	width: 100%;
 	background: darkblue;
 	color: white;
@@ -13,35 +13,31 @@
 	justify-content: space-between;
 	align-items: center;
 	/*padding: 0 2rem;*/
-	padding: 0 10px;
-	font-size: 1.2rem;
+	/*padding: 0 10px;*/
+	/*font-size: 1.2rem;*/
 }
 
-.nav-logo {
-	text-decoration: none;
-	color: white;
-}
-
-.nav-links {
-	display: grid;
-	grid-template-columns: repeat(3, auto);
-	grid-gap: 20px;
+.links {
+	/*display: grid;*/
+	/*grid-template-columns: repeat(3, auto);*/
+	/*grid-gap: 20px;*/
+	display: flex;
 	list-style: none;
 	z-index: 1;
 }
 
-.nav-link {
+.item {
+	padding-left: 20px;
+}
+
+.link {
 	text-decoration: none;
 	text-transform: uppercase;
 	color: white;
-	transition: 0.3s all;
+	transition: 0.8s all;
 }
 
-.nav-link:hover {
-	color: gold;
-}
-
-.nav-icon {
+.icon {
 	display: none;
 	font-size: 2rem;
 	cursor: pointer;
@@ -52,30 +48,37 @@
 		position: relative;
 	}
 
-	.nav-links {
+	.links {
 		display: flex;
 		flex-direction: column;
 		position: absolute;
 		text-align: center;
 		width: 100%;
-		top: 80px;
+		top: 60px;
 		left: -100%;
-		transition: 0.5s all;
+		transition: 0.8s all;
+		border-bottom-left-radius: 8px;
+		border-bottom-right-radius: 8px;
+		grid-gap: 0;
 	}
 
-	.nav-links.active {
+	.links.active {
 		background: darkblue;
 		left: 0;
-		height: 100vh;
+		/*height: 100vh;*/
 	}
 
-	.nav-item {
+	.item {
 		padding: 10px 0;
-		/*border-top: 1px solid red;*/
-		/*border-bottom: 1px solid red;*/
 	}
 
-	.nav-icon {
+	.icon {
 		display: flex;
+	}
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.link:hover {
+		color: gold;
 	}
 }
