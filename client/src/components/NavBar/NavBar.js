@@ -1,14 +1,20 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {FiMenu, FiX} from 'react-icons/fi';
 
 import styles from './NavBar.module.css';
 
 import AuthContext from '../../contexts';
+import useOutsideClick from "../../hooks/useOutsideClick";
 
 const NavBar = () => {
     const {isLoggedIn, displayName, userId} = useContext(AuthContext);
     const [open, setOpen] = useState(false);
+    const ref = useRef();
+
+    useOutsideClick(ref, () => {
+        if (open) setOpen(false);
+    });
 
     const handleClick = (e) => {
         if (e.target.tagName.toLowerCase() === 'svg' || e.target.tagName.toLowerCase() === 'line') {
@@ -32,7 +38,7 @@ const NavBar = () => {
                 <div onClick={(e) => handleClick(e)} className={styles.icon} id="nav-icon">
                     {open ? <FiX/> : <FiMenu/>}
                 </div>
-                <ul className={open ? `${styles.links} ${styles.active}` : `${styles.links}`}>
+                <ul ref={ref} className={open ? `${styles.links} ${styles.active}` : `${styles.links}`}>
                     {isLoggedIn
                         ?
                         <>
