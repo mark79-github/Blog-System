@@ -11,12 +11,10 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Logout from './components/Logout';
 
-import haveToBeAuthenticated from './hoc/haveToBeAuthenticated';
-import haveToBeGuest from './hoc/haveToBeGuest';
+import haveToBeAuthenticated from './hocs/haveToBeAuthenticated';
+import haveToBeGuest from './hocs/haveToBeGuest';
 
 const App = () => {
-
-    // const {isLoggedIn} = useContext(AuthContext);
 
     return (
         <>

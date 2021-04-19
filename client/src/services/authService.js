@@ -7,7 +7,7 @@ export const register = (displayName, email, password, avatarImageUrl) => {
     return request(api.auth.registerURL, 'POST', data);
 };
 
-export const login = async (email, password) => {
+export const login = (email, password) => {
 
     const data = {email, password}
     return request(api.auth.loginURL, 'POST', data);

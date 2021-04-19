@@ -33,7 +33,7 @@ const FormSignIn = () => {
         initialValues,
         validationSchema,
         onSubmit: ({email, password}) => {
-            authService.login(email.toLowerCase(), password)
+            authService.login(email.toLowerCase().trim(), password)
                 .then((response) => {
 
                     if (response.hasOwnProperty('token')) {
@@ -80,7 +80,6 @@ const FormSignIn = () => {
                     <span className={styles.error}>{formik.errors.password}</span>
                 )}
             </div>
-            {/*disabled={!(formik.dirty && formik.isValid)}*/}
             <button type="submit" className={styles.button}>Sign In</button>
         </form>
     );
