@@ -9,7 +9,6 @@ import styles from './EditPost.module.css';
 import AuthContext from '../../contexts';
 
 import FormPost from '../FormPost';
-import {notificationMsg} from '../../utils/globals';
 
 class EditPost extends Component {
 
@@ -33,7 +32,6 @@ class EditPost extends Component {
         postService.editPost(this.postId, title, content, urlToImage, this.props.token)
             .then(() => {
                 this.props.history.push(`/post/${this.postId}`);
-                notificationService.successMsg(notificationMsg.editPostSuccessfully);
             })
             .catch(err => notificationService.errorMsg(err.message))
     }

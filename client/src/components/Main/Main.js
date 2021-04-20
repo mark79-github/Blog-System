@@ -11,7 +11,6 @@ import Post from '../Post';
 import TopPost from '../TopPost';
 import FormSearch from '../FormSearch';
 import FormOrder from '../FormOrder';
-import {notificationMsg} from '../../utils/globals';
 
 class Main extends Component {
 
@@ -32,14 +31,12 @@ class Main extends Component {
         const result = queryString.parse(this.props.location.search);
         Object.assign(result, {title});
         this.props.history.push(`/?${queryString.stringify(result)}`);
-        notificationService.infoMsg(notificationMsg.searchSuccessfully);
     }
 
     onOrderChange = (value) => {
         this.setState({
             orderBy: value
         });
-        notificationService.infoMsg(notificationMsg.orderSuccessfully);
     }
 
     getAllPosts = () => {

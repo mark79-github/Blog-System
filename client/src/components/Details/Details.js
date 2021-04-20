@@ -17,8 +17,7 @@ import Comment from '../Comment';
 import Edit from '../Icons/Edit';
 import Delete from '../Icons/Delete';
 import Comments from '../Icons/Comment';
-import {notificationMsg} from '../../utils/globals';
-import Avatar from "../Icons/Avatar";
+import Avatar from '../Icons/Avatar';
 
 
 class Details extends Component {
@@ -40,7 +39,6 @@ class Details extends Component {
         postService.likeById(this.state.post._id, this.props.token)
             .then(post => {
                 this.setState({post});
-                notificationService.successMsg(notificationMsg.likeSuccessfully);
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)
@@ -51,7 +49,6 @@ class Details extends Component {
         postService.unlikeById(this.state.post._id, this.props.token)
             .then(post => {
                 this.setState({post});
-                notificationService.successMsg(notificationMsg.unlikeSuccessfully);
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)
@@ -62,7 +59,6 @@ class Details extends Component {
         postService.deleteCommentByIds(this.state.post._id, commentId, this.props.token)
             .then(post => {
                 this.setState({post});
-                notificationService.successMsg(notificationMsg.deleteCommentSuccessfully);
             })
             .catch(err => {
                 notificationService.errorMsg(err.message)
@@ -73,7 +69,6 @@ class Details extends Component {
         postService.commentById(this.state.post._id, comment, this.props.token)
             .then(post => {
                 this.setState({post});
-                notificationService.successMsg(notificationMsg.commentSuccessfully);
             })
             .catch(err => notificationService.errorMsg(err.message));
     }
@@ -86,7 +81,6 @@ class Details extends Component {
         await postService.deleteById(this.state.post._id, this.props.token)
             .then(() => {
                 this.props.history.push('/');
-                notificationService.successMsg(notificationMsg.deleteCommentSuccessfully);
             })
             .catch(err => notificationService.errorMsg(err.message))
     }
@@ -96,11 +90,6 @@ class Details extends Component {
             ...prevState,
             hideComments: !prevState.hideComments
         }));
-        !this.state.post.comments.length && !this.props.userId
-            ? notificationService.infoMsg(notificationMsg.noComments)
-            : this.state.hideComments
-            ? notificationService.infoMsg(notificationMsg.showCommentsSuccessfully)
-            : notificationService.infoMsg(notificationMsg.hideCommentsSuccessfully);
     }
 
     getPostById = (postId) => {
