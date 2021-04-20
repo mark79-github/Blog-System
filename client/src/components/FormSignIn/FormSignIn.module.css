@@ -19,6 +19,15 @@
     top: 40px;
 }
 
+.credentials{
+    text-transform: uppercase;
+    text-align: center;
+    width: inherit;
+    color: gold;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
 .input {
     width: inherit;
     margin: 5px 0;

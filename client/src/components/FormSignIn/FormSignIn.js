@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import styles from './FormSignIn.module.css';
 
 import * as authService from '../../services/authService';
-import notificationService from '../../services/notificationService';
 
 import AuthContext from '../../contexts';
 import {globalConstants, notificationMsg} from '../../utils/globals';
@@ -29,6 +28,16 @@ const FormSignIn = () => {
     const {login} = useContext(AuthContext);
     const history = useHistory();
 
+    const [error, setError] = useState('');
+    const timer = useRef(null);
+
+    useEffect(() => {
+        timer.current = setTimeout(() => setError(''), 2000);
+        return () => {
+            clearTimeout(timer.current);
+        };
+    }, [error]);
+
     const formik = useFormik({
         initialValues,
         validationSchema,
@@ -46,11 +55,12 @@ const FormSignIn = () => {
                     }
                 })
                 .catch(err => {
+                    setError(err.message);
                     formik.resetForm();
-                    notificationService.errorMsg(err.message);
                 });
         }
     });
+
 
     return (
         <form className={styles.form} onSubmit={formik.handleSubmit}>
@@ -80,6 +90,10 @@ const FormSignIn = () => {
                     <span className={styles.error}>{formik.errors.password}</span>
                 )}
             </div>
+            {
+                error &&
+                <span className={styles.credentials}>{error}</span>
+            }
             <button type="submit" className={styles.button}>Sign In</button>
         </form>
     );

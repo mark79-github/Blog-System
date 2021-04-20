@@ -26,13 +26,8 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const user = await User.findOne({email: req.body.email})
-        if (!user) {
-            return response.missing(res, `No user found with email: ${req.body.email}`);
-        }
-
-        const matches = await utils.verifyPassword(req.body.password, user.password)
-        if (!matches) {
-            return response.forbidden(res, "Passwords do not match");
+        if (!user || !await utils.verifyPassword(req.body.password, user.password)) {
+            return response.forbidden(res, "Wrong credentials")
         }
 
         const token = await utils.generateAccessToken(user._id)
