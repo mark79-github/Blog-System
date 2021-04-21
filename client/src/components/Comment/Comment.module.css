@@ -16,7 +16,7 @@
 }
 
 .icon {
-    background: darkblue;
+    background: #bbc;
     color: white;
     font-size: 20px;
     font-weight: 600;
@@ -29,6 +29,6 @@
     .icon:hover {
         cursor: pointer;
         background: white;
-        color: darkblue;
+        color: #bbc;
     }
 }

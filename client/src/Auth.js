@@ -1,7 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import AuthContext from './contexts';
-import {globalConstants, notificationMsg} from './utils/globals';
-import notificationService from './services/notificationService';
+import {globalConstants} from './utils/globals';
 
 let logoutTimer;
 
@@ -25,7 +24,7 @@ const Auth = (props) => {
             displayName,
             expirationTime: expiration.toISOString()
         }));
-        notificationService.successMsg(notificationMsg.loginSuccessfully);
+        // notificationService.successMsg(notificationMsg.loginSuccessfully);
     }, []);
 
     const logout = useCallback(() => {
@@ -33,7 +32,7 @@ const Auth = (props) => {
         setUserId(null);
         setDisplayName(null);
         localStorage.removeItem(globalConstants.AUTH_TOKEN);
-        notificationService.infoMsg(notificationMsg.logoutSuccessfully);
+        // notificationService.infoMsg(notificationMsg.logoutSuccessfully);
     }, []);
 
     useEffect(() => {

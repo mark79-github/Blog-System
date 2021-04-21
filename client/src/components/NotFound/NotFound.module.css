@@ -14,7 +14,7 @@
 }
 
 .header {
-    background-color: darkblue;
+    background-color: #bbc;
     min-height: 80vh;
     display: flex;
     flex-direction: column;

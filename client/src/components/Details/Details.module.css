@@ -1,5 +1,5 @@
 .container {
-    background: darkblue;
+    background: #bbc;
     max-width: 1000px;
     margin: 0 auto;
     display: flex;
@@ -44,7 +44,7 @@
 
 .details {
     background: white;
-    color: darkblue;
+    color: #bbc;
     display: flex;
     justify-content: space-between;
     align-items: center;

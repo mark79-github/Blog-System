@@ -1,13 +1,13 @@
 .header {
 	max-width: 1000px;
 	margin: 0 auto;
-	background: darkblue;
+	background: #bbc;
 }
 
 .navbar {
 	height: 60px;
 	width: 100%;
-	background: darkblue;
+	background: #bbc;
 	color: white;
 	display: flex;
 	justify-content: space-between;
@@ -62,7 +62,7 @@
 	}
 
 	.links.active {
-		background: darkblue;
+		background: #bbc;
 		left: 0;
 		/*height: 100vh;*/
 		min-height: 60px;

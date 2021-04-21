@@ -19,19 +19,23 @@
     resize: none;
     min-width: 100%;
     min-height: 100px;
-    color: darkblue;
+    color: #bbc;
     font-size: 18px;
     margin: 20px 0;
 }
 
 .textarea::placeholder {
-    color: darkblue;
+    color: #bbc;
     font-size: 18px;
     font-style: italic;
 }
 
+.textarea:focus {
+    outline-color: #bbc;
+}
+
 .button {
-    background: darkblue;
+    background: #bbc;
     color: white;
     border: 1px solid white;
     border-radius: 8px;
@@ -45,6 +49,6 @@
     .button:hover {
         cursor: pointer;
         background: white;
-        color: darkblue;
+        color: #bbc;
     }
 }

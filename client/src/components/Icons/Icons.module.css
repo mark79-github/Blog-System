@@ -1,5 +1,5 @@
 .icon {
-    border: 1px solid darkblue;
+    border: 1px solid #bbc;
     font-size: 20px;
     font-weight: 500;
     margin-left: 10px;
@@ -10,7 +10,7 @@
 @media (hover: hover) and (pointer: fine) {
     .icon:hover {
         cursor: pointer;
-        background: darkblue;
+        background: #bbc;
         color: white;
     }
 }

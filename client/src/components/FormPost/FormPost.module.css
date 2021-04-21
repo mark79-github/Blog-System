@@ -68,11 +68,11 @@
     .button:hover {
         cursor: pointer;
         background: white;
-        color: darkblue;
+        color: #bbc;
     }
 
     .button[disabled]:hover {
-        background: darkblue;
+        background: #bbc;
         color: white;
         cursor: not-allowed;
     }
