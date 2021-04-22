@@ -4,15 +4,13 @@ import moment from 'moment';
 import styles from './TopPost.module.css';
 
 import BtnReadMore from '../BtnReadMore';
-import {api} from "../../utils/globals";
-import {request} from "../../utils/data";
-import * as userService from "../../services/userService";
-import notificationService from "../../services/notificationService";
+import {api} from '../../utils/globals';
+import {request} from '../../utils/data';
+import * as userService from '../../services/userService';
 
 const TopPost = ({data, history}) => {
     let {_id, title, content, author, urlToImage, publishedAt, likes, comments, visits} = data;
     publishedAt = moment(publishedAt).format('DD.MM.YYYY hh:mm');
-    // author = useContext(AuthContext).displayName;
 
     const [authorName, setAuthorName] = useState('')
 
@@ -27,8 +25,7 @@ const TopPost = ({data, history}) => {
         userService.getById(author)
             .then((res) => {
                 setAuthorName(res.displayName);
-            })
-            .catch(err => notificationService.errorMsg(err.message));
+            });
     }, [author]);
 
     return (

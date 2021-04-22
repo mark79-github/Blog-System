@@ -73,7 +73,7 @@
     align-items: center;
     border: 1px solid #FFFFFF;
     overflow: hidden;
-    background-image: linear-gradient(to bottom, #bbc 50%, #FFFFFF 50%);
+    background-image: linear-gradient(to bottom, #595990 50%, #FFFFFF 50%);
     background-size: 100% 200%;
     transition: all 1s;
     color: #FFFFFF;
@@ -95,18 +95,18 @@
     .button:hover {
         cursor: pointer;
         background: white;
-        color: #bbc;
+        color: #595990;
     }
 
     .button[disabled]:hover {
-        background: #bbc;
+        background: #595990;
         color: white;
         cursor: not-allowed;
     }
 
     .file:hover {
         background-position: 0 -100%;
-        color: #bbc;
+        color: #595990;
     }
 }
 

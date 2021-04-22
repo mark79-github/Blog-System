@@ -1,16 +1,17 @@
 .icon {
-    border: 1px solid #bbc;
+    border: 1px solid #595990;
     font-size: 20px;
     font-weight: 500;
     margin-left: 10px;
     padding: 20px;
     border-radius: 50%;
+    box-shadow: 0 0 5px 0 #000000;
 }
 
 @media (hover: hover) and (pointer: fine) {
     .icon:hover {
         cursor: pointer;
-        background: #bbc;
+        background: #595990;
         color: white;
     }
 }

@@ -5,7 +5,6 @@ import Loader from 'react-loader-spinner';
 import styles from './Main.module.css';
 
 import * as postService from '../../services/postService';
-import notificationService from '../../services/notificationService';
 
 import Post from '../Post';
 import TopPost from '../TopPost';
@@ -58,8 +57,7 @@ class Main extends Component {
                         loading: false
                     })
                 }
-            })
-            .catch(err => notificationService.errorMsg(err.message));
+            });
     }
 
     componentWillUnmount() {

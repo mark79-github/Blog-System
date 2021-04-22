@@ -1,5 +1,5 @@
 import React from 'react';
-import NotFound from "../NotFound";
+import NotFound from '../NotFound';
 
 class CustomErrorBoundary extends React.Component {
     constructor(props) {
@@ -20,6 +20,15 @@ class CustomErrorBoundary extends React.Component {
 
     componentDidCatch(error) {
         console.log('Error from componentDidCatch: ', error.message);
+    }
+
+    componentDidMount() {
+        window.onunhandledrejection = (error) => {
+            this.setState({
+                hasError: true,
+                error: error.reason.message
+            })
+        }
     }
 
     render() {

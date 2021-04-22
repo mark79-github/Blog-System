@@ -4,11 +4,10 @@ import * as Yup from 'yup';
 import {useHistory} from 'react-router-dom';
 
 import * as authService from '../../services/authService';
-import notificationService from '../../services/notificationService';
 
 import styles from './FormSignUp.module.css';
 
-import AuthContext from "../../contexts";
+import AuthContext from '../../contexts';
 import {api, globalConstants, notificationMsg} from '../../utils/globals';
 
 
@@ -82,10 +81,7 @@ const FormSignUp = () => {
             }).then(({token, userId, displayName}) => {
                 authContext.login(token, userId, displayName);
                 history.push('/');
-            }).catch(err => {
-                formik.resetForm();
-                notificationService.errorMsg(err.message);
-            })
+            }).catch(() => formik.resetForm());
         }
     });
 

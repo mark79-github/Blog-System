@@ -1,7 +1,6 @@
 import {Component} from 'react';
 import Loader from 'react-loader-spinner';
 
-import notificationService from '../../services/notificationService';
 import * as postService from '../../services/postService';
 
 import styles from './EditPost.module.css';
@@ -32,8 +31,7 @@ class EditPost extends Component {
         postService.editPost(this.postId, title, content, urlToImage, this.props.token)
             .then(() => {
                 this.props.history.push(`/post/${this.postId}`);
-            })
-            .catch(err => notificationService.errorMsg(err.message))
+            });
     }
 
     componentWillUnmount() {
@@ -51,10 +49,7 @@ class EditPost extends Component {
                         this.props.history.push('/');
                     }
                 }
-            })
-            .catch(err => {
-                notificationService.errorMsg(err.message)
-            })
+            });
     }
 
     render() {

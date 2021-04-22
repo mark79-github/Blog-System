@@ -90,10 +90,7 @@ const FormSignIn = () => {
                     <span className={styles.error}>{formik.errors.password}</span>
                 )}
             </div>
-            {
-                error &&
-                <span className={styles.credentials}>{error}</span>
-            }
+            {error && <span className={styles.credentials}>{error}</span>}
             <button type="submit" className={styles.button}>Sign In</button>
         </form>
     );

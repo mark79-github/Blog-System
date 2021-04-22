@@ -1,11 +1,11 @@
 .header {
     max-width: 1000px;
     margin: 0 auto;
-    background: #bbc;
+    background: #595990;
 }
 
 .navigation {
-    background: #bbc;
+    background: #595990;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -51,8 +51,8 @@
 
 @media (hover: hover) and (pointer: fine) {
     .link:hover {
-        color: #bbc;
-        border: 1px solid #bbc;
+        color: #595990;
+        border: 1px solid #595990;
         background: white;
     }
 }

@@ -4,7 +4,6 @@ import Loader from 'react-loader-spinner';
 
 import * as postService from '../../services/postService';
 import * as userService from '../../services/userService';
-import notificationService from '../../services/notificationService';
 
 import styles from './Details.module.css';
 
@@ -39,9 +38,6 @@ class Details extends Component {
         postService.likeById(this.state.post._id, this.props.token)
             .then(post => {
                 this.setState({post});
-            })
-            .catch(err => {
-                notificationService.errorMsg(err.message)
             });
     }
 
@@ -49,9 +45,6 @@ class Details extends Component {
         postService.unlikeById(this.state.post._id, this.props.token)
             .then(post => {
                 this.setState({post});
-            })
-            .catch(err => {
-                notificationService.errorMsg(err.message)
             });
     }
 
@@ -59,9 +52,6 @@ class Details extends Component {
         postService.deleteCommentByIds(this.state.post._id, commentId, this.props.token)
             .then(post => {
                 this.setState({post});
-            })
-            .catch(err => {
-                notificationService.errorMsg(err.message)
             });
     }
 
@@ -69,8 +59,7 @@ class Details extends Component {
         postService.commentById(this.state.post._id, comment, this.props.token)
             .then(post => {
                 this.setState({post});
-            })
-            .catch(err => notificationService.errorMsg(err.message));
+            });
     }
 
     onEditPost = () => {
@@ -81,8 +70,7 @@ class Details extends Component {
         await postService.deleteById(this.state.post._id, this.props.token)
             .then(() => {
                 this.props.history.push('/');
-            })
-            .catch(err => notificationService.errorMsg(err.message))
+            });
     }
 
     showComments = () => {
@@ -103,10 +91,7 @@ class Details extends Component {
                 this.publishedAt = moment(post.publishedAt).format('DD.MM.YYYY hh:mm');
                 this.setState({post});
             }
-        })
-            .catch(err => {
-                notificationService.errorMsg(err.message)
-            });
+        });
     }
 
     componentWillUnmount() {
@@ -138,7 +123,8 @@ class Details extends Component {
                         <h2 className={styles.title}>{this.state.post.title}</h2>
                         <p className={styles.content}>{this.state.post.content}</p>
                     </article>
-                    <article className={`${styles.details} ${!this.state.hideComments && !!this.state.post.comments.length ? styles.border: ''}`}>
+                    <article
+                        className={`${styles.details} ${!this.state.hideComments && !!this.state.post.comments.length ? styles.border : ''}`}>
                         <article className={styles.info}>
                             <div>
                                 <span>Published: </span>

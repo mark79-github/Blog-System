@@ -3,7 +3,6 @@ import {useHistory} from 'react-router-dom';
 
 import styles from './AddPost.module.css';
 
-import notificationService from '../../services/notificationService';
 import * as postService from '../../services/postService';
 
 import AuthContext from '../../contexts';
@@ -27,8 +26,7 @@ const AddPost = () => {
         postService.addPost(title, content, urlToImage, token)
             .then(() => {
                 history.push('/');
-            })
-            .catch(err => notificationService.errorMsg(err.message))
+            });
     }
 
     return (

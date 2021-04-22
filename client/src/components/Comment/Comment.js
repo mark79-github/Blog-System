@@ -5,7 +5,6 @@ import styles from './Comment.module.css';
 import AuthContext from '../../contexts';
 
 import * as userService from '../../services/userService';
-import notificationService from '../../services/notificationService';
 import Avatar from "../Icons/Avatar";
 
 
@@ -23,8 +22,7 @@ const Comment = ({data, onDeleteComment}) => {
                 .then(res => {
                     setAuthorDisplayName(res.displayName);
                     setAuthorAvatarImgUrl(res.avatarImageUrl);
-                })
-                .catch(err => notificationService.errorMsg(err.message));
+                });
         }
         getUserData();
     }, [user]);
