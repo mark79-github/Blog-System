@@ -20,6 +20,6 @@
         background: white;
         color: #595990;
         border: 1px solid #595990;
-        box-shadow: 0 0 5px 0 #000000;
+        box-shadow: 0 0 5px 2px #fff;
     }
 }

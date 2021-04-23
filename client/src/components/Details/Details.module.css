@@ -53,7 +53,7 @@
     border-bottom-right-radius: 8px;
 }
 
-.border{
+.border {
     border-radius: 0;
 }
 
@@ -88,6 +88,10 @@
 @media all and (max-width: 600px) {
     .details {
         flex-direction: column;
+    }
+
+    .icons {
+        margin-top: 20px;
     }
 }
 
