@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import queryString from 'query-string';
+import Loader from 'react-loader-spinner';
 
 import styles from './Main.module.css';
 
@@ -20,7 +21,7 @@ class Main extends Component {
         this.state = {
             topPost: [],
             posts: [],
-            // loading: true,
+            loading: true,
             orderBy: 'publishedAt'
         }
     }
@@ -53,7 +54,7 @@ class Main extends Component {
                     this.setState({
                         topPost: res.slice(0, 1),
                         posts: res.slice(1),
-                        // loading: false
+                        loading: false
                     })
                 }
             });
@@ -84,13 +85,13 @@ class Main extends Component {
 
     render() {
 
-        // if (this.state.loading) {
-        //     return (
-        //         <main className={styles.container}>
-        //             <Loader type="Rings" color="white" height={80} width={80}/>
-        //         </main>
-        //     )
-        // }
+        if (this.state.loading) {
+            return (
+                <main className={styles.container}>
+                    <Loader type="Rings" color="white" height={80} width={80}/>
+                </main>
+            )
+        }
 
         if (!this.state.topPost.length) {
             return (

@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import moment from 'moment';
+import Loader from 'react-loader-spinner';
 
 import * as postService from '../../services/postService';
 import * as userService from '../../services/userService';
@@ -104,6 +105,14 @@ class Details extends Component {
 
     render() {
 
+        if (Object.keys(this.state.post).length === 0) {
+            return (
+                <main className={styles.container}>
+                    <Loader type="Rings" color="white" height={80} width={80}/>
+                </main>
+            )
+        }
+
         return (
             <main className={styles.container}>
                 <section className={styles.article}>
@@ -128,11 +137,11 @@ class Details extends Component {
                             </div>
                             <div>
                                 <span>Comments: </span>
-                                {this.state.post.comments?.length}
+                                {this.state.post.comments.length}
                             </div>
                             <div>
                                 <span>Likes: </span>
-                                {this.state.post.likes?.length}
+                                {this.state.post.likes.length}
                             </div>
                             <div>
                                 <span>Views: </span>
@@ -157,7 +166,7 @@ class Details extends Component {
                                     ?
                                     <div>
                                         {
-                                            !this.state.post.likes?.some(x => x === this.props.userId)
+                                            !this.state.post.likes.some(x => x === this.props.userId)
                                                 ? <Like onLike={this.like}/>
                                                 : <Unlike onUnlike={this.unlike}/>
                                         }
@@ -174,12 +183,12 @@ class Details extends Component {
                             : <article className={styles.comment}>
                                 <article>
                                     {
-                                        this.state.post.comments?.length > 0
+                                        this.state.post.comments.length > 0
                                             ?
                                             <>
                                                 <h2 className={styles.header}>Comments:</h2>
                                                 {
-                                                    this.state.post.comments?.map((commentObj, index) => {
+                                                    this.state.post.comments.map((commentObj, index) => {
                                                         commentObj.index = index + 1;
                                                         return <Comment
                                                             key={index + 1}
