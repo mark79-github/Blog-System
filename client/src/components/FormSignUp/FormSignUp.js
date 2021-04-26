@@ -10,7 +10,6 @@ import styles from './FormSignUp.module.css';
 import AuthContext from '../../contexts';
 import {api, globalConstants, notificationMsg} from '../../utils/globals';
 
-
 const initialValues = {
     displayName: '',
     email: '',
