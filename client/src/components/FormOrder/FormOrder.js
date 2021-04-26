@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {useEffect, useState} from 'react';
 
 import styles from './FormOrder.module.css';
 
@@ -21,39 +21,64 @@ const selectOptions = [
     },
 ];
 
-class FormOrder extends Component {
+const FormOrder = (props) => {
+    const [orderBy, setOrderBy] = useState('publishedAt');
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            orderBy: 'publishedAt'
-        };
+    const selectChangeHandler = (event) => {
+        setOrderBy(event.target.value);
     }
 
-    selectChangeHandler = (event) => {
-        this.setState({orderBy: event.target.value});
-    }
+    useEffect(() => {
+        props.onOrderChange(orderBy);
+    }, [orderBy]);
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.orderBy !== this.state.orderBy) {
-            this.props.onOrderChange(this.state.orderBy);
-        }
-    }
-
-    render() {
-        return (
-            <section className={styles.container}>
-                <form className={styles.form}>
-                    <select className={styles.select} value={this.state.orderBy}
-                            onChange={this.selectChangeHandler} disabled={this.props.disabled}>
-                        {selectOptions.map((option, index) => (
-                            <option key={index} value={option.value}>{option.label}</option>
-                        ))}
-                    </select>
-                </form>
-            </section>
-        );
-    }
+    return (
+        <section className={styles.container}>
+            <form className={styles.form}>
+                <select className={styles.select} value={orderBy}
+                        onChange={selectChangeHandler} disabled={props.disabled}>
+                    {selectOptions.map((option, index) => (
+                        <option key={index} value={option.value}>{option.label}</option>
+                    ))}
+                </select>
+            </form>
+        </section>
+    );
 }
+
+// class FormOrder extends Component {
+//
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             orderBy: 'publishedAt'
+//         };
+//     }
+//
+//     selectChangeHandler = (event) => {
+//         this.setState({orderBy: event.target.value});
+//     }
+//
+//     componentDidUpdate(prevProps, prevState, snapshot) {
+//         if (prevState.orderBy !== this.state.orderBy) {
+//             this.props.onOrderChange(this.state.orderBy);
+//         }
+//     }
+//
+//     render() {
+//         return (
+//             <section className={styles.container}>
+//                 <form className={styles.form}>
+//                     <select className={styles.select} value={this.state.orderBy}
+//                             onChange={this.selectChangeHandler} disabled={this.props.disabled}>
+//                         {selectOptions.map((option, index) => (
+//                             <option key={index} value={option.value}>{option.label}</option>
+//                         ))}
+//                     </select>
+//                 </form>
+//             </section>
+//         );
+//     }
+// }
 
 export default FormOrder;
