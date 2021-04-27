@@ -16,12 +16,8 @@ const NavBar = () => {
         if (open) setOpen(false);
     });
 
-    const handleClick = (e) => {
-        if (e.target.tagName.toLowerCase() === 'svg' || e.target.tagName.toLowerCase() === 'line') {
-            setOpen(!open);
-            return;
-        }
-        setOpen(false);
+    const handleClick = () => {
+        setOpen(!open);
     };
 
     const closeMenu = () => {

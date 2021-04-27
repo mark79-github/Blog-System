@@ -25,7 +25,7 @@ const validationSchema = Yup.object({
 })
 
 const FormSignIn = () => {
-    const {login} = useContext(AuthContext);
+    const authContext = useContext(AuthContext);
     const history = useHistory();
 
     const [error, setError] = useState('');
@@ -46,7 +46,7 @@ const FormSignIn = () => {
                 .then((response) => {
 
                     if (response.hasOwnProperty('token')) {
-                        login(response.token, response.user._id, response.user.displayName);
+                        authContext.login(response.token, response.user._id, response.user.displayName);
                         history.push('/');
                     }
 

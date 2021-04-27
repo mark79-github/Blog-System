@@ -1,6 +1,6 @@
 import NotFound from '../../components/NotFound';
 
-function ErrorPage() {
+const ErrorPage = () => {
 
     return (
         <NotFound/>

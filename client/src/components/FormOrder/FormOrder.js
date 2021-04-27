@@ -22,6 +22,7 @@ const selectOptions = [
 ];
 
 const FormOrder = (props) => {
+    const {onOrderChange, disabled} = props;
     const [orderBy, setOrderBy] = useState('publishedAt');
 
     const selectChangeHandler = (event) => {
@@ -29,14 +30,14 @@ const FormOrder = (props) => {
     }
 
     useEffect(() => {
-        props.onOrderChange(orderBy);
-    }, [orderBy]);
+        onOrderChange(orderBy);
+    }, [orderBy, onOrderChange]);
 
     return (
         <section className={styles.container}>
             <form className={styles.form}>
                 <select className={styles.select} value={orderBy}
-                        onChange={selectChangeHandler} disabled={props.disabled}>
+                        onChange={selectChangeHandler} disabled={disabled}>
                     {selectOptions.map((option, index) => (
                         <option key={index} value={option.value}>{option.label}</option>
                     ))}
