@@ -1,0 +1,24 @@
+.profile {
+    flex-grow: 1;
+    flex-basis: 48%;
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    color: white;
+}
+
+.img-wrapper {
+
+}
+
+.img {
+
+}
+
+.span {
+    color: white;
+}

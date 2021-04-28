@@ -6,6 +6,7 @@ import DetailsPage from './pages/details-page';
 import ErrorPage from './pages/error-page';
 import CreatePostPage from './pages/create-post-page';
 import EditPostPage from './pages/edit-post-page';
+import ProfilePage from './pages/profile-page';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Logout from './components/Logout';
@@ -29,6 +30,8 @@ const App = () => {
                 <Route exact path={'/post/:id/edit'} component={haveToBeAuthenticated(EditPostPage)}/>
 
                 <Route exact path={'/user/sign'} component={haveToBeGuest(SignPage)}/>
+
+                <Route exact path={'/user/:id'} component={haveToBeAuthenticated(ProfilePage)}/>
 
                 <Route exact path={'/user/logout'} component={haveToBeAuthenticated(Logout)}/>
 
