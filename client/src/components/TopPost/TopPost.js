@@ -7,6 +7,7 @@ import BtnReadMore from '../BtnReadMore';
 import {api} from '../../utils/globals';
 import {request} from '../../utils/data';
 import * as userService from '../../services/userService';
+import {Link} from "react-router-dom";
 
 const TopPost = ({data, history}) => {
     let {_id, title, content, author, urlToImage, publishedAt, likes, comments, visits} = data;
@@ -40,7 +41,9 @@ const TopPost = ({data, history}) => {
                 </div>
                 <div>
                     <span>Post author:</span>
-                    {authorName}
+                    <Link to={`/user/${author}`} className={styles.link}>
+                        {authorName}
+                    </Link>
                 </div>
                 <div>
                     <span>Comments:</span>

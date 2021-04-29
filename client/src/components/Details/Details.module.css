@@ -67,6 +67,12 @@
     align-items: center;
 }
 
+.link{
+    text-decoration: none;
+    color: #595990;
+    margin-left: 6px;
+}
+
 .icons {
     display: flex;
     justify-content: stretch;

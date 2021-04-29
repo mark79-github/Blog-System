@@ -44,13 +44,13 @@ const NavBar = () => {
                                 </Link>
                             </li>
                             <li className={styles.item}>
-                                <Link to={`/?author=${userId}`} className={styles.link} onClick={closeMenu}>
-                                    Own Posts
+                                <Link to={`/user/${userId}`} className={styles.link} onClick={closeMenu}>
+                                    {displayName}'s profile
                                 </Link>
                             </li>
                             <li className={styles.item}>
                                 <Link to="/user/logout" className={styles.link} onClick={closeMenu}>
-                                    Logout, {displayName}
+                                    Logout
                                 </Link>
                             </li>
                         </>

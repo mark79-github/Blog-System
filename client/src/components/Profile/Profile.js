@@ -37,11 +37,9 @@ const Profile = () => {
     return (
         <section className={styles.profile}>
             <h2 className={styles.title}>User profile</h2>
-            <div className={styles['img-wrapper']}>
-                {/*<img className={styles.img} src={user.avatarImageUrl} alt="logo"/>*/}
-                <Avatar img={user.avatarImageUrl}/>
-            </div>
-            <span className={styles.span}>Display name: {user.displayName}</span>
+            <Avatar img={user.avatarImageUrl}/>
+            <p className={styles.span}>Name: {user.displayName}</p>
+            <p className={styles.span}>Email: {user.email}</p>
         </section>
     )
 }

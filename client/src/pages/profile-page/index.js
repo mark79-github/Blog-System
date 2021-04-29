@@ -3,12 +3,12 @@ import styles from './index.module.css';
 import Profile from '../../components/Profile';
 import UserPosts from '../../components/UserPosts';
 
-const ProfilePage = () => {
+const ProfilePage = (props) => {
 
     return (
         <main className={styles.container}>
             <Profile/>
-            <UserPosts/>
+            <UserPosts {...props}/>
         </main>
     );
 }

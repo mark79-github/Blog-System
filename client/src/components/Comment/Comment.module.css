@@ -15,6 +15,11 @@
     flex-basis: 100%;
 }
 
+.link{
+    /*text-decoration: none;*/
+    color: white;
+}
+
 .icon {
     background: #595990;
     color: white;

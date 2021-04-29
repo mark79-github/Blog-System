@@ -1,12 +1,13 @@
 import {useContext, useEffect, useRef, useState} from 'react';
+import {Link} from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 import styles from './Comment.module.css';
 
+import * as userService from '../../services/userService';
+
 import AuthContext from '../../contexts';
 
-import * as userService from '../../services/userService';
-import Avatar from "../Icons/Avatar";
-import Loader from "react-loader-spinner";
 
 const Comment = ({data, onDeleteComment}) => {
     const {_id, index, comment, user} = data;
@@ -44,8 +45,11 @@ const Comment = ({data, onDeleteComment}) => {
     return (
         <article className={styles.container}>
             <span className={styles.span}>#{index}</span>
-            <span className={styles.span}>{authorDisplayName.current}</span>
-            <Avatar img={authorAvatarImgURL.current}/>
+            {/*<span className={styles.span}>{authorDisplayName.current}</span>*/}
+            <Link to={`/user/${user}`} className={styles.link}>
+                {authorDisplayName.current}
+            </Link>
+            {/*<Avatar img={authorAvatarImgURL.current}/>*/}
             {
                 authContext.userId === user
                     ? <i className={`${styles.icon} far fa-trash-alt`} onClick={handleClick}/>

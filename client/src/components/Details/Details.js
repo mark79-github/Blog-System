@@ -1,5 +1,5 @@
 import {useContext, useEffect, useRef, useState} from 'react';
-import {useHistory, useParams} from 'react-router-dom';
+import {Link, useHistory, useParams} from 'react-router-dom';
 import moment from 'moment';
 import Loader from 'react-loader-spinner';
 
@@ -17,8 +17,6 @@ import Comment from '../Comment';
 import Edit from '../Icons/Edit';
 import Delete from '../Icons/Delete';
 import Comments from '../Icons/Comment';
-import Avatar from '../Icons/Avatar';
-
 
 const Details = () => {
     const {isLoggedIn, userId, token} = useContext(AuthContext);
@@ -127,8 +125,11 @@ const Details = () => {
                         </div>
                         <div className={styles.author}>
                             <span>Post author: </span>
-                            {authorName.current}
-                            <Avatar img={avatarImageUrl.current}/>
+                            <Link to={`/user/${post.author}`} className={styles.link}>
+                                {authorName.current}
+                            </Link>
+                            {/*{authorName.current}*/}
+                            {/*<Avatar img={avatarImageUrl.current}/>*/}
                         </div>
                         <div>
                             <span>Comments: </span>

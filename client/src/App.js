@@ -31,9 +31,9 @@ const App = () => {
 
                 <Route exact path={'/user/sign'} component={haveToBeGuest(SignPage)}/>
 
-                <Route exact path={'/user/:id'} component={haveToBeAuthenticated(ProfilePage)}/>
-
                 <Route exact path={'/user/logout'} component={haveToBeAuthenticated(Logout)}/>
+
+                <Route exact path={'/user/:id'} component={haveToBeAuthenticated(ProfilePage)}/>
 
                 <Route exact path='/error' component={ErrorPage}/>
 
