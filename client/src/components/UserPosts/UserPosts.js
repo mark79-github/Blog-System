@@ -1,13 +1,16 @@
 import {useEffect, useRef, useState} from 'react';
+import {useParams} from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 import styles from './UserPosts.module.css';
 
 import * as postService from '../../services/postService';
-import Loader from "react-loader-spinner";
-import Post from "../Post";
 
+import PostListView from '../PostListView';
 
 const UserPosts = (props) => {
+
+    const {id} = useParams();
 
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -16,8 +19,8 @@ const UserPosts = (props) => {
 
     useEffect(() => {
 
-        const getAllPosts = () => {
-            postService.getAll()
+        const getAllPosts = (userId) => {
+            postService.getAll(`/?author=${userId}`)
                 .then(res => {
                     if (isMounted) {
                         setPosts(res);
@@ -27,37 +30,39 @@ const UserPosts = (props) => {
         }
 
         isMounted.current = true;
-        getAllPosts();
+        getAllPosts(id);
 
         return () => {
             isMounted.current = false;
         }
-    }, []);
+    }, [id]);
 
 
     if (loading) {
         return (
-            // <main className={styles.container}>
-            <Loader type="Rings" color="white" height={80} width={80}/>
-            // </main>
+            <section className={styles.container}>
+                <Loader type="Rings" color="white" height={80} width={80}/>
+            </section>
         )
     }
 
     return (
         <section className={styles.container}>
-            <h2 className={styles.title}>Posts</h2>
             {
                 !!posts.length
                     ?
-                    <section className={styles.wrapper}>
-                        {posts.map(x => {
-                            return (
-                                <Post {...props} key={x._id} data={x}/>
-                            )
-                        })}
-                    </section>
+                    <>
+                        <h2 className={styles.title}>Posts</h2>
+                        <section className={styles.wrapper}>
+                            {posts.map(x => {
+                                return (
+                                    <PostListView {...props} key={x._id} data={x}/>
+                                )
+                            })}
+                        </section>
+                    </>
                     :
-                    <h2>No Posts found</h2>
+                    <h2 className={styles.title}>No posts found</h2>
             }
         </section>
     )

@@ -28,9 +28,9 @@ const Profile = () => {
 
     if (loading) {
         return (
-            // <main className={styles.container}>
-            <Loader type="Rings" color="white" height={80} width={80}/>
-            // </main>
+            <section className={styles.profile}>
+                <Loader type="Rings" color="white" height={80} width={80}/>
+            </section>
         )
     }
 
