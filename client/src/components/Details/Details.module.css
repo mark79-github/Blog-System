@@ -67,7 +67,7 @@
     align-items: center;
 }
 
-.link{
+.link {
     text-decoration: none;
     color: #595990;
     margin-left: 6px;
@@ -89,6 +89,10 @@
     padding: 10px 20px;
     font-size: 20px;
     font-weight: 600;
+}
+
+.link:hover {
+    text-decoration: underline;
 }
 
 @media all and (max-width: 600px) {

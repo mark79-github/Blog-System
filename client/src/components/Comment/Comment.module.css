@@ -15,9 +15,13 @@
     flex-basis: 100%;
 }
 
-.link{
-    /*text-decoration: none;*/
+.link {
+    text-decoration: none;
     color: white;
+}
+
+.link:hover {
+    text-decoration: underline;
 }
 
 .icon {
