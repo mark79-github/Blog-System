@@ -1,6 +1,10 @@
 import {config} from './config';
 
-const cloudinaryURL = 'https://api.cloudinary.com/v1_1/mark79/upload';
+const getCloudName = () => {
+    return process.env.REACT_APP_CLOUD_NAME;
+}
+const cloudName = getCloudName();
+const cloudinaryURL = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
 
 const getBaseUrl = () => {
     return config[process.env.NODE_ENV.trim()].baseURL;
