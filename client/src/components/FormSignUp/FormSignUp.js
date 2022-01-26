@@ -55,8 +55,6 @@ const FormSignUp = () => {
 
             const formData = new FormData();
             formData.append("file", file);
-            const uploadPrest = 'll7qfuac';
-            console.log(uploadPrest);
             formData.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET);
 
             const API_ENDPOINT = api.cloudinary.base;
