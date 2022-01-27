@@ -53,9 +53,10 @@ const FormSignUp = () => {
         validateOnMount: true,
         onSubmit: ({displayName, email, password, file}) => {
 
+            const {REACT_APP_UPLOAD_PRESET} = process.env;
             const formData = new FormData();
             formData.append("file", file);
-            formData.append('upload_preset', process.env.REACT_APP_UPLOAD_PRESET);
+            formData.append('upload_preset', REACT_APP_UPLOAD_PRESET);
 
             const API_ENDPOINT = api.cloudinary.base;
             fetch(API_ENDPOINT, {
