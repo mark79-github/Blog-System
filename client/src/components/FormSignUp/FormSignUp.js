@@ -8,7 +8,7 @@ import * as authService from '../../services/authService';
 import styles from './FormSignUp.module.css';
 
 import AuthContext from '../../contexts';
-import {api, globalConstants, notificationMsg} from '../../utils/globals';
+import {globalConstants, notificationMsg} from '../../utils/globals';
 
 const initialValues = {
     displayName: '',
@@ -53,35 +53,26 @@ const FormSignUp = () => {
         validateOnMount: true,
         onSubmit: ({displayName, email, password, file}) => {
 
-            const {REACT_APP_UPLOAD_PRESET} = process.env;
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append('upload_preset', REACT_APP_UPLOAD_PRESET);
+            const form = new FormData;
+            form.append("displayName", displayName);
+            form.append("email", email);
+            form.append("password", password);
+            form.append("file", file);
 
-            const API_ENDPOINT = api.cloudinary.base;
-            fetch(API_ENDPOINT, {
-                method: 'POST',
-                body: formData
-            }).then(res => {
-                if (!res.ok) {
-                    throw Error(notificationMsg.avatarUploadError);
-                }
-                return res.json();
-            }).then(cloudinary => {
-                return authService.register(displayName, email.toLowerCase(), password, cloudinary['secure_url'])
-            }).then(response => {
-                if (response.hasOwnProperty('message')) {
-                    throw Error(response.message);
-                }
-                return {
-                    token: response.token,
-                    userId: response.newUser._id,
-                    displayName: response.newUser.displayName
-                };
-            }).then(({token, userId, displayName}) => {
-                authContext.login(token, userId, displayName);
-                history.push('/');
-            }).catch(() => formik.resetForm());
+            return authService.register(form)
+                .then(response => {
+                    if (response.hasOwnProperty('message')) {
+                        throw Error(response.message);
+                    }
+                    return {
+                        token: response.token,
+                        userId: response.newUser._id,
+                        displayName: response.newUser.displayName
+                    };
+                }).then(({token, userId, displayName}) => {
+                    authContext.login(token, userId, displayName);
+                    history.push('/');
+                }).catch(() => formik.resetForm());
         }
     });
 
