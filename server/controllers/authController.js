@@ -1,6 +1,7 @@
 const utils = require('../utils/utils');
 const response = require('../utils/response')
 const User = require('../models/User');
+let cloudinary = require('../config/cloudinary');
 
 exports.register = async (req, res) => {
     try {
@@ -9,12 +10,18 @@ exports.register = async (req, res) => {
             return response.forbidden(res, "User with that email already exists");
         }
 
-        const hash = await utils.hashPassword(req.body.password);
+        const {email, displayName, password, avatarImageUrl} = req.body;
+        const cloudinaryImageUrl = await cloudinary.uploader.upload(avatarImageUrl)
+            .then(cloudinary => {
+                return cloudinary['secure_url'];
+            }).catch(error => {throw Error(error.message)});
+
+        const hash = await utils.hashPassword(password);
         const newUser = await new User({
-            email: req.body.email,
-            displayName: req.body.displayName,
+            email: email,
+            displayName: displayName,
             password: hash,
-            avatarImageUrl: req.body.avatarImageUrl
+            avatarImageUrl: cloudinaryImageUrl
         }).save();
         const token = await utils.generateAccessToken(newUser._id);
         res.status(200).json({token, newUser});
