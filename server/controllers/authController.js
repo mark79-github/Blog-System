@@ -45,7 +45,7 @@ exports.register = async (req, res) => {
             email,
             displayName,
             password: hash,
-            avatarImageUrl: req.body.avatarImageUrl
+            avatarImageUrl: cloudinaryImageUrl
         }).save();
         const token = await utils.generateAccessToken(newUser._id);
         res.status(200).json({token, newUser});
