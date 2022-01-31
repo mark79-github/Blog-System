@@ -1,10 +1,9 @@
 import {api} from '../utils/globals'
-import {request} from '../utils/data';
+import {request, requestForm} from '../utils/data';
 
-export const register = (displayName, email, password, avatarImageUrl) => {
+export const register = (data) => {
 
-    const data = {displayName, email, password, avatarImageUrl}
-    return request(api.auth.registerURL, 'POST', data);
+    return requestForm(api.auth.registerURL, 'POST', data);
 };
 
 export const login = (email, password) => {

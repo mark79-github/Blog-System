@@ -18,4 +18,21 @@ const request = async (url, method, data = {}, options = {}, token) => {
     }).then(res => res.json());
 
 };
-export {request};
+
+const requestForm = async (url, method, data = {}, options = {}, token) => {
+    const authorization = getToken(token);
+    const headers = {
+        Accept: "application/json",
+        ...authorization
+    };
+
+    return await fetch(url, {
+        method: method || 'GET',
+        headers,
+        body: Object.keys(data).length ? JSON.stringify(data) : undefined,
+        ...options
+    }).then(res => res.json());
+
+};
+
+export {request, requestForm};
