@@ -23,6 +23,7 @@ const requestForm = async (url, method, data = {}, options = {}, token) => {
     const authorization = getToken(token);
     const headers = {
         Accept: "application/json",
+        "Access-Control-Allow-Origin": "*",
         ...authorization
     };
 
