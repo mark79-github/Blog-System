@@ -13,7 +13,7 @@ const request = async (url, method, data = {}, options = {}, token) => {
     return await fetch(url, {
         method: method || 'GET',
         headers,
-        body: data,
+        body: Object.keys(data).length ? JSON.stringify(data) : undefined,
         ...options
     }).then(res => res.json());
 
@@ -30,7 +30,7 @@ const requestForm = async (url, method, data = {}, options = {}, token) => {
     return await fetch(url, {
         method: method || 'GET',
         headers,
-        body: Object.keys(data).length ? JSON.stringify(data) : undefined,
+        body: data,
         ...options
     }).then(res => res.json());
 
