@@ -53,31 +53,26 @@ const FormSignUp = () => {
         validateOnMount: true,
         onSubmit: ({displayName, email, password, file}) => {
 
-            function getBase64(filename) {
-                return new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(filename);
-                    reader.onload = () => resolve(reader.result);
-                    reader.onerror = error => reject(error)
-                })
-            }
+            const form = new FormData;
+            form.append("displayName", displayName);
+            form.append("email", email);
+            form.append("password", password);
+            form.append("file", file);
 
-            getBase64(file)
-                .then(avatarImageUrl => {
-                    return authService.register(displayName, email.toLowerCase(), password, avatarImageUrl)
-                }).then(response => {
-                if (response.hasOwnProperty('message')) {
-                    throw Error(response.message);
-                }
-                return {
-                    token: response.token,
-                    userId: response.newUser._id,
-                    displayName: response.newUser.displayName
-                };
-            }).then(({token, userId, displayName}) => {
-                authContext.login(token, userId, displayName);
-                history.push('/');
-            }).catch(() => formik.resetForm());
+            return authService.register(form)
+                .then(response => {
+                    if (response.hasOwnProperty('message')) {
+                        throw Error(response.message);
+                    }
+                    return {
+                        token: response.token,
+                        userId: response.newUser._id,
+                        displayName: response.newUser.displayName
+                    };
+                }).then(({token, userId, displayName}) => {
+                    authContext.login(token, userId, displayName);
+                    history.push('/');
+                }).catch(() => formik.resetForm());
         }
     });
 
