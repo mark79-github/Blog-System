@@ -53,7 +53,7 @@ const FormSignUp = () => {
         validateOnMount: true,
         onSubmit: ({displayName, email, password, file}) => {
 
-            const form = new FormData;
+            const form = new FormData();
             form.append("displayName", displayName);
             form.append("email", email);
             form.append("password", password);
