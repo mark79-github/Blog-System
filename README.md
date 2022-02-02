@@ -75,9 +75,10 @@ Blog System is a blog like **MERN** application for posting all sort of articles
 ### Setup project
 
 - [**Cloudinary**](https://cloudinary.com) account is needed to store avatar images
-- **[Add](https://create-react-app.dev/docs/adding-custom-environment-variables/)** these custom environment variables to use [unsigned upload](https://cloudinary.com/documentation/image_upload_api_reference#unsigned_upload_syntax) at Cloudinary
-  - `REACT_APP_CLOUD_NAME`
-  - `REACT_APP_UPLOAD_PRESET`
+- **[Add](https://www.thirdrocktechkno.com/blog/how-to-set-environment-variable-in-node-js/)** these custom environment variables to use [server side upload](https://cloudinary.com/documentation/node_image_and_video_upload#server_side_upload) at Cloudinary
+  - `CLOUD_NAME`
+  - `API_KEY`
+  - `API_SECRET`
   
 ### How to run this project
 

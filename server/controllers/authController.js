@@ -33,7 +33,7 @@ exports.register = async (req, res) => {
             return response.forbidden(res, "User with that email already exists");
         }
 
-        const cloudinaryImageUrl = await cloudinary.uploader.upload(files.file.filepath)
+        const cloudinaryImageUrl = await cloudinary.uploader.upload(files.file.filepath, {width: 256, crop: "scale"})
             .then(cloudinary => {
                 return cloudinary['secure_url'];
             }).catch(error => {
