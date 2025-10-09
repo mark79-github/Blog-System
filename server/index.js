@@ -5,8 +5,17 @@ const cors = require('cors');
 const {msg} = require('./config/constants');
 const {PORT} = require('./config/config');
 
+const corsOptions = {
+    origin: [
+        'https://blog-system.netlify.app',
+        'http://localhost:3000'
+    ],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}))
 
