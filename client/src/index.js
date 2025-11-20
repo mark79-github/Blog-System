@@ -9,14 +9,16 @@ import CustomErrorBoundary from './components/CustomErrorBoundary/CustomErrorBou
 const container = document.getElementById('root');
 const root = createRoot(container);
 
-root.render(
-    <React.StrictMode>
-        <Auth>
-            <Router>
-                <CustomErrorBoundary>
-                    <App/>
-                </CustomErrorBoundary>
-            </Router>
-        </Auth>
-    </React.StrictMode>
+const isDev = import.meta.env.DEV;
+
+const AppTree = (
+    <Auth>
+        <Router>
+            <CustomErrorBoundary>
+                <App/>
+            </CustomErrorBoundary>
+        </Router>
+    </Auth>
 );
+
+root.render(isDev ? <React.StrictMode>{AppTree}</React.StrictMode> : AppTree);
