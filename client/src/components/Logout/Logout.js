@@ -1,5 +1,5 @@
 import {useContext, useEffect} from 'react';
-import {Redirect} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 
 import AuthContext from '../../contexts';
 
@@ -11,7 +11,7 @@ const Logout = () => {
     }, [logout]);
 
     return (
-        <Redirect to={'/'}/>
+        <Navigate to={'/'}/>
     );
 }
 
