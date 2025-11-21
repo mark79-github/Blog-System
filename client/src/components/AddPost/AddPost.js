@@ -1,17 +1,14 @@
 import {useContext} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import styles from './AddPost.module.css';
-
 import * as postService from '../../services/postService';
-
 import AuthContext from '../../contexts';
-
 import FormPost from '../FormPost';
 
 const AddPost = () => {
     const {token} = useContext(AuthContext);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const post = {
         title: '',
@@ -20,12 +17,11 @@ const AddPost = () => {
     }
 
     const addPost = (data) => {
-
         const {title, content, urlToImage} = data;
 
         postService.addPost(title, content, urlToImage, token)
             .then(() => {
-                history.push('/');
+                navigate('/');
             });
     }
 
