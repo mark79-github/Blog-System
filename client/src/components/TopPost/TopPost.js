@@ -7,18 +7,19 @@ import BtnReadMore from '../BtnReadMore';
 import {api} from '../../utils/globals';
 import {request} from '../../utils/data';
 import * as userService from '../../services/userService';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from 'react-router-dom';
 
-const TopPost = ({data, history}) => {
+const TopPost = ({data}) => {
     let {_id, title, content, author, urlToImage, publishedAt, likes, comments, visits} = data;
     publishedAt = moment(publishedAt).format('DD.MM.YYYY hh:mm');
 
     const [authorName, setAuthorName] = useState('')
+    let navigate = useNavigate();
 
     const handleButtonClick = async () => {
         await request(`${api.posts.visit}/${_id}`, 'POST')
             .then(() => {
-                history.push(`/post/${_id}`);
+                navigate(`/post/${_id}`);
             }).catch(error => console.error('Error:', error));
     }
 
