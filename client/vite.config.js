@@ -19,8 +19,9 @@ const config = {
         port: 3000,
         open: true
     },
-    build: {
-        outDir: 'build'
+    preview: {
+        port: 3000,
+        open: true
     }
 };
 
