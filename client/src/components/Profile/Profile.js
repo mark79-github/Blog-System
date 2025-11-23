@@ -17,13 +17,17 @@ const Profile = () => {
 
     useEffect(() => {
         isMounted.current = true;
-        userService.getById(id)
-            .then((user) => {
-                if (isMounted) {
-                    setUser(user);
-                    setLoading(false);
-                }
-            })
+
+        userService.getById(id).then((user) => {
+            if (isMounted.current) {
+                setUser(user);
+                setLoading(false);
+            }
+        })
+
+        return () => {
+            isMounted.current = false;
+        }
     }, [id]);
 
     if (loading) {
