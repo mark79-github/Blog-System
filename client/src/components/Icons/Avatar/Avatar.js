@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './Avatar.module.css';
 
 const Avatar = (props) => {
@@ -8,5 +9,9 @@ const Avatar = (props) => {
         </div>
     )
 }
+
+Avatar.propTypes = {
+    img: PropTypes.string.isRequired
+};
 
 export default Avatar;
