@@ -20,7 +20,7 @@ exports.getAllPosts = async (req, res) => {
         let options = {};
 
         if (author) {
-            options.author = new mongoose.Types.ObjectId(author);
+            options.author = mongoose.Types.ObjectId.createFromHexString(author);
         }
         if (title) {
             options.title = {$regex: title, $options: "i"};
@@ -33,10 +33,6 @@ exports.getAllPosts = async (req, res) => {
             .addFields({commentsLength: {"$size": "$comments"}})
             .addFields({likesLength: {"$size": "$likes"}})
             .sort({publishedAt: -1})
-
-        // Array.from(posts).map(x => {
-        //     console.log(`Title:${x.title} => Likes:${x.likes.length}`);
-        // })
 
         res.status(200).json(posts)
     } catch (error) {
@@ -55,18 +51,10 @@ exports.getPostById = async (req, res) => {
 exports.updatePost = async (req, res) => {
     try {
         const post = req.post
-        /**
-         * Checks if the fields in the body are not undefined
-         * If the fields exist, update the document, otherwise, keep the existing record
-         * */
-        const titleUpdate = req.body.title
-        post.title = titleUpdate ? titleUpdate : post.title
 
-        const contentUpdate = req.body.content
-        post.content = contentUpdate ? contentUpdate : post.content
-
-        const urlToImageUpdate = req.body.urlToImage
-        post.urlToImage = urlToImageUpdate ? urlToImageUpdate : post.urlToImage
+        post.title = req.body.title || post.title
+        post.content = req.body.content || post.content
+        post.urlToImage = req.body.urlToImage || post.urlToImage
 
         const update = await post.save()
         res.status(200).json(update)
