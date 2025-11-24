@@ -7,7 +7,6 @@ router.post('/', middleware.verifyToken, postController.addPost);
 
 router.get('/', postController.getAllPosts);
 
-// router.get('/:id', [middleware.verifyToken, middleware.getPost], postController.getPostById);
 router.get('/:id', [middleware.getPost], postController.getPostById);
 
 router.patch('/:id', [middleware.verifyToken, middleware.getPost], postController.updatePost);
