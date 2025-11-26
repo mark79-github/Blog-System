@@ -2,14 +2,16 @@ import {api} from "../../utils/globals";
 import {request} from "../../utils/data";
 
 import styles from './PostListView.module.css';
+import {useNavigate} from 'react-router-dom';
 
-const PostListView = ({data, history}) => {
+const PostListView = ({data}) => {
     const {_id, title, urlToImage} = data;
+    let navigate = useNavigate();
 
     const handleButtonCLick = async () => {
         await request(`${api.posts.visit}/${_id}`, 'POST')
             .then(() => {
-                history.push(`/post/${_id}`);
+                navigate(`/post/${_id}`);
             }).catch(error => console.error('Error:', error));
     }
 

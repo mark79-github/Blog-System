@@ -1,10 +1,11 @@
 import {config} from './config';
 
-const {REACT_APP_CLOUD_NAME} = process.env;
-const cloudinaryURL = `https://api.cloudinary.com/v1_1/${REACT_APP_CLOUD_NAME}/upload`;
+const {VITE_CLOUD_NAME, MODE} = import.meta.env;
+const cloudinaryURL = `https://api.cloudinary.com/v1_1/${VITE_CLOUD_NAME}/upload`;
 
 const getBaseUrl = () => {
-    return config[process.env.NODE_ENV.trim()].baseURL;
+    const mode = MODE.trim();
+    return config[mode].baseURL;
 }
 
 const baseURL = getBaseUrl();
@@ -41,7 +42,7 @@ const globalConstants = {
     DISPLAY_NAME_MIN_LENGTH: 3,
     DISPLAY_NAME_MAX_LENGTH: 15,
     COMMENT_MIN_LENGTH: 10,
-    URL_TO_IMAGE: /^(http[s]?:\/\/.*.(?:png|jpg|gif|svg|jpeg))$/i,
+    URL_TO_IMAGE: /^(https?:\/\/.*.(?:png|jpg|gif|svg|jpeg))$/i,
     MAX_FILE_SIZE: 2 * 1024 * 1024,
     IMAGE_FORMATS: [
         'image/jpeg', 'image/jpg', 'image/bmp', 'image/png'

@@ -22,7 +22,7 @@ exports.register = async (req, res) => {
             .then((response) => {
                 return response;
             }).catch(error => {
-                throw Error(error.message)
+                throw new Error(error.message)
             })
 
         const {fields, files} = result
@@ -37,7 +37,7 @@ exports.register = async (req, res) => {
             .then(cloudinary => {
                 return cloudinary['secure_url'];
             }).catch(error => {
-                throw Error(error.message)
+                throw new Error(error.message)
             });
 
         const hash = await utils.hashPassword(password);

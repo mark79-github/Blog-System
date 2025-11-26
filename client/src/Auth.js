@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import AuthContext from './contexts';
 import {globalConstants} from './utils/globals';
 
@@ -16,7 +16,7 @@ const Auth = (props) => {
         setToken(token);
         setUserId(userId);
         setDisplayName(displayName);
-        const expiration = expirationTime || new Date(new Date().getTime() + 1000 * 60 * 60);
+        const expiration = expirationTime || new Date(Date.now() + 1000 * 60 * 60);
         setTokenExpirationDate(expiration);
         localStorage.setItem(globalConstants.AUTH_TOKEN, JSON.stringify({
             token,
@@ -24,7 +24,6 @@ const Auth = (props) => {
             displayName,
             expirationTime: expiration.toISOString()
         }));
-        // notificationService.successMsg(notificationMsg.loginSuccessfully);
     }, []);
 
     const logout = useCallback(() => {
@@ -32,14 +31,12 @@ const Auth = (props) => {
         setUserId(null);
         setDisplayName(null);
         localStorage.removeItem(globalConstants.AUTH_TOKEN);
-        // notificationService.infoMsg(notificationMsg.logoutSuccessfully);
     }, []);
 
     useEffect(() => {
 
         const storedData = JSON.parse(localStorage.getItem(globalConstants.AUTH_TOKEN));
-        if (storedData &&
-            storedData.token &&
+        if (storedData?.token &&
             storedData.userId &&
             storedData.displayName &&
             new Date(storedData.expirationTime) > new Date()) {
@@ -50,7 +47,7 @@ const Auth = (props) => {
 
     useEffect(() => {
         if (token && tokenExpirationDate) {
-            const remainingTime = tokenExpirationDate.getTime() - new Date().getTime();
+            const remainingTime = tokenExpirationDate.getTime() - Date.now();
             logoutTimer = setTimeout(logout, remainingTime);
         } else {
             clearTimeout(logoutTimer);

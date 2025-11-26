@@ -1,21 +1,17 @@
-import {useContext} from 'react';
-import {useHistory} from 'react-router-dom';
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 
 import AuthContext from '../contexts';
 
 const haveToBeAuthenticated = (WrappedComponent) => {
-
     return (props) => {
-        const {isLoggedIn} = useContext(AuthContext);
-        const history = useHistory();
+        const { isLoggedIn } = useContext(AuthContext);
 
         if (!isLoggedIn) {
-            history.push('/user/sign')
-
-            return null;
+            return <Navigate to="/user/sign" replace />;
         }
 
-        return <WrappedComponent {...props} />
+        return <WrappedComponent {...props} />;
     };
 };
 

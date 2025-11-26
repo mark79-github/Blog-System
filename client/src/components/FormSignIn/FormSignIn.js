@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useContext, useEffect, useRef, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
@@ -26,7 +26,7 @@ const validationSchema = Yup.object({
 
 const FormSignIn = () => {
     const authContext = useContext(AuthContext);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [error, setError] = useState('');
     const timer = useRef(null);
@@ -47,11 +47,11 @@ const FormSignIn = () => {
 
                     if (response.hasOwnProperty('token')) {
                         authContext.login(response.token, response.user._id, response.user.displayName);
-                        history.push('/');
+                        navigate('/');
                     }
 
                     if (response.hasOwnProperty('message')) {
-                        throw Error(response.message);
+                        throw new Error(response.message);
                     }
                 })
                 .catch(err => {

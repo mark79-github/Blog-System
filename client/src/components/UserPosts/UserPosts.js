@@ -18,25 +18,24 @@ const UserPosts = (props) => {
     const isMounted = useRef(false);
 
     useEffect(() => {
+        isMounted.current = true;
 
         const getAllPosts = (userId) => {
             postService.getAll(`/?author=${userId}`)
                 .then(res => {
-                    if (isMounted) {
+                    if (isMounted.current) {
                         setPosts(res);
                         setLoading(false);
                     }
                 });
         }
 
-        isMounted.current = true;
         getAllPosts(id);
 
         return () => {
             isMounted.current = false;
         }
     }, [id]);
-
 
     if (loading) {
         return (
@@ -49,16 +48,13 @@ const UserPosts = (props) => {
     return (
         <section className={styles.container}>
             {
-                !!posts.length
-                    ?
+                posts.length > 0 ?
                     <>
                         <h2 className={styles.title}>Posts</h2>
                         <section className={styles.wrapper}>
-                            {posts.map(x => {
-                                return (
-                                    <PostListView {...props} key={x._id} data={x}/>
-                                )
-                            })}
+                            {posts.map(x =>
+                                <PostListView {...props} key={x._id} data={x}/>
+                            )}
                         </section>
                     </>
                     :

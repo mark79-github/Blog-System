@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './BtnReadMore.module.css'
 
 const BtnReadMore = (props) => {
@@ -9,5 +10,8 @@ const BtnReadMore = (props) => {
     )
 }
 
-export default BtnReadMore;
+BtnReadMore.propTypes = {
+    onClick: PropTypes.func.isRequired
+};
 
+export default BtnReadMore;

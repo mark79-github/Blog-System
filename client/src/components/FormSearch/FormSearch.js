@@ -1,8 +1,12 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react';
 import styles from './FormSearch.module.css';
 
-const FormSearch = (props) => {
-    const [search, setSearch] = useState('')
+const FormSearch = ({onSearch, searchValue}) => {
+    const [search, setSearch] = useState(searchValue)
+
+    useEffect(() => {
+        setSearch(searchValue)
+    }, [searchValue]);
 
     const handleInputChange = (event) => {
         setSearch(event.target.value)
@@ -10,9 +14,7 @@ const FormSearch = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.onSearch(search);
-
-        setSearch('');
+        onSearch(search);
     }
 
     return (

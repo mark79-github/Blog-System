@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
+import {useContext} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import * as authService from '../../services/authService';
 
@@ -43,7 +43,7 @@ const validationSchema = Yup.object({
 
 const FormSignUp = () => {
     const authContext = useContext(AuthContext);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues,
@@ -62,7 +62,7 @@ const FormSignUp = () => {
             return authService.register(form)
                 .then(response => {
                     if (response.hasOwnProperty('message')) {
-                        throw Error(response.message);
+                        throw new Error(response.message);
                     }
                     return {
                         token: response.token,
@@ -71,7 +71,7 @@ const FormSignUp = () => {
                     };
                 }).then(({token, userId, displayName}) => {
                     authContext.login(token, userId, displayName);
-                    history.push('/');
+                    navigate('/');
                 }).catch(() => formik.resetForm());
         }
     });
