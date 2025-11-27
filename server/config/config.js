@@ -1,4 +1,6 @@
-const {username, password, db, server, privateKey} = require('./credentials.js');
+import credentials from './credentials.js';
+
+const { username, password, db, server, privateKey } = credentials;
 
 const config = {
     development: {
@@ -13,6 +15,8 @@ const config = {
         saltRounds: 7,
         privateKey,
     }
-}
+};
 
-module.exports = config[process.env.NODE_ENV.trim()];
+const env = process.env.NODE_ENV?.trim() || "development";
+
+export default config[env];
