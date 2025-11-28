@@ -15,4 +15,6 @@ const credentials = {
     }
 }
 
-module.exports = credentials[process.env.NODE_ENV.trim()];
+const env = process.env.NODE_ENV?.trim() || "development";
+
+export default credentials[env];
