@@ -1,9 +1,10 @@
-const express = require('express');
-const middleware = require('../utils/middleware');
-const userController = require('../controllers/userController');
+import { Router } from 'express';
+import * as middleware from '../utils/middleware.js';
+import * as userController from '../controllers/userController.js';
 
-const router = express.Router();
+const router = Router();
 
 router.get('/:id', [middleware.getUser], userController.getUserById);
 
-module.exports = router;
+export default router;
+
