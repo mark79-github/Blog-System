@@ -1,11 +1,13 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const {privateKey, saltRounds} = require('../config/config');
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import config from '../config/config.js';
 
-exports.generateAccessToken = async (id) => jwt.sign({id}, privateKey)
+const {privateKey, saltRounds} = config;
 
-exports.verifyPassword = async (password, hash) => bcrypt.compare(password, hash)
+export const generateAccessToken = async (id) => jwt.sign({id}, privateKey)
 
-exports.hashPassword = async (password) => {
+export const verifyPassword = async (password, hash) => bcrypt.compare(password, hash)
+
+export const hashPassword = async (password) => {
     return bcrypt.hash(password, saltRounds)
 }
