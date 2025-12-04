@@ -1,10 +1,12 @@
-const Post = require('../models/Post');
-const User = require('../models/User');
-const response = require('./response');
-const jwt = require('jsonwebtoken');
-const {privateKey} = require('../config/config');
+import Post from '../models/Post.js';
+import User from '../models/User.js';
+import * as response from './response.js';
+import jwt from 'jsonwebtoken';
+import config from '../config/config.js';
 
-exports.verifyToken = async (req, res, next) => {
+const {privateKey} = config;
+
+export const verifyToken = async (req, res, next) => {
     try {
         const bearer = req.headers.authorization
 
@@ -21,7 +23,7 @@ exports.verifyToken = async (req, res, next) => {
     }
 }
 
-exports.getUser = async (req, res, next) => {
+export const getUser = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id)
         if (!user) {
@@ -29,15 +31,14 @@ exports.getUser = async (req, res, next) => {
         }
 
         // remove password hash from result
-        Object.assign(user, {password: undefined})
-        req.user = user
+        req.user = {...user.toObject(), password: undefined}
         next()
     } catch (error) {
         response.serverError(res, error.message)
     }
 }
 
-exports.getPost = async (req, res, next) => {
+export const getPost = async (req, res, next) => {
     try {
         const post = await Post.findById(req.params.id)
         if (!post) {

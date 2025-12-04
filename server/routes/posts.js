@@ -1,7 +1,8 @@
-const express = require('express')
-const router = express.Router()
-const middleware = require('../utils/middleware')
-const postController = require('../controllers/postController')
+import { Router } from 'express';
+import * as middleware from '../utils/middleware.js';
+import * as postController from '../controllers/postController.js';
+
+const router = Router();
 
 router.post('/', middleware.verifyToken, postController.addPost);
 
@@ -23,4 +24,4 @@ router.delete('/comment/:id/delete/:commentId', [middleware.verifyToken, middlew
 
 router.post('/visit/:id', [middleware.getPost], postController.visitPost);
 
-module.exports = router;
+export default router;

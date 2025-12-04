@@ -1,9 +1,12 @@
-const mongoose = require('mongoose');
-const config = require('./config');
-const {msg} = require('./constants');
+import mongoose from 'mongoose';
+import config from './config.js';
+import {msg} from './constants.js';
 
-mongoose.connect(config.DB)
-    .then((res) => console.log(msg.DB_CONNECTED(res.connections[0].host, res.connections[0].name, config.PORT)))
-    .catch(console.warn.bind(console, msg.DB_CONNECTION_ERROR));
+try {
+    const res = await mongoose.connect(config.DB);
+    console.log(msg.DB_CONNECTED(res.connections[0].host, res.connections[0].name, config.PORT));
+} catch (err) {
+    console.error(msg.DB_CONNECTION_ERROR, err);
+}
 
-module.exports = mongoose.connection;
+export default mongoose.connection;
