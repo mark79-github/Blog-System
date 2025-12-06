@@ -1,4 +1,5 @@
 import styles from '../Icons.module.css';
+import PropTypes from 'prop-types';
 
 const Comments = (props) => {
 
@@ -12,6 +13,10 @@ const Comments = (props) => {
         </div>
     )
 
+}
+
+Comments.propTypes = {
+    onClick: PropTypes.func.isRequired,
 }
 
 export default Comments;
