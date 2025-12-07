@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 import styles from './NavigationItem.module.css';
+import PropTypes from "prop-types";
 
 const NavigationItem = (props) => {
     return (
@@ -12,5 +13,10 @@ const NavigationItem = (props) => {
         </li>
     );
 };
+
+NavigationItem.propTypes = {
+    linkTo: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+}
 
 export default NavigationItem;
