@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import styles from './FormComment.module.css';
 
 import {globalConstants, notificationMsg} from '../../utils/globals';
+import PropTypes from "prop-types";
 
 const initialValues = {
     comment: '',
@@ -45,6 +46,10 @@ const FormComment = ({onNewComment}) => {
             <button type="submit" className={styles.button}>Post Comment</button>
         </form>
     );
+}
+
+FormComment.propTypes = {
+    onNewComment: PropTypes.func.isRequired,
 }
 
 export default FormComment;
