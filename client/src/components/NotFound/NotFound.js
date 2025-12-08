@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 import logo from '../../logo.svg';
 import styles from './NotFound.module.css';
+import PropTypes from "prop-types";
 
 const NotFound = (props) => {
     return (
@@ -22,6 +23,10 @@ const NotFound = (props) => {
             </header>
         </main>
     );
+}
+
+NotFound.propTypes = {
+    error: PropTypes.string.isRequired,
 }
 
 export default NotFound;
