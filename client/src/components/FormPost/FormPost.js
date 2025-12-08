@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import styles from './FormPost.module.css';
 
 import {globalConstants, notificationMsg} from '../../utils/globals';
+import PropTypes from "prop-types";
 
 const validationSchema = Yup.object({
     title: Yup.string().trim()
@@ -77,5 +78,14 @@ const FormPost = ({data, onSubmitFormHandler}) => {
         </form>
     );
 }
+
+FormPost.propTypes = {
+    data: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        content: PropTypes.string.isRequired,
+        urlToImage: PropTypes.string.isRequired,
+    }).isRequired,
+    onSubmitFormHandler: PropTypes.func.isRequired,
+};
 
 export default FormPost;
