@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NotFound from '../NotFound';
 
 class CustomErrorBoundary extends React.Component {
@@ -23,10 +24,10 @@ class CustomErrorBoundary extends React.Component {
     }
 
     componentDidMount() {
-        window.onunhandledrejection = (error) => {
+        globalThis.onunhandledrejection = (error) => {
             this.setState({
                 hasError: true,
-                error: error.reason.message
+                error: error.reason?.message || 'Unhandled rejection'
             })
         }
     }
@@ -38,6 +39,10 @@ class CustomErrorBoundary extends React.Component {
 
         return this.props.children;
     }
+}
+
+CustomErrorBoundary.propTypes = {
+    children: PropTypes.node
 }
 
 export default CustomErrorBoundary;
