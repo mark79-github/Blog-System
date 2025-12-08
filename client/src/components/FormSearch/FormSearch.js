@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import styles from './FormSearch.module.css';
+import PropTypes from "prop-types";
 
 const FormSearch = ({onSearch, searchValue}) => {
     const [search, setSearch] = useState(searchValue)
@@ -28,5 +29,10 @@ const FormSearch = ({onSearch, searchValue}) => {
         </section>
     );
 }
+
+FormSearch.propTypes = {
+    onSearch: PropTypes.func.isRequired,
+    searchValue: PropTypes.string.isRequired,
+};
 
 export default FormSearch;
