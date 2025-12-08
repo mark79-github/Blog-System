@@ -7,6 +7,7 @@ import styles from './Comment.module.css';
 import * as userService from '../../services/userService';
 
 import AuthContext from '../../contexts';
+import PropTypes from "prop-types";
 
 
 const Comment = ({data, onDeleteComment}) => {
@@ -58,6 +59,16 @@ const Comment = ({data, onDeleteComment}) => {
             <p className={styles.p}>{comment}</p>
         </article>
     );
+}
+
+Comment.propTypes = {
+    data: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        index: PropTypes.number.isRequired,
+        comment: PropTypes.string.isRequired,
+        user: PropTypes.string.isRequired,
+    }).isRequired,
+    onDeleteComment: PropTypes.func.isRequired,
 }
 
 export default Comment;
