@@ -22,7 +22,7 @@ const PostListView = ({data}) => {
                 <img className={styles.img} src={urlToImage} alt=""/>
             </article>
             <article className={styles.description}>
-                <h2 className={styles.title} onClick={handleButtonCLick}>{title}</h2>
+                <button className={styles.title} onClick={handleButtonCLick}>{title}</button>
             </article>
         </article>
     );
