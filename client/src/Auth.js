@@ -1,6 +1,7 @@
-import {useCallback, useEffect, useState} from 'react'
+import {useCallback, useEffect, useMemo, useState} from 'react'
 import AuthContext from './contexts';
 import {globalConstants} from './utils/globals';
+import PropTypes from "prop-types";
 
 let logoutTimer;
 
@@ -55,6 +56,14 @@ const Auth = (props) => {
         setLoading(false);
     }, [token, logout, tokenExpirationDate]);
 
+    const authContextValue = useMemo(() => ({
+        isLoggedIn: !!token,
+        token: token,
+        userId: userId,
+        displayName: displayName,
+        login: login,
+        logout: logout
+    }), [token, userId, displayName, login, logout]);
 
     if (loading) {
         return (
@@ -64,17 +73,14 @@ const Auth = (props) => {
     }
 
     return (
-        <AuthContext.Provider value={{
-            isLoggedIn: !!token,
-            token: token,
-            userId: userId,
-            displayName: displayName,
-            login: login,
-            logout: logout
-        }}>
+        <AuthContext.Provider value={authContextValue}>
             {props.children}
         </AuthContext.Provider>
     )
 }
+
+Auth.propTypes = {
+    children: PropTypes.node.isRequired,
+};
 
 export default Auth;
