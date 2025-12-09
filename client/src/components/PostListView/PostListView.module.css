@@ -39,4 +39,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 10px 20px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: 1.5em;
 }
