@@ -9,7 +9,7 @@ const Delete = ({onDelete}) => {
 
     return (
         <div>
-            <i className={`${styles.icon} far fa-trash-alt`} onClick={handleClick}/>
+            <button className={`${styles.icon} far fa-trash-alt`} onClick={handleClick}/>
         </div>
     );
 }
