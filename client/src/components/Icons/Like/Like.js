@@ -9,7 +9,7 @@ const Like = (props) => {
 
     return (
         <div>
-            <i className={`${styles.icon} far fa-thumbs-up`} onClick={handleClick}/>
+            <button className={`${styles.icon} far fa-thumbs-up`} onClick={handleClick}/>
         </div>
     )
 }
