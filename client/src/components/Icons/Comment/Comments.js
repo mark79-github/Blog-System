@@ -9,7 +9,7 @@ const Comments = (props) => {
 
     return (
         <div>
-            <i className={`${styles.icon} far fa-comments`} onClick={handleClick}/>
+            <button className={`${styles.icon} far fa-comments`} onClick={handleClick}/>
         </div>
     )
 
