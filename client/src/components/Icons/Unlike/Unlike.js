@@ -9,7 +9,7 @@ const Unlike = (props) => {
 
     return (
         <div>
-            <i className={`${styles.icon} far fa-thumbs-down`} onClick={handleClick}/>
+            <button className={`${styles.icon} far fa-thumbs-down`} onClick={handleClick}/>
         </div>
     );
 }
