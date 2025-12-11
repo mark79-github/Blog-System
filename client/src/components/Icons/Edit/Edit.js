@@ -9,7 +9,7 @@ const Edit = ({onEdit}) => {
 
     return (
         <div>
-            <i className={`${styles.icon} far fa-edit`} onClick={handleClick}/>
+            <button className={`${styles.icon} far fa-edit`} onClick={handleClick}/>
         </div>
     );
 }
