@@ -3,11 +3,15 @@ import * as response from '../utils/response.js';
 import User from '../models/User.js';
 import cloudinary from '../config/cloudinary.js';
 import formidable from 'formidable';
+import os from 'node:os';
 
 export const register = async (req, res) => {
     try {
         const parseForm = (req) => {
-            const form = formidable({multiple: true});
+            const form = formidable({
+                multiple: true,
+                uploadDir: os.tmpdir()
+            });
             return new Promise((resolve, reject) => {
                 form.parse(req, (err, fields, files) => {
                     if (err) reject(err);
