@@ -24,7 +24,9 @@ const FormSearch = ({onSearch, searchValue}) => {
                 <input type="text" name="search" className={styles.input} placeholder="Search by title ..."
                        value={search}
                        onChange={handleInputChange}/>
-                <input type="submit" className={styles.submit} value="&#xf002;"/>
+                <button type="submit" className={styles.submit}>
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                </button>
             </form>
         </section>
     );
