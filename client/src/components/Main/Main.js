@@ -14,7 +14,9 @@ import FormOrder from '../FormOrder';
 const Main = (props) => {
     const [topPost, setTopPost] = useState([]);
     const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
+
+    const [isInitialLoad, setIsInitialLoad] = useState(true);
+    const [isFetching, setIsFetching] = useState(false);
 
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -42,7 +44,7 @@ const Main = (props) => {
         let abort = false;
 
         async function load() {
-            setLoading(true);
+            setIsFetching(true);
 
             const query = `?${searchParams.toString()}`;
             const data = await postService.getAll(query);
@@ -54,11 +56,13 @@ const Main = (props) => {
                     return b[orderBy].length - a[orderBy].length;
                 }
                 return b[orderBy] - a[orderBy];
-            })
+            });
 
             setTopPost(sorted.slice(0, 1));
             setPosts(sorted.slice(1));
-            setLoading(false);
+
+            setIsFetching(false);
+            setIsInitialLoad(false);
         }
 
         load();
@@ -68,15 +72,15 @@ const Main = (props) => {
         }
     }, [searchParams, orderBy]);
 
-    if (loading) {
+    if (isInitialLoad && isFetching) {
         return (
             <main className={styles.container}>
                 <Loader type="Rings" color="white" height={80} width={80}/>
             </main>
-        )
+        );
     }
 
-    if (!topPost.length) {
+    if (!topPost.length && !isFetching) {
         return (
             <main className={styles.container}>
                 <FormSearch onSearch={onSearch} searchValue={title}/>
@@ -85,13 +89,19 @@ const Main = (props) => {
                     <h1 className={styles.title}>No posts found</h1>
                 </section>
             </main>
-        )
+        );
     }
 
     return (
         <main className={styles.container}>
             <FormSearch onSearch={onSearch} searchValue={title}/>
-            <FormOrder onOrderChange={onOrderChange} orderBy={orderBy}/>
+            <FormOrder onOrderChange={onOrderChange} orderBy={orderBy} disabled={isFetching}/>
+
+            {isFetching && (
+                <div style={{opacity: 0.8, margin: "12px 0"}}>
+                    <Loader type="Rings" color="white" height={28} width={28}/>
+                </div>
+            )}
 
             {topPost.map((x) => (
                 <TopPost key={x._id} data={x} {...props} />
