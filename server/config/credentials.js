@@ -1,20 +1,14 @@
-const credentials = {
-    development: {
-        username: "",
-        password: "",
-        db: "blog-system-db",
-        server: "127.0.0.1",
-        privateKey: "pr1v@t3-k3y",
-    },
-    production: {
-        username: "admin",
-        password: "admin",
-        db: "blog-system",
-        server: "cluster0.rqyl3.mongodb.net",
-        privateKey: "pr1v@t3-k3y",
-    }
-}
+import dotenv from 'dotenv';
+import path from 'node:path';
 
-const env = process.env.NODE_ENV?.trim() || "development";
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
-export default credentials[env];
+const credentials = () => ({
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    db: process.env.DB_NAME,
+    server: process.env.DB_SERVER,
+    privateKey: process.env.JWT_PRIVATE_KEY,
+});
+
+export default credentials();
