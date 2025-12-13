@@ -20,20 +20,20 @@ export const getById = (id) => {
 export const likeById = (id, token) => {
 
     const apiWithPostId = `${api.posts.like}/${id}`
-    return request(apiWithPostId, 'PUT', {}, {}, token);
+    return request(apiWithPostId, 'PUT', token);
 };
 
 export const unlikeById = (id, token) => {
 
     const apiWithPostId = `${api.posts.unlike}/${id}`
-    return request(apiWithPostId, 'PUT', {}, {}, token);
+    return request(apiWithPostId, 'PUT', token);
 };
 
 export const commentById = (id, comment, token) => {
 
     const data = comment;
     const apiWithPostId = `${api.posts.comment}/${id}`;
-    return request(apiWithPostId, 'PUT', data, {}, token);
+    return request(apiWithPostId, 'PUT', token, data);
 };
 
 export const addPost = (title, content, urlToImage, token) => {

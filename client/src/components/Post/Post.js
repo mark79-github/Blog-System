@@ -4,6 +4,7 @@ import {request} from "../../utils/data";
 
 import styles from './Post.module.css';
 import {useNavigate} from 'react-router-dom';
+import PropTypes from "prop-types";
 
 const Post = ({data}) => {
     const {_id, title, urlToImage} = data;
@@ -27,6 +28,14 @@ const Post = ({data}) => {
             </article>
         </article>
     );
+}
+
+Post.propTypes = {
+    data: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        urlToImage: PropTypes.string.isRequired,
+    }).isRequired,
 }
 
 export default Post;

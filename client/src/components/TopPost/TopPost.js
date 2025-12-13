@@ -1,4 +1,6 @@
 import {useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
+
 import moment from 'moment';
 
 import styles from './TopPost.module.css';
@@ -66,6 +68,24 @@ const TopPost = ({data}) => {
             </article>
         </section>
     );
+}
+
+TopPost.propTypes = {
+    data: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        content: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired,
+        urlToImage: PropTypes.string.isRequired,
+        publishedAt: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.number,
+            PropTypes.instanceOf(Date)
+        ]).isRequired,
+        likes: PropTypes.arrayOf(PropTypes.string).isRequired,
+        comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+        visits: PropTypes.number.isRequired
+    }).isRequired
 }
 
 export default TopPost;

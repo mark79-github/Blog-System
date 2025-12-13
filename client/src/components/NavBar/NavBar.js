@@ -31,9 +31,9 @@ const NavBar = () => {
                 <Link to="/" className={styles.link} onClick={closeMenu}>
                     All Posts
                 </Link>
-                <div onClick={(e) => handleClick(e)} className={styles.icon} id="nav-icon">
+                <button onClick={handleClick} className={styles.icon} id="nav-icon">
                     {open ? <FiX/> : <FiMenu/>}
-                </div>
+                </button>
                 <ul ref={ref} className={open ? `${styles.links} ${styles.active}` : `${styles.links}`}>
                     {isLoggedIn
                         ?

@@ -6,6 +6,7 @@
     padding: 20px;
     border-radius: 50%;
     box-shadow: 0 0 5px 0 #000000;
+    background: transparent;
 }
 
 @media (hover: hover) and (pointer: fine) {

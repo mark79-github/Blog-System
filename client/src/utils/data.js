@@ -2,7 +2,7 @@ const getToken = (token) => {
     return token ? {Authorization: `Bearer ${token}`} : {};
 };
 
-const request = async (url, method, data = {}, options = {}, token) => {
+const request = async (url, method, token, data = {}, options = {}) => {
     const authorization = getToken(token);
     const headers = {
         "Content-Type": "application/json",
@@ -19,7 +19,7 @@ const request = async (url, method, data = {}, options = {}, token) => {
 
 };
 
-const requestForm = async (url, method, data = {}, options = {}, token) => {
+const requestForm = async (url, method, token, data = {}, options = {}) => {
     const authorization = getToken(token);
     const headers = {
         Accept: "application/json",

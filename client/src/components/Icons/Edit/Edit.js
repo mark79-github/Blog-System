@@ -1,4 +1,5 @@
 import styles from '../Icons.module.css';
+import PropTypes from "prop-types";
 
 const Edit = ({onEdit}) => {
 
@@ -8,9 +9,13 @@ const Edit = ({onEdit}) => {
 
     return (
         <div>
-            <i className={`${styles.icon} far fa-edit`} onClick={handleClick}/>
+            <button className={`${styles.icon} far fa-edit`} onClick={handleClick}/>
         </div>
     );
+}
+
+Edit.propTypes = {
+    onEdit: PropTypes.func.isRequired,
 }
 
 export default Edit;

@@ -1,4 +1,5 @@
 import styles from './FormOrder.module.css';
+import PropTypes from "prop-types";
 
 const selectOptions = [
     {label: "Last published", value: "publishedAt"},
@@ -17,8 +18,8 @@ const FormOrder = ({onOrderChange, disabled, orderBy}) => {
                     onChange={(e) => onOrderChange(e.target.value)}
                     disabled={disabled}
                 >
-                    {selectOptions.map((option, index) => (
-                        <option key={index} value={option.value}>
+                    {selectOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
                             {option.label}
                         </option>
                     ))}
@@ -27,5 +28,11 @@ const FormOrder = ({onOrderChange, disabled, orderBy}) => {
         </section>
     );
 }
+
+FormOrder.propTypes = {
+    onOrderChange: PropTypes.func.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    orderBy: PropTypes.string.isRequired,
+};
 
 export default FormOrder;

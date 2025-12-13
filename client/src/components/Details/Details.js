@@ -148,7 +148,7 @@ const Details = () => {
                                 <h2 className={styles.header}>Comments:</h2>
                                 {post.comments.map((commentObj, index) => (
                                     <Comment
-                                        key={index}
+                                        key={commentObj._id}
                                         data={{...commentObj, index: index + 1}}
                                         onDeleteComment={deleteComment}
                                     />
