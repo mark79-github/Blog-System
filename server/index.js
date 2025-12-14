@@ -8,6 +8,7 @@ import config from './config/config.js';
 import authRoute from './routes/auth.js';
 import usersRoute from './routes/users.js';
 import blogsRoute from './routes/posts.js';
+import healthRoute from "./routes/health.js";
 
 const {PORT} = config;
 
@@ -26,5 +27,6 @@ app.use(express.urlencoded({extended: false}));
 app.use('/api/auth', authRoute);
 app.use('/api/users', usersRoute);
 app.use('/api/posts', blogsRoute);
+app.use('/api/health', healthRoute);
 
 app.listen(PORT, () => console.log(msg.APPLICATION_RUNNING(PORT)));
