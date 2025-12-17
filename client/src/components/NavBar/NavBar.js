@@ -10,7 +10,7 @@ import useOutsideClick from "../../hooks/useOutsideClick";
 const NavBar = () => {
     const {isLoggedIn, displayName, userId} = useContext(AuthContext);
     const [open, setOpen] = useState(false);
-    const ref = useRef();
+    const ref = useRef(null);
 
     useOutsideClick(ref, () => {
         if (open) setOpen(false);
@@ -25,16 +25,15 @@ const NavBar = () => {
     };
 
     return (
-
         <header className={styles.header}>
-            <nav className={styles.navbar}>
+            <nav className={styles.navbar} ref={ref}>
                 <Link to="/" className={styles.link} onClick={closeMenu}>
                     All Posts
                 </Link>
-                <button onClick={handleClick} className={styles.icon} id="nav-icon">
+                <button onClick={handleClick} className={styles.icon} id="nav-icon" type="button">
                     {open ? <FiX/> : <FiMenu/>}
                 </button>
-                <ul ref={ref} className={open ? `${styles.links} ${styles.active}` : `${styles.links}`}>
+                <ul className={open ? `${styles.links} ${styles.active}` : `${styles.links}`}>
                     {isLoggedIn
                         ?
                         <>
